@@ -1,35 +1,37 @@
 using Horror.Gameplay.VoiceRecognizer;
 using UnityEngine.SceneManagement;
 using Horror.ServiceLocator;
+using Horror.Pooling;
 using Horror.Events;
 using Horror.Inputs;
+using Horror.Audio;
 using UnityEngine;
 
 namespace Horror.Master
 {
     public static class ServicesInitializator
     {
-        private const string StartupSceneName = "Startup";
-        
-        // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void LoadStartupScene()
-        {
-            string currentSceneName = SceneManager.GetActiveScene().name;
-            
-            if (currentSceneName != StartupSceneName)
-            {
-                SceneManager.LoadScene(StartupSceneName, LoadSceneMode.Additive);
-            }
-        }
+        private static bool _hasInitializedServices;
         
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeServices()
         {
+            if (_hasInitializedServices)
+            {
+                return;
+            }
+            
             InitializeEventService();
+
+            InitializePoolingService();
+
+            InitializeAudioService();
 
             InitializeInputService();
 
             InitializeVoiceService();
+
+            _hasInitializedServices = true;
         }
         
         private static void InitializeEventService()
@@ -37,6 +39,20 @@ namespace Horror.Master
             IEventService eventService = new EventService();
             
             GameServices.RegisterService(eventService);
+        }
+
+        private static void InitializePoolingService()
+        {
+            IPoolingService poolingService = new PoolingService();
+            
+            GameServices.RegisterService(poolingService);
+        }
+
+        private static void InitializeAudioService()
+        {
+            IAudioService audioService = new AudioService();
+            
+            GameServices.RegisterService(audioService);
         }
         
         private static void InitializeInputService()

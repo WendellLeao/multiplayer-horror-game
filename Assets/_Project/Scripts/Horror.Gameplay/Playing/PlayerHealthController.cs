@@ -1,4 +1,3 @@
-using Horror.Gameplay.Audio;
 using Horror.Gameplay.Health;
 using UnityEngine;
 
@@ -19,7 +18,7 @@ namespace Horror.Gameplay.Playing
 		
 		public void TakeDamage(int damageAmount)
 		{
-			SoundManager.PlaySound(Sound.PLAYER_HITTED, transform.position);
+			// SoundManager.PlaySound(Sound.PLAYER_HITTED, transform.position);
 		
 			_healthSystem.Damage(damageAmount);
 

@@ -1,4 +1,4 @@
-using Horror.Gameplay.ObjectPooling;
+using Horror.Pooling;
 
 namespace Horror.Gameplay.Particles.SuperClass
 {
@@ -6,7 +6,7 @@ namespace Horror.Gameplay.Particles.SuperClass
 	{
 		protected override void ReturnToPool()
 		{
-			ObjectPooler.ReturnObjectToPool(PoolType.PROJECTILE_COLLISION_PARTICLES, this.gameObject);
+			// ObjectPooler.ReturnObjectToPool(PoolType.PROJECTILE_COLLISION_PARTICLES, this.gameObject);
 		}
 	}
 }

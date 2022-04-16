@@ -1,21 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Horror.Gameplay.ObjectPooling
+namespace Horror.Pooling
 {
-	public static class ObjectPooler
+	public sealed class PoolingService: IPoolingService
 	{
-		private static Dictionary<PoolType, Queue<GameObject>> _poolDictionary;
+		private Dictionary<PoolType, Queue<GameObject>> _poolDictionary;
+		private PoolData[] _poolDatas;
 
-		private static Pool[] _pools;
-
-		public static void Initialize(Pool[] pools)
+		public PoolingService()
 		{
-			_pools = pools;
+			_poolDatas = Resources.LoadAll<PoolData>("PoolingService/PoolData");
 
 			_poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
-
-			foreach (Pool pool in pools)
+			
+			foreach (PoolData pool in _poolDatas)
 			{
 				Queue<GameObject> objectPool = new Queue<GameObject>();
 
@@ -30,7 +29,7 @@ namespace Horror.Gameplay.ObjectPooling
 			}
 		}
 
-		public static GameObject GetObjectFromPool(PoolType poolType)
+		public GameObject GetObjectFromPool(PoolType poolType)
 		{
 			if (_poolDictionary.TryGetValue(poolType, out Queue<GameObject> objectList))
 			{
@@ -49,7 +48,7 @@ namespace Horror.Gameplay.ObjectPooling
 			return null;
 		}
 
-		public static void ReturnObjectToPool(PoolType objectType, GameObject objectToReturn)
+		public void ReturnObjectToPool(PoolType objectType, GameObject objectToReturn)
 		{
 			if (_poolDictionary.TryGetValue(objectType, out Queue<GameObject> objectList))
 			{
@@ -59,7 +58,7 @@ namespace Horror.Gameplay.ObjectPooling
 			objectToReturn.SetActive(false);
 		}
 
-		private static GameObject CreateNewObject(GameObject gameObject)
+		private GameObject CreateNewObject(GameObject gameObject)
 		{
 			GameObject newGameObject = Object.Instantiate(gameObject);
 
@@ -68,11 +67,11 @@ namespace Horror.Gameplay.ObjectPooling
 			return newGameObject;
 		}
 
-		private static GameObject CreateBackupObject(PoolType poolType)
+		private GameObject CreateBackupObject(PoolType poolType)
 		{
 			GameObject newBackupObject = null;
 
-			foreach (Pool pool in _pools)
+			foreach (PoolData pool in _poolDatas)
 			{
 				if (pool.PoolType == poolType)
 				{

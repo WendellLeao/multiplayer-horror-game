@@ -1,5 +1,5 @@
 using Horror.Gameplay.Health;
-using Horror.Gameplay.ObjectPooling;
+using Horror.Pooling;
 using UnityEngine;
 
 namespace Horror.Gameplay.Projectiles
@@ -122,15 +122,15 @@ namespace Horror.Gameplay.Projectiles
 
 		private void PlayCollisionParticles()
 		{
-			PoolType collisionPool = PoolType.PROJECTILE_COLLISION_PARTICLES;
-		
-			GameObject collisionParticlesObject = ObjectPooler.GetObjectFromPool(collisionPool);
-
-			ParticleSystem collisionParticles = collisionParticlesObject.GetComponent<ParticleSystem>();
-
-			collisionParticles.Play();
-		
-			collisionParticlesObject.transform.position = transform.position;
+			// PoolType collisionPool = PoolType.PROJECTILE_COLLISION_PARTICLES;
+			//
+			// GameObject collisionParticlesObject = ObjectPooler.GetObjectFromPool(collisionPool);
+			//
+			// ParticleSystem collisionParticles = collisionParticlesObject.GetComponent<ParticleSystem>();
+			//
+			// collisionParticles.Play();
+			//
+			// collisionParticlesObject.transform.position = transform.position;
 		}
 
 		private void ResetVelocity()

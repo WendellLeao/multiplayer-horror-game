@@ -1,4 +1,4 @@
-using Horror.Gameplay.ObjectPooling;
+using Horror.Pooling;
 using UnityEngine;
 
 namespace Horror.Gameplay.Enemies.EnemyData

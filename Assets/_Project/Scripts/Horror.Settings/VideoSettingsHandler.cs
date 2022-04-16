@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
-using Horror.Gameplay.Audio;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using UnityEngine;
+using TMPro;
 
 namespace Horror.GameSettings
 {
@@ -28,7 +27,7 @@ namespace Horror.GameSettings
 			{
 				ResetToDefault();
 		
-				SoundManager.PlaySound(Sound.UI_BUTTON_CLICK);
+				// SoundManager.PlaySound(Sound.UI_BUTTON_CLICK);
 			});
 		}
 
@@ -43,7 +42,7 @@ namespace Horror.GameSettings
 			{
 				ResetToDefault();
 		
-				SoundManager.PlaySound(Sound.UI_BUTTON_CLICK);
+				// SoundManager.PlaySound(Sound.UI_BUTTON_CLICK);
 			});
 		}
 

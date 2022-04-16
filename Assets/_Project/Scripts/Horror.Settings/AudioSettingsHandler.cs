@@ -1,4 +1,3 @@
-using Horror.Gameplay.Audio;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine;
@@ -32,7 +31,7 @@ namespace Horror.GameSettings
 			{
 				ResetToDefault();
 		
-				SoundManager.PlaySound(Sound.UI_BUTTON_CLICK);
+				// SoundManager.PlaySound(Sound.UI_BUTTON_CLICK);
 			});
 		}
 	

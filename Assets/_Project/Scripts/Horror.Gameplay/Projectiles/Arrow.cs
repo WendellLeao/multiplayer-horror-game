@@ -1,5 +1,3 @@
-using Horror.Gameplay.Audio;
-using Horror.Gameplay.ObjectPooling;
 using UnityEngine;
 
 namespace Horror.Gameplay.Projectiles
@@ -46,12 +44,12 @@ namespace Horror.Gameplay.Projectiles
 	
 		protected override void ReturnProjectileToPool()
 		{
-			ObjectPooler.ReturnObjectToPool(PoolType.ARROW_PROJECTILE, this.gameObject);
+			// ObjectPooler.ReturnObjectToPool(PoolType.ARROW_PROJECTILE, this.gameObject);
 		}
 
 		protected override void PlayCollisionSound()
 		{
-			SoundManager.PlaySound(Sound.ARROW_COLLISION, transform.position);
+			// SoundManager.PlaySound(Sound.ARROW_COLLISION, transform.position);
 		}
 	
 		private void ActiveTrail()

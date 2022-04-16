@@ -1,20 +1,20 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-namespace Horror.UI
+namespace Horror.UI.Screens
 {
-    public class PlayScreen : MonoBehaviour
+    public sealed class PlayScreen : UIScreen
     {
         [SerializeField] private HoverButton _playButton;
         [SerializeField] private HoverButton _quitButton;
 
-        private void OnEnable()//TODO: ADJUST THIS
+        public void Initialize()
         {
             _playButton.OnButtonClicked += HandlePlayButtonClicked;
             _quitButton.OnButtonClicked += HandleQuitButtonClicked;
         }
-        
-        private void OnDisable()//TODO: ADJUST THIS
+
+        public void Dispose()
         {
             _playButton.OnButtonClicked -= HandlePlayButtonClicked;
             _quitButton.OnButtonClicked -= HandleQuitButtonClicked;
@@ -22,7 +22,9 @@ namespace Horror.UI
 
         private void HandlePlayButtonClicked()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            
+            SceneManager.LoadScene(nextSceneIndex);
         }
         
         private void HandleQuitButtonClicked()
