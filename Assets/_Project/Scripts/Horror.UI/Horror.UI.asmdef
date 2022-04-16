@@ -1,0 +1,19 @@
+{
+    "name": "Horror.UI",
+    "rootNamespace": "Horror.UI",
+    "references": [
+        "GUID:0c0410b263394074c8dc3b816960c3e4",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:d01a69a7c657c3041afdf68719600185",
+        "GUID:e33670ff95bc46b42aa50b5272662677"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

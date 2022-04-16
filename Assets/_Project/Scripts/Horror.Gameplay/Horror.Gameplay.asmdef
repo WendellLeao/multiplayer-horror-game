@@ -1,0 +1,25 @@
+{
+    "name": "Horror.Gameplay",
+    "rootNamespace": "Horror.Gameplay",
+    "references": [
+        "GUID:d99d98637fd56ff4c9f258fdedb73af5",
+        "GUID:8e76cbdc5a0251a4ba4465b9e3001eca",
+        "GUID:4307f53044263cf4b835bd812fc161a4",
+        "GUID:e33670ff95bc46b42aa50b5272662677",
+        "GUID:d01a69a7c657c3041afdf68719600185",
+        "GUID:30817c1a0e6d646d99c048fc403f5979",
+        "GUID:a075b55b404a34748ac14ea9b6039911",
+        "GUID:457756d89b35d2941b3e7b37b4ece6f1",
+        "GUID:6db9c19b80736f643b859bc09ee968c2",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

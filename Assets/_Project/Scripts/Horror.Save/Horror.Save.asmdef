@@ -1,0 +1,16 @@
+{
+    "name": "Horror.Save",
+    "rootNamespace": "Gameplay.Save",
+    "references": [
+        "GUID:d01a69a7c657c3041afdf68719600185"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
