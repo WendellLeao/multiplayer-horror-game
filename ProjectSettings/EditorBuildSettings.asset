@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/Startup.unity
     guid: 278872542c16bbe4f90b5183b737613d
   - enabled: 1
+    path: Assets/_Project/Scenes/MainMenu.unity
+    guid: 2177e689a78b89c4fa6608ed0ad2cb11
+  - enabled: 1
     path: Assets/_Project/Scenes/HorrorHotel.unity
     guid: 97735b5ccb9f2d14e9602fdd2d9d3d3b
   m_configObjects: {}
