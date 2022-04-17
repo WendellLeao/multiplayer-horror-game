@@ -32,7 +32,9 @@ namespace Horror.Gameplay.VoiceRecognizer
         
         private void OnDisable()
         {
-            _voiceService.OnPhraseRecognized -= HandlePhraseRecognized;
+            IVoiceService voiceService = GameServices.GetService<IVoiceService>();
+            
+            voiceService.OnPhraseRecognized -= HandlePhraseRecognized;
         }
         
         private void HandlePhraseRecognized(PhraseData recognizedPhraseData)

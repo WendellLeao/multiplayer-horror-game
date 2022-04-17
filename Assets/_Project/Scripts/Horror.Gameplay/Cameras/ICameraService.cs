@@ -4,8 +4,9 @@ namespace Horror.Gameplay.Cameras
 {
     public interface ICameraService
     {
-        public Camera MainCamera { get; }
-        public Transform ItemContainer { get; }
+        Camera MainCamera { get; }
+        Transform ItemContainer { get; }
+        FirstPersonCamera LocalFirstPersonCamera { get; }
         FirstPersonCamera CreateFirstPersonCamera();
     }
 }

@@ -1,7 +1,4 @@
-﻿using Horror.ServiceLocator;
-using Horror.UI.Screens;
-using Horror.Audio;
-using Horror.Pooling;
+﻿using Horror.UI.Screens;
 using UnityEngine;
 
 namespace Horror.UI
@@ -18,14 +15,6 @@ namespace Horror.UI
 
         private void Awake()
         {
-            IPoolingService poolingService = GameServices.GetService<IPoolingService>();
-            
-            poolingService.Begin();
-            
-            IAudioService audioService = GameServices.GetService<IAudioService>();
-            
-            audioService.PlaySound(Sound.GameTheme, Vector3.zero);
-            
             _playScreen.Initialize();
         }
 

@@ -11,27 +11,6 @@ namespace Horror.Pooling
 		private Dictionary<PoolType, Queue<GameObject>> _poolDictionary;
 		private PoolData[] _poolDatas;
 
-		public void Begin()
-		{
-			_poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
-			
-			foreach (PoolData pool in _poolDatas)
-			{
-				Queue<GameObject> objectPool = new Queue<GameObject>();
-
-				for (int i = 0; i < pool.StartAmount; i++)
-				{
-					GameObject newGameObject = CreateNewObject(pool.ObjectToPool);
-
-					objectPool.Enqueue(newGameObject);
-					
-					newGameObject.transform.SetParent(transform);
-				}
-
-				_poolDictionary.Add(pool.PoolType, objectPool);
-			}
-		}
-
 		public GameObject GetObjectFromPool(PoolType poolType)
 		{
 			if (_poolDictionary.TryGetValue(poolType, out Queue<GameObject> objectList))
@@ -86,19 +65,59 @@ namespace Horror.Pooling
 
 			return null;
 		}
-		
+
 		private void Awake()
 		{
+			if (ServiceIsRegistered())
+			{
+				return;
+			}
+			
 			GameServices.RegisterService<IPoolingService>(this);
 			
 			_poolDatas = Resources.LoadAll<PoolData>(PoolDatasPath);
 
+			_poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
+			
+			PopulateDictionary();
+			
 			DontDestroyOnLoad(gameObject);
 		}
 
 		private void OnDestroy()
 		{
 			GameServices.DeregisterService<IPoolingService>();
+		}
+		
+		private void PopulateDictionary()
+		{
+			foreach (PoolData pool in _poolDatas)
+			{
+				Queue<GameObject> objectPool = new Queue<GameObject>();
+
+				for (int i = 0; i < pool.StartAmount; i++)
+				{
+					GameObject newGameObject = CreateNewObject(pool.ObjectToPool);
+
+					objectPool.Enqueue(newGameObject);
+
+					newGameObject.transform.SetParent(transform);
+				}
+
+				_poolDictionary.Add(pool.PoolType, objectPool);
+			}
+		}
+
+		private bool ServiceIsRegistered()
+		{
+			IPoolingService poolingService = GameServices.GetService<IPoolingService>();
+			
+			if (poolingService != null)
+			{
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

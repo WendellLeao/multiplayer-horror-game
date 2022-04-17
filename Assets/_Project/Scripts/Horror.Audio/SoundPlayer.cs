@@ -22,7 +22,10 @@ namespace Horror.Audio
         {
             IPoolingService poolingService = GameServices.GetService<IPoolingService>();
 
-            poolingService.ReturnObjectToPool(PoolType.SoundPlayer, gameObject);
+            if (poolingService != null)
+            {
+                poolingService.ReturnObjectToPool(PoolType.SoundPlayer, gameObject);
+            }
 
             if (_audioData != null)
             {

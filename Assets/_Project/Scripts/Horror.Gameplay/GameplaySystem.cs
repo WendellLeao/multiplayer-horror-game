@@ -23,10 +23,6 @@ namespace Horror.Gameplay
 
         private void Awake()
         {
-            IPoolingService poolingService = GameServices.GetService<IPoolingService>();
-            
-            poolingService.Begin();
-            
             _playerManager.Initialize();
             _cursorManager.Initialize();
             _itemManager.Initialize();
@@ -38,8 +34,6 @@ namespace Horror.Gameplay
             _eventService.AddEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.AddEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
             _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
-            
-            Application.targetFrameRate = 60;//TODO: UNLOCK FRAME RATE
         }
 
         private void OnDestroy()

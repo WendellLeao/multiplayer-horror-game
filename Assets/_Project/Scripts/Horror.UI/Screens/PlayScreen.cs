@@ -1,4 +1,6 @@
 using UnityEngine.SceneManagement;
+using Horror.ServiceLocator;
+using Horror.Audio;
 using UnityEngine;
 
 namespace Horror.UI.Screens
@@ -10,6 +12,10 @@ namespace Horror.UI.Screens
 
         public void Initialize()
         {
+            IAudioService audioService = GameServices.GetService<IAudioService>();
+            
+            audioService.PlaySound(Sound.GameTheme, Vector3.zero);
+            
             _playButton.OnButtonClicked += HandlePlayButtonClicked;
             _quitButton.OnButtonClicked += HandleQuitButtonClicked;
         }
