@@ -18,23 +18,38 @@ namespace Horror.UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            EnableGlow();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            DisableGlow();
+        }
+        
+        public void Invoke()
+        {
+            _button.onClick.Invoke();
+        }
+
+        private void OnDisable()
+        {
+            DisableGlow();
+        }
+
+        private void EnableGlow()
+        {
             foreach (HighlightableText highlightableText in _highlightableTexts)
             {
                 highlightableText.EnableGlow();
             }
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        private void DisableGlow()
         {
             foreach (HighlightableText highlightableText in _highlightableTexts)
             {
                 highlightableText.DisableGlow();
             }
-        }
-        
-        public void Invoke()
-        {
-            _button.onClick.Invoke();
         }
     }
 }

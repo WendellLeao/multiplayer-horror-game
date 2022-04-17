@@ -4,7 +4,8 @@ namespace Horror.UI
 {
     public interface IUIService
     {
-        void OpenScreen<T>() where T : UIScreen;
-        void CloseScreen<T>() where T : UIScreen;
+        void OpenScreen(UIScreen uiScreen, OpenScreenMode openScreenMode = OpenScreenMode.Single);
+        void CloseScreen(UIScreen uiScreen);
+        void CloseTopScreen();
     }
 }

@@ -5,6 +5,7 @@ using Horror.Events;
 using Horror.Inputs;
 using Horror.Audio;
 using Horror.Pooling;
+using Horror.UI;
 using UnityEngine;
 
 namespace Horror.Master
@@ -14,6 +15,8 @@ namespace Horror.Master
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeServices()
         {
+            InitializeUIService();
+            
             InitializeEventService();
             
             InitializeAudioService();
@@ -21,6 +24,13 @@ namespace Horror.Master
             InitializeInputService();
             
             InitializeVoiceService();
+        }
+
+        private static void InitializeUIService()
+        {
+            IUIService uiService = new UIService();
+            
+            GameServices.RegisterService(uiService);
         }
 
         private static void InitializeEventService()
