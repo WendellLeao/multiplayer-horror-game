@@ -1,7 +1,9 @@
 {
     "name": "Horror.Pooling",
     "rootNamespace": "Horror.Pooling",
-    "references": [],
+    "references": [
+        "GUID:6db9c19b80736f643b859bc09ee968c2"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

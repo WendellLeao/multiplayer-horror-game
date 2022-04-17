@@ -2,6 +2,11 @@ namespace Horror.Audio
 {
     public enum Sound
     {
-        GameTheme
+        GameTheme,
+        CloseDoor,
+        AgeResponseVoice,
+        AgeResponseVoicePt,
+        LocationResponseVoice,
+        LocationResponseVoicePt
     }
 }

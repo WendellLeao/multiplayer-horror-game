@@ -22,13 +22,6 @@ namespace Horror.Audio
         {
             IPoolingService poolingService = GameServices.GetService<IPoolingService>();
 
-            if (poolingService == null)
-            {
-                Debug.Log("dsds");
-                
-                return;
-            }
-            
             poolingService.ReturnObjectToPool(PoolType.SoundPlayer, gameObject);
 
             if (_audioData != null)
@@ -75,6 +68,8 @@ namespace Horror.Audio
 
             if (audioData.PersistentSound)
             {
+                transform.SetParent(null);
+                
                 DontDestroyOnLoad(_audioSource.gameObject);
             }
         }

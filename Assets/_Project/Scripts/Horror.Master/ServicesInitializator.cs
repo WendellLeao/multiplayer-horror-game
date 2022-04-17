@@ -21,6 +21,13 @@ namespace Horror.Master
                 return;
             }
             
+            if (SceneManager.GetActiveScene().name != "Startup")
+            {
+                SceneManager.LoadScene("Startup");
+                
+                return;
+            }
+            
             InitializeEventService();
 
             InitializePoolingService();
@@ -31,6 +38,8 @@ namespace Horror.Master
 
             InitializeVoiceService();
 
+            LoadNextScene();
+            
             _hasInitializedServices = true;
         }
         
@@ -43,9 +52,9 @@ namespace Horror.Master
 
         private static void InitializePoolingService()
         {
-            IPoolingService poolingService = new PoolingService();
-            
-            GameServices.RegisterService(poolingService);
+            // IPoolingService poolingService = new PoolingService();
+            //
+            // GameServices.RegisterService(poolingService);
         }
 
         private static void InitializeAudioService()
@@ -67,6 +76,13 @@ namespace Horror.Master
             IVoiceService voiceService = new VoiceService();
             
             GameServices.RegisterService(voiceService);
+        }
+
+        private static void LoadNextScene()
+        {
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            
+            SceneManager.LoadScene(nextSceneIndex);
         }
     }
 }

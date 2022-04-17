@@ -7,11 +7,15 @@ namespace Horror.Networking
 {
     public sealed class NetworkService : NetworkManager, INetworkService
     {
+        private IEventService _eventService;
+
         public override void Awake()
         {
             base.Awake();
 
             GameServices.RegisterService<INetworkService>(this);
+            
+            _eventService = GameServices.GetService<IEventService>();
         }
 
         public override void OnDestroy()
@@ -28,9 +32,7 @@ namespace Horror.Networking
             
             ServerReadiedEvent serverReadiedEvent = new ServerReadiedEvent(conn);
             
-            IEventService eventService = GameServices.GetService<IEventService>();
-            
-            eventService.DispatchEvent(serverReadiedEvent);
+            _eventService.DispatchEvent(serverReadiedEvent);
         }
 
         [Server]
@@ -40,9 +42,7 @@ namespace Horror.Networking
             
             ServerStartedEvent serverStartedEvent = new ServerStartedEvent();
             
-            IEventService eventService = GameServices.GetService<IEventService>();
-            
-            eventService.DispatchEvent(serverStartedEvent);
+            _eventService.DispatchEvent(serverStartedEvent);
         }
 
         [Server]
@@ -52,9 +52,7 @@ namespace Horror.Networking
             
             ServerStoppedEvent serverStoppedEvent = new ServerStoppedEvent();
             
-            IEventService eventService = GameServices.GetService<IEventService>();
-            
-            eventService.DispatchEvent(serverStoppedEvent);
+            _eventService.DispatchEvent(serverStoppedEvent);
         }
 
         [Server]
@@ -64,9 +62,7 @@ namespace Horror.Networking
             
             ServerDisconnectedEvent serverDisconnectedEvent = new ServerDisconnectedEvent(conn);
             
-            IEventService eventService = GameServices.GetService<IEventService>();
-            
-            eventService.DispatchEvent(serverDisconnectedEvent);
+            _eventService.DispatchEvent(serverDisconnectedEvent);
         }
 
         [Client]
@@ -76,9 +72,7 @@ namespace Horror.Networking
             
             ClientStartedEvent clientStartedEvent = new ClientStartedEvent();
             
-            IEventService eventService = GameServices.GetService<IEventService>();
-            
-            eventService.DispatchEvent(clientStartedEvent);
+            _eventService.DispatchEvent(clientStartedEvent);
         }
         
         [Client]
@@ -88,9 +82,7 @@ namespace Horror.Networking
             
             ClientStoppedEvent clientStoppedEvent = new ClientStoppedEvent();
             
-            IEventService eventService = GameServices.GetService<IEventService>();
-            
-            eventService.DispatchEvent(clientStoppedEvent);
+            _eventService.DispatchEvent(clientStoppedEvent);
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Horror.Gameplay.VoiceRecognizer
     {
         public event Action<PhraseData> OnPhraseRecognized;
         
+        private const string PhraseDatasPath = "VoiceService/PhraseDatas";
+
         private List<string> _phrases = new List<string>();
         private PhraseRecognizer _phraseRecognizer;
         private PhraseData[] _phraseDatas;
@@ -17,7 +19,7 @@ namespace Horror.Gameplay.VoiceRecognizer
 
         public VoiceService()
         {
-            _phraseDatas = Resources.LoadAll<PhraseData>("VoiceService/Phrases");
+            _phraseDatas = Resources.LoadAll<PhraseData>(PhraseDatasPath);
         }
         
         public void Begin()

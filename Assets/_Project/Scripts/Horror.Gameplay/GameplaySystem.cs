@@ -5,6 +5,7 @@ using Horror.Gameplay.Items;
 using Horror.ServiceLocator;
 using Multiplayer.Events;
 using Horror.Events;
+using Horror.Pooling;
 using UnityEngine;
 using Mirror;
 
@@ -22,6 +23,10 @@ namespace Horror.Gameplay
 
         private void Awake()
         {
+            IPoolingService poolingService = GameServices.GetService<IPoolingService>();
+            
+            poolingService.Begin();
+            
             _playerManager.Initialize();
             _cursorManager.Initialize();
             _itemManager.Initialize();

@@ -1,19 +1,12 @@
-using Horror.ServiceLocator;
-using Horror.Gameplay;
 using Horror.Gameplay.Scenary;
+using Horror.ServiceLocator;
+using Horror.Audio;
 using UnityEngine;
 
 namespace Horror.Gameplay.VoiceRecognizer
 {
     public sealed class VoiceListener : MonoBehaviour
     {
-        [Header("Audio Source")]
-        [SerializeField] private AudioSource _audioSource;
-        [SerializeField] private AudioClip _locationClip;
-        [SerializeField] private AudioClip _locationClipPT;
-        [SerializeField] private AudioClip _nameClip;
-        [SerializeField] private AudioClip _nameClipPT;
-        
         [Header("Phrases")]
         [SerializeField] private PhraseData askNamePhraseData;
         [SerializeField] private PhraseData askNamePhraseDataPt;
@@ -24,52 +17,47 @@ namespace Horror.Gameplay.VoiceRecognizer
 
         [Header("Others")]
         [SerializeField] private Door _door;
-        [SerializeField] private AudioSource _doorAudioSource;
+        
+        private IVoiceService _voiceService;
+        private IAudioService _audioService;
 
         public void Begin()
         {
-            IVoiceService voiceService = GameServices.GetService<IVoiceService>();
+            _audioService = GameServices.GetService<IAudioService>();
+            
+            _voiceService = GameServices.GetService<IVoiceService>();
 
-            voiceService.OnPhraseRecognized += HandlePhraseRecognized;
+            _voiceService.OnPhraseRecognized += HandlePhraseRecognized;
         }
         
         private void OnDisable()
         {
-            IVoiceService voiceService = GameServices.GetService<IVoiceService>();
-
-            voiceService.OnPhraseRecognized -= HandlePhraseRecognized;
+            _voiceService.OnPhraseRecognized -= HandlePhraseRecognized;
         }
         
         private void HandlePhraseRecognized(PhraseData recognizedPhraseData)
         {
             if (recognizedPhraseData.ID == askNamePhraseData.ID)
             {
-                _audioSource.clip = _nameClip;
-                
-                _audioSource.Play();
+                _audioService.PlaySound(Sound.AgeResponseVoice, Vector3.zero);
             }
             else if(recognizedPhraseData.ID == askLocationPhraseData.ID)
             {
-                _audioSource.clip = _locationClip;
-         
-                _audioSource.Play();
+                _audioService.PlaySound(Sound.LocationResponseVoice, Vector3.zero);
             }
             if (recognizedPhraseData.ID == askNamePhraseDataPt.ID)
             {
-                _audioSource.clip = _nameClipPT;
-                
-                _audioSource.Play();
+                _audioService.PlaySound(Sound.AgeResponseVoicePt, Vector3.zero);
             }
             else if(recognizedPhraseData.ID == askLocationPhraseDataPt.ID)
             {
-                _audioSource.clip = _locationClipPT;
-         
-                _audioSource.Play();
+                _audioService.PlaySound(Sound.LocationResponseVoicePt, Vector3.zero);
             }
             else if(recognizedPhraseData.ID == giveSignPhraseData.ID || recognizedPhraseData.ID == giveSignPhraseDataPt.ID)
             {
                 _door.Close();
-                _doorAudioSource.Play();
+                
+                _audioService.PlaySound(Sound.CloseDoor, _door.transform.position);
             }
         }
     }

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c08d0a9debb56f47a2b8947b970085d, type: 3}
-  m_Name: GameThemeAudioData
+  m_Name: LocationResponseAudioData
   m_EditorClassIdentifier: 
-  Sound: 0
+  Sound: 5
   AudioClips:
-  - {fileID: 8300000, guid: acf170d70807b6f41b53b13c55bab0f3, type: 3}
+  - {fileID: 8300000, guid: 27f9c559edd754f4e843b6693f1f44a2, type: 3}
   AudioMixerGroup: {fileID: 0}
   Volume: 0.5
   Pitch: 1
-  SpatialBlend: 0.5
-  Loop: 1
-  PersistentSound: 1
+  SpatialBlend: 0
+  Loop: 0
+  PersistentSound: 0

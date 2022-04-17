@@ -111,7 +111,7 @@ namespace Horror.Gameplay.Playing
             
             ICameraService cameraService = GameServices.GetService<ICameraService>();
 
-            _localPlayer.Begin(cameraService.MainCamera, firstPersonCamera);
+            _localPlayer.Begin(cameraService, firstPersonCamera);
         }
 
         [Server]

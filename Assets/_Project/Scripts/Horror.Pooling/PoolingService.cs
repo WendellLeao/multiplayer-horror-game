@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using Horror.ServiceLocator;
 using UnityEngine;
 
 namespace Horror.Pooling
 {
-	public sealed class PoolingService: IPoolingService
+	public sealed class PoolingService: MonoBehaviour, IPoolingService
 	{
+		private const string PoolDatasPath = "PoolingService/PoolDatas";
+		
 		private Dictionary<PoolType, Queue<GameObject>> _poolDictionary;
 		private PoolData[] _poolDatas;
 
-		public PoolingService()
+		public void Begin()
 		{
-			_poolDatas = Resources.LoadAll<PoolData>("PoolingService/PoolData");
-
 			_poolDictionary = new Dictionary<PoolType, Queue<GameObject>>();
 			
 			foreach (PoolData pool in _poolDatas)
@@ -23,6 +24,8 @@ namespace Horror.Pooling
 					GameObject newGameObject = CreateNewObject(pool.ObjectToPool);
 
 					objectPool.Enqueue(newGameObject);
+					
+					newGameObject.transform.SetParent(transform);
 				}
 
 				_poolDictionary.Add(pool.PoolType, objectPool);
@@ -60,7 +63,7 @@ namespace Horror.Pooling
 
 		private GameObject CreateNewObject(GameObject gameObject)
 		{
-			GameObject newGameObject = Object.Instantiate(gameObject);
+			GameObject newGameObject = Instantiate(gameObject);
 
 			newGameObject.SetActive(false);
 
@@ -75,13 +78,27 @@ namespace Horror.Pooling
 			{
 				if (pool.PoolType == poolType)
 				{
-					newBackupObject = Object.Instantiate(pool.ObjectToPool);
+					newBackupObject = Instantiate(pool.ObjectToPool);
 
 					return newBackupObject;
 				}
 			}
 
 			return null;
+		}
+		
+		private void Awake()
+		{
+			GameServices.RegisterService<IPoolingService>(this);
+			
+			_poolDatas = Resources.LoadAll<PoolData>(PoolDatasPath);
+
+			DontDestroyOnLoad(gameObject);
+		}
+
+		private void OnDestroy()
+		{
+			GameServices.DeregisterService<IPoolingService>();
 		}
 	}
 }

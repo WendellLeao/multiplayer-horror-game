@@ -7,12 +7,14 @@ namespace Horror.Audio
 {
     public sealed class AudioService : IAudioService
     {
+        private const string AudioDatasPath = "AudioService/AudioDatas";
+        
         private Dictionary<Sound, AudioData> _audioDataDictionary;
         private AudioData[] _audioDatas;
 
         public AudioService()
         {
-            _audioDatas = Resources.LoadAll<AudioData>("AudioService/AudioData");
+            _audioDatas = Resources.LoadAll<AudioData>(AudioDatasPath);
             
             _audioDataDictionary = new Dictionary<Sound, AudioData>();
 
@@ -33,7 +35,9 @@ namespace Horror.Audio
                     return;
                 }
 
-                GetSoundPlayerFromPool().PlaySound(audioData, position);
+                SoundPlayer soundPlayer = GetSoundPlayerFromPool();
+                
+                soundPlayer.PlaySound(audioData, position);
 
                 audioData.IsPlaying = true;
             }

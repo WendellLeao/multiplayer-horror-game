@@ -1,6 +1,5 @@
 using Horror.Gameplay.Cameras;
 using Horror.Gameplay.Playing;
-using Horror.ServiceLocator;
 using Horror.Inputs;
 using UnityEngine;
 using Mirror;
@@ -14,11 +13,13 @@ namespace Horror.Gameplay
         
         private ICarriableObject _containedCarriableObject;
         private Transform _mainCameraTransform;
+        private ICameraService _cameraService;
         private IInputService _inputService;
 
-        public void Initialize(IInputService inputService, Camera mainCamera)
+        public void Initialize(ICameraService cameraService, IInputService inputService, Camera mainCamera)
         {
             _mainCameraTransform = mainCamera.transform;
+            _cameraService = cameraService;
             _inputService = inputService;
             
             _inputService.OnReadPlayerInputs += HandleReadInputs;
@@ -111,9 +112,7 @@ namespace Horror.Gameplay
 
             if (item.hasAuthority)
             {
-                ICameraService cameraService = GameServices.GetService<ICameraService>();
-
-                carriableObject.SetContainer(cameraService.ItemContainer);
+                carriableObject.SetContainer(_cameraService.ItemContainer);
 
                 return;
             }
