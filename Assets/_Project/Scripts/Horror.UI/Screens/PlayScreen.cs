@@ -9,9 +9,9 @@ namespace Horror.UI.Screens
         [Header("Buttons")]
         [SerializeField] private HoverButton _playButton;
         [SerializeField] private HoverButton _quitButton;
-
-        [Header("Screens")] 
-        [SerializeField] private HostScreen _hostScreen;
+        
+        [Header("Screens")]
+        [SerializeField] private PlayerNameScreen _playerNameScreen;
 
         protected override void OnInitialize()
         {
@@ -21,9 +21,7 @@ namespace Horror.UI.Screens
             
             audioService.PlaySound(Sound.GameTheme, Vector3.zero);
             
-            _hostScreen.Initialize();
-            
-            UIService.OpenScreen(this);
+            _playerNameScreen.Initialize();
         }
 
         protected override void SubscribeEvents()
@@ -44,7 +42,7 @@ namespace Horror.UI.Screens
 
         private void HandlePlayButtonClicked()
         {
-            UIService.OpenScreen(_hostScreen);
+            UIService.OpenScreen(_playerNameScreen);
         }
         
         private void HandleQuitButtonClicked()

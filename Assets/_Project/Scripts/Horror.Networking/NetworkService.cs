@@ -2,18 +2,26 @@
 using Horror.ServiceLocator;
 using Horror.Events;
 using Mirror;
+using UnityEngine;
 
 namespace Horror.Networking
 {
     public sealed class NetworkService : NetworkManager, INetworkService
     {
         private IEventService _eventService;
+        
+        public NetworkConnectionToClient PlayerConn { get; private set; }
 
         public override void Awake()
         {
             base.Awake();
 
             GameServices.RegisterService<INetworkService>(this);
+        }
+
+        public override void Start()
+        {
+            base.Start();
             
             _eventService = GameServices.GetService<IEventService>();
         }
@@ -29,10 +37,12 @@ namespace Horror.Networking
         public override void OnServerReady(NetworkConnectionToClient conn)
         {
             base.OnServerReady(conn);
-            
+
             ServerReadiedEvent serverReadiedEvent = new ServerReadiedEvent(conn);
             
             _eventService.DispatchEvent(serverReadiedEvent);
+
+            PlayerConn = conn;
         }
 
         [Server]
@@ -72,6 +82,7 @@ namespace Horror.Networking
             
             ClientStartedEvent clientStartedEvent = new ClientStartedEvent();
             
+            
             _eventService.DispatchEvent(clientStartedEvent);
         }
         
@@ -83,6 +94,13 @@ namespace Horror.Networking
             ClientStoppedEvent clientStoppedEvent = new ClientStoppedEvent();
             
             _eventService.DispatchEvent(clientStoppedEvent);
+        }
+        
+        public void StartClient(string ipAddress)
+        {
+            networkAddress = ipAddress;
+            
+            StartClient();
         }
     }
 }

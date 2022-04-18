@@ -68,11 +68,6 @@ namespace Horror.Pooling
 
 		private void Awake()
 		{
-			if (ServiceIsRegistered())
-			{
-				return;
-			}
-			
 			GameServices.RegisterService<IPoolingService>(this);
 			
 			_poolDatas = Resources.LoadAll<PoolData>(PoolDatasPath);
@@ -106,18 +101,6 @@ namespace Horror.Pooling
 
 				_poolDictionary.Add(pool.PoolType, objectPool);
 			}
-		}
-
-		private bool ServiceIsRegistered()
-		{
-			IPoolingService poolingService = GameServices.GetService<IPoolingService>();
-			
-			if (poolingService != null)
-			{
-				return true;
-			}
-
-			return false;
 		}
 	}
 }

@@ -15,6 +15,13 @@ namespace Horror.Gameplay.Playing
         private List<Player> _players = new List<Player>();
         private Player _localPlayer;
 
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+
+            Debug.Log("OnStartClient");
+        }
+        
         public void Initialize()
         { }
 
@@ -22,6 +29,8 @@ namespace Horror.Gameplay.Playing
         public void Begin(NetworkConnectionToClient conn)
         {
             ServerHandlePlayerSpawn(conn);
+
+            Debug.Log("Begin");
         }
 
         public void Dispose()

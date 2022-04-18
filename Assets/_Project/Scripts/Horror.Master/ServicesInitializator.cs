@@ -1,20 +1,32 @@
 using Horror.Gameplay.VoiceRecognizer;
-using UnityEngine.SceneManagement;
 using Horror.ServiceLocator;
 using Horror.Events;
 using Horror.Inputs;
 using Horror.Audio;
-using Horror.Pooling;
-using Horror.UI;
 using UnityEngine;
+using Horror.UI;
 
 namespace Horror.Master
 {
     public static class ServicesInitializator
     {
+        private const string NetworkServicePrefabPath = "NetworkService/NetworkService";
+        private const string PoolingServicePrefabPath = "PoolingService/PoolingService";
+
+        private static bool _hasInitialized;
+        
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeServices()
         {
+            if (_hasInitialized)
+            {
+                return;
+            }
+            
+            InitializeNetworkService();
+
+            InitializePoolingService();
+                
             InitializeUIService();
             
             InitializeEventService();
@@ -24,6 +36,22 @@ namespace Horror.Master
             InitializeInputService();
             
             InitializeVoiceService();
+
+            _hasInitialized = true;
+        }
+
+        private static void InitializeNetworkService()
+        {
+            GameObject networkServicePrefab = Resources.Load(NetworkServicePrefabPath) as GameObject;
+                
+            Object.Instantiate(networkServicePrefab);
+        }
+        
+        private static void InitializePoolingService()
+        {
+            GameObject poolingServicePrefab = Resources.Load(PoolingServicePrefabPath) as GameObject;
+                
+            Object.Instantiate(poolingServicePrefab);
         }
 
         private static void InitializeUIService()

@@ -5,8 +5,6 @@ namespace Horror.UI.Screens
 {
     public abstract class UIScreen : MonoBehaviour
     {
-        [SerializeField] private bool _autoInitialize;
-        
         private IUIService _uiService;
 
         protected IUIService UIService => _uiService;
@@ -17,17 +15,7 @@ namespace Horror.UI.Screens
             
             OnInitialize();
         }
-        
-        protected virtual void OnEnable()
-        {
-            SubscribeEvents();
-        }
 
-        protected virtual void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-        
         protected virtual void SubscribeEvents()
         {}
         
@@ -37,14 +25,29 @@ namespace Horror.UI.Screens
         protected virtual void OnInitialize()
         {}
         
-        private void Awake()
+        protected virtual void OnOpen()
+        {}
+        
+        protected virtual void OnClose()
+        {}
+
+        protected void Close()
         {
-            if (!_autoInitialize)
-            {
-                return;
-            }
+            UIService.CloseTopScreen();
+        }
+        
+        private void OnEnable()
+        {
+            SubscribeEvents();
             
-            Initialize();
+            OnOpen();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+            
+            OnClose();
         }
     }
 }

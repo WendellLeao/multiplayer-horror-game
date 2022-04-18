@@ -5,6 +5,7 @@ using Horror.Gameplay.Items;
 using Horror.ServiceLocator;
 using Multiplayer.Events;
 using Horror.Events;
+using Horror.Networking;
 using Horror.Pooling;
 using UnityEngine;
 using Mirror;
@@ -34,6 +35,8 @@ namespace Horror.Gameplay
             _eventService.AddEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.AddEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
             _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
+
+            Debug.Log("Subscribe system events");
         }
 
         private void OnDestroy()

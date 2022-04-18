@@ -162,8 +162,8 @@ GameObject:
   - component: {fileID: 6409398168684183761}
   - component: {fileID: 1066730699415834642}
   - component: {fileID: 6409398168684183774}
-  - component: {fileID: 5654796292767173192}
   - component: {fileID: 8321292049749831021}
+  - component: {fileID: 5654796292767173192}
   - component: {fileID: 4360381944364374611}
   m_Layer: 5
   m_Name: HoverButton
@@ -274,21 +274,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5654796292767173192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6409398168684183772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04429003f18d4101bc1acc13b84c99d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 6409398168684183774}
-  _highlightableTexts:
-  - {fileID: 8610421268830287838}
 --- !u!114 &8321292049749831021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +300,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5654796292767173192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409398168684183772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04429003f18d4101bc1acc13b84c99d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 6409398168684183774}
+  _highlightableTexts:
+  - {fileID: 8610421268830287838}
 --- !u!114 &4360381944364374611
 MonoBehaviour:
   m_ObjectHideFlags: 0

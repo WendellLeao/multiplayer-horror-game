@@ -54,15 +54,5 @@ namespace Horror.Events
                 thisEvent.Invoke(serviceEvent);
             }
         }
-
-        private void Awake()
-        {
-            GameServices.RegisterService<IEventService>(this);
-        }
-
-        private void OnDestroy()
-        {
-            GameServices.DeregisterService<IEventService>();
-        }
     }
 }

@@ -15,7 +15,7 @@ namespace Horror.UI
         
         [SerializeField] private Button _button = default;
         [SerializeField] private HighlightableText[] _highlightableTexts;
-
+        
         public void OnPointerEnter(PointerEventData eventData)
         {
             EnableGlow();
@@ -38,6 +38,11 @@ namespace Horror.UI
 
         private void EnableGlow()
         {
+            if (!_button.interactable)
+            {
+                return;
+            }
+            
             foreach (HighlightableText highlightableText in _highlightableTexts)
             {
                 highlightableText.EnableGlow();
@@ -50,6 +55,12 @@ namespace Horror.UI
             {
                 highlightableText.DisableGlow();
             }
+        }
+        
+        public bool IsInteractable
+        {
+            get => _button.interactable;
+            set => _button.interactable = value;
         }
     }
 }

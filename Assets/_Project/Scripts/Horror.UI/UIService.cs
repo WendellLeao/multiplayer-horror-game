@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using Horror.UI.Screens;
+using UnityEngine;
 
 namespace Horror.UI
 {
     public sealed class UIService : IUIService
     {
         private Stack<UIScreen> _screens = new Stack<UIScreen>();
+        private UIScreen _currentOpenedScreen;
+
+        public UIScreen CurrentOpenedScreen => _currentOpenedScreen;
 
         public void OpenScreen(UIScreen uiScreen, OpenScreenMode openScreenMode = OpenScreenMode.Single)
         {
@@ -13,15 +17,17 @@ namespace Horror.UI
             {
                 CloseCurrentScreen();
             }
-
-            uiScreen.gameObject.SetActive(true);
             
-            if (_screens.Contains(uiScreen))
+            if (!_screens.Contains(uiScreen))
             {
-                return;
+                _screens.Push(uiScreen); 
             }
 
-            _screens.Push(uiScreen);
+            uiScreen.gameObject.SetActive(true);
+
+            _currentOpenedScreen = uiScreen;
+            
+            Debug.Log("Open Screen: " + uiScreen.name);
         }
 
         public void CloseScreen(UIScreen uiScreen)
@@ -53,7 +59,7 @@ namespace Horror.UI
             }
             
             UIScreen currentScreen = _screens.Peek();
-            
+
             currentScreen.gameObject.SetActive(false);
         }
         
