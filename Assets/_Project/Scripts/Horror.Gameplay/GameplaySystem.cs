@@ -5,8 +5,6 @@ using Horror.Gameplay.Items;
 using Horror.ServiceLocator;
 using Multiplayer.Events;
 using Horror.Events;
-using Horror.Networking;
-using Horror.Pooling;
 using UnityEngine;
 using Mirror;
 
@@ -27,7 +25,7 @@ namespace Horror.Gameplay
             _playerManager.Initialize();
             _cursorManager.Initialize();
             _itemManager.Initialize();
-            
+
             _eventService = GameServices.GetService<IEventService>();
             
             _eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
@@ -35,12 +33,7 @@ namespace Horror.Gameplay
             _eventService.AddEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.AddEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
             _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
-
-            Debug.Log("Subscribe system events");
-            
-            IVoiceService voiceService = GameServices.GetService<IVoiceService>();//
-            
-            voiceService.Begin();
+            _eventService.AddEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
         }
 
         private void OnDestroy()
@@ -54,10 +47,7 @@ namespace Horror.Gameplay
             _eventService.RemoveEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.RemoveEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
             _eventService.RemoveEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
-            
-            IVoiceService voiceService = GameServices.GetService<IVoiceService>();//
-            
-            voiceService.Stop();
+            _eventService.RemoveEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
         }
 
         private void Update()//TODO: JUST UPDATE WHEN THE GAME STATE IS STARTED
@@ -92,6 +82,13 @@ namespace Horror.Gameplay
         {
             _voiceListener.Begin();
         }
+    
+        [Client]
+        private void ClientHandleClientStopped(ServiceEvent serviceEvent)
+        {
+            _playerManager.Stop();
+            _itemManager.Stop();
+        }
         
         [Server]
         private void ServerHandleServerDisconnected(ServiceEvent serviceEvent)
@@ -101,12 +98,9 @@ namespace Horror.Gameplay
                 _playerManager.RemoveDisconnectedPlayerFromList(serverDisconnectedEvent.Conn);
             }
         }
-        
+
         [Client]
-        private void ClientHandleClientStopped(ServiceEvent serviceEvent)
-        {
-            _playerManager.Stop();
-            _itemManager.Stop();
-        }
+        private void ClientHandleClientConnected(ServiceEvent serviceEvent)
+        { }
     }
 }

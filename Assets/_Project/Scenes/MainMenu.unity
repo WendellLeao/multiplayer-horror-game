@@ -6889,6 +6889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4589d5b47e4e4aa9bd553b292d755075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameSceneName: Assets/_Project/Scenes/HorrorHotel.unity
   _joinButton: {fileID: 128451848}
   _hostButton: {fileID: 1401035825}
   _backButton: {fileID: 345632068}
@@ -12763,6 +12764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61dcff9cf5642449052ff3200c5e64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameSceneName: Assets/_Project/Scenes/HorrorHotel.unity
   _ipInputField: {fileID: 32743249}
   _joinButton: {fileID: 690085314}
   _ipAddress: localhost

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Horror.Gameplay.Cameras;
 using Horror.ServiceLocator;
 using Horror.Events;
@@ -21,7 +22,7 @@ namespace Horror.Gameplay.Playing
 
             Debug.Log("OnStartClient");
         }
-        
+
         public void Initialize()
         { }
 
@@ -29,8 +30,6 @@ namespace Horror.Gameplay.Playing
         public void Begin(NetworkConnectionToClient conn)
         {
             ServerHandlePlayerSpawn(conn);
-
-            Debug.Log("Begin");
         }
 
         public void Dispose()

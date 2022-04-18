@@ -1,12 +1,16 @@
-﻿using UnityEngine.SceneManagement;
-using Horror.ServiceLocator;
+﻿using Horror.ServiceLocator;
 using Horror.Networking;
 using UnityEngine;
+using Mirror;
 
 namespace Horror.UI.Screens
 {
     public sealed class LobbyScreen : UIScreen
     {
+        [Scene]
+        [SerializeField] private string _gameSceneName;
+        
+        [Header("UI")]
         [SerializeField] private HoverButton _joinButton;
         [SerializeField] private HoverButton _hostButton;
         [SerializeField] private HoverButton _backButton;
@@ -48,21 +52,14 @@ namespace Horror.UI.Screens
         {
             INetworkService networkService = GameServices.GetService<INetworkService>();
             
-            networkService.StartHost();
+            networkService.ServerChangeScene(_gameSceneName);
 
-            LoadNextScene();
+            networkService.StartHost();
         }
 
         private void HandleBackButtonClicked()
         {
             UIService.CloseTopScreen();
-        }
-
-        private void LoadNextScene()
-        {
-            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-            
-            SceneManager.LoadScene(nextSceneIndex);
         }
     }
 }

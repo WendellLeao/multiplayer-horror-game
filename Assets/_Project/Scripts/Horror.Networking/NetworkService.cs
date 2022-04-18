@@ -2,15 +2,12 @@
 using Horror.ServiceLocator;
 using Horror.Events;
 using Mirror;
-using UnityEngine;
 
 namespace Horror.Networking
 {
     public sealed class NetworkService : NetworkManager, INetworkService
     {
         private IEventService _eventService;
-        
-        public NetworkConnectionToClient PlayerConn { get; private set; }
 
         public override void Awake()
         {
@@ -41,10 +38,8 @@ namespace Horror.Networking
             ServerReadiedEvent serverReadiedEvent = new ServerReadiedEvent(conn);
             
             _eventService.DispatchEvent(serverReadiedEvent);
-
-            PlayerConn = conn;
         }
-
+        
         [Server]
         public override void OnStartServer()
         {
@@ -65,16 +60,6 @@ namespace Horror.Networking
             _eventService.DispatchEvent(serverStoppedEvent);
         }
 
-        [Server]
-        public override void OnServerDisconnect(NetworkConnectionToClient conn)
-        {
-            base.OnServerDisconnect(conn);
-            
-            ServerDisconnectedEvent serverDisconnectedEvent = new ServerDisconnectedEvent(conn);
-            
-            _eventService.DispatchEvent(serverDisconnectedEvent);
-        }
-
         [Client]
         public override void OnStartClient()
         {
@@ -93,6 +78,26 @@ namespace Horror.Networking
             ClientStoppedEvent clientStoppedEvent = new ClientStoppedEvent();
             
             _eventService.DispatchEvent(clientStoppedEvent);
+        }
+
+        [Server]
+        public override void OnServerDisconnect(NetworkConnectionToClient conn)
+        {
+            base.OnServerDisconnect(conn);
+            
+            ServerDisconnectedEvent serverDisconnectedEvent = new ServerDisconnectedEvent(conn);
+            
+            _eventService.DispatchEvent(serverDisconnectedEvent);
+        }
+
+        [Client]
+        public override void OnClientConnect()
+        {
+            base.OnClientConnect();
+            
+            ClientConnectedEvent clientConnectedEvent = new ClientConnectedEvent();
+            
+            _eventService.DispatchEvent(clientConnectedEvent);
         }
         
         public void StartClient(string ipAddress)

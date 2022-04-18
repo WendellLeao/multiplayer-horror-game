@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Horror.UI.Screens;
-using UnityEngine;
 
 namespace Horror.UI
 {
@@ -26,8 +25,6 @@ namespace Horror.UI
             uiScreen.gameObject.SetActive(true);
 
             _currentOpenedScreen = uiScreen;
-            
-            Debug.Log("Open Screen: " + uiScreen.name);
         }
 
         public void CloseScreen(UIScreen uiScreen)

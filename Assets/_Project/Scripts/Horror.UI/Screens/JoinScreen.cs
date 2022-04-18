@@ -1,5 +1,4 @@
-﻿using UnityEngine.SceneManagement;
-using Horror.ServiceLocator;
+﻿using Horror.ServiceLocator;
 using Horror.Networking;
 using UnityEngine;
 using TMPro;
@@ -8,6 +7,7 @@ namespace Horror.UI.Screens
 {
     public sealed class JoinScreen : UIScreen
     {
+        [Header("UI")]
         [SerializeField] private TMP_InputField _ipInputField;
         [SerializeField] private HoverButton _joinButton;
         [SerializeField] private string _ipAddress;
@@ -58,15 +58,6 @@ namespace Horror.UI.Screens
             INetworkService networkService = GameServices.GetService<INetworkService>();
             
             networkService.StartClient(_ipAddress);
-
-            LoadNextScene();
-        }
-        
-        private void LoadNextScene()
-        {
-            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-            
-            SceneManager.LoadScene(nextSceneIndex);
         }
     }
 }
