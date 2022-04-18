@@ -1,5 +1,4 @@
-﻿using Castle.Core.Internal;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Horror.UI.Screens
 {
@@ -27,12 +26,10 @@ namespace Horror.UI.Screens
 
             string playerName = _playerInputField.PlayerName;
             
-            if (!playerName.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(playerName))
             {
-                return;
+                _continueButton.IsInteractable = false;
             }
-            
-            _continueButton.IsInteractable = false;
         }
 
         protected override void OnClose()
@@ -62,7 +59,7 @@ namespace Horror.UI.Screens
 
         private void HandlePlayerInputFieldSubmitted(string playerName)
         {
-            if (playerName.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(playerName))
             {
                 _continueButton.IsInteractable = false;
                 

@@ -37,6 +37,10 @@ namespace Horror.Gameplay
             _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
 
             Debug.Log("Subscribe system events");
+            
+            IVoiceService voiceService = GameServices.GetService<IVoiceService>();//
+            
+            voiceService.Begin();
         }
 
         private void OnDestroy()

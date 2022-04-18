@@ -81,8 +81,7 @@ namespace Horror.Networking
             base.OnStartClient();
             
             ClientStartedEvent clientStartedEvent = new ClientStartedEvent();
-            
-            
+
             _eventService.DispatchEvent(clientStartedEvent);
         }
         

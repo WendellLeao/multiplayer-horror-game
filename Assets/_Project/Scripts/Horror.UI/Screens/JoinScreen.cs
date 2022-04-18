@@ -1,6 +1,5 @@
 ﻿using UnityEngine.SceneManagement;
 using Horror.ServiceLocator;
-using Castle.Core.Internal;
 using Horror.Networking;
 using UnityEngine;
 using TMPro;
@@ -42,7 +41,7 @@ namespace Horror.UI.Screens
 
         private void SubmitInputField(string ipAddress)
         {
-            if (ipAddress.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(ipAddress))
             {
                 _joinButton.IsInteractable = false;
                 
