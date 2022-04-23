@@ -6,28 +6,28 @@ namespace Horror.UI
     public sealed class HighlightableText : MonoBehaviour
     {
         [SerializeField] private TMP_Text _text = default;
-        [SerializeField] private TMP_FontAsset _originalMaterial;
-        [SerializeField] private TMP_FontAsset _glowMaterial;
-        [SerializeField] private TMP_FontAsset _blockedMaterial;
+        [SerializeField] private Material _originalMaterial;
+        [SerializeField] private Material _glowMaterial;
+        [SerializeField] private Material _blockedMaterial;
 
         public void EnableGlow()
         {
-            _text.fontMaterial = _glowMaterial.material;
+            _text.fontMaterial = _glowMaterial;
         }
 
         public void DisableGlow()
         {
-            _text.fontMaterial = _originalMaterial.material;
+            _text.fontMaterial = _originalMaterial;
         }
 
         public void BlockGlow()
         {
-            _text.fontMaterial = _blockedMaterial.material;
+            _text.fontMaterial = _blockedMaterial;
         }
         
         public void UnblockGlow()
         {
-            _text.fontMaterial = _originalMaterial.material;
+            _text.fontMaterial = _originalMaterial;
         }
     }
 }

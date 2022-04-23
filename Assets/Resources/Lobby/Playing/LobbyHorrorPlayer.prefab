@@ -1545,6 +1545,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  PlayerName: 
+  IsReady: 0
   _nameText: {fileID: 6831701731895027036}
   _readinessText: {fileID: 6492355453489525493}
   _readyTextColor: {r: 0.015300989, g: 1, b: 0, a: 1}
@@ -1789,7 +1791,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 6414101475180984794, guid: eb1a62967b3194744b2416ac3823460e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1833,8 +1835,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ready
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eb1a62967b3194744b2416ac3823460e, type: 2}
+  m_sharedMaterial: {fileID: 6414101475180984794, guid: eb1a62967b3194744b2416ac3823460e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2082,7 +2084,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 6414101475180984794, guid: eb1a62967b3194744b2416ac3823460e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2126,8 +2128,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wendinho
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eb1a62967b3194744b2416ac3823460e, type: 2}
+  m_sharedMaterial: {fileID: 6414101475180984794, guid: eb1a62967b3194744b2416ac3823460e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -55,6 +55,8 @@ namespace Horror.UI.Screens.MainMenu
             INetworkService networkService = GameServices.GetService<INetworkService>();
             
             networkService.StartHost();
+            
+            _soloButton.SetInteractable(false);
         }
         
         private void HandleQuitButtonClicked()
