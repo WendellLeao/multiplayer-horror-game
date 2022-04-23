@@ -8926,8 +8926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9710e7c907411295d2bd31ddb60675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hostButtonsGroup: {fileID: 1711219650}
-  _clientButtonsGroup: {fileID: 432124297}
+  _hostHintPanel: {fileID: 1711219650}
+  _clientHintPanel: {fileID: 432124297}
   _playHoverButton: {fileID: 1676049213}
   _readyHoverButton: {fileID: 1389349671}
 --- !u!1 &413111561
@@ -9306,7 +9306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 432124298}
   m_Layer: 5
-  m_Name: ClientButtonsGroup
+  m_Name: ClientHintPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34666,7 +34666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1711219651}
   m_Layer: 5
-  m_Name: HostButtonsGroup
+  m_Name: HostHintPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

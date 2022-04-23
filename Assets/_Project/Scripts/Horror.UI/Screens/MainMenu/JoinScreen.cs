@@ -3,13 +3,16 @@ using Horror.Networking;
 using UnityEngine;
 using TMPro;
 
-namespace Horror.UI.Screens
+namespace Horror.UI.Screens.MainMenu
 {
     public sealed class JoinScreen : UIScreen
     {
         [Header("UI")]
-        [SerializeField] private TMP_InputField _ipInputField;
         [SerializeField] private HoverButton _joinButton;
+        [SerializeField] private HoverButton _backButton;
+        [SerializeField] private TMP_InputField _ipInputField;
+        
+        [Header("Server")]
         [SerializeField] private string _ipAddress;
 
         protected override void OnInitialize()
@@ -34,6 +37,7 @@ namespace Horror.UI.Screens
             _ipInputField.onEndEdit.AddListener(SubmitInputField);
             
             _joinButton.OnButtonClicked += HandleJoinButtonClicked;
+            _backButton.OnButtonClicked += HandleBackButtonClicked;
         }
 
         protected override void UnsubscribeEvents()
@@ -44,6 +48,7 @@ namespace Horror.UI.Screens
             _ipInputField.onEndEdit.RemoveListener(SubmitInputField);
 
             _joinButton.OnButtonClicked -= HandleJoinButtonClicked;
+            _backButton.OnButtonClicked -= HandleBackButtonClicked;
         }
 
         private void SubmitInputField(string ipAddress)
@@ -67,6 +72,11 @@ namespace Horror.UI.Screens
             networkService.StartClient(_ipAddress);
             
             _joinButton.SetInteractable(false);
+        }
+
+        private void HandleBackButtonClicked()
+        {
+            UIService.CloseTopScreen();
         }
     }
 }

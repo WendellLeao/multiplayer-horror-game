@@ -1,12 +1,14 @@
 ﻿using Horror.ServiceLocator;
 using Horror.Networking;
 using UnityEngine;
-using Mirror;
 
-namespace Horror.UI.Screens
+namespace Horror.UI.Screens.MainMenu
 {
     public sealed class EnterServerOptions : UIScreen
     {
+        [Header("Player Name")]
+        [SerializeField] private PlayerInputField _playerInputField;
+        
         [Header("UI")]
         [SerializeField] private HoverButton _joinButton;
         [SerializeField] private HoverButton _hostButton;
@@ -20,19 +22,19 @@ namespace Horror.UI.Screens
             base.OnInitialize();
             
             _joinScreen.Initialize();
-        }
-
-        protected override void OnOpen()
-        {
-            base.OnOpen();
             
-            _hostButton.SetInteractable(true);
+            _playerInputField.Initialize();
+            
+            string playerName = _playerInputField.PlayerName;
+            
+            CheckPlayerNameSubmission(playerName);
         }
 
         protected override void SubscribeEvents()
         {
             base.SubscribeEvents();
 
+            _playerInputField.OnSubmitted += CheckPlayerNameSubmission;
             _joinButton.OnButtonClicked += HandleJoinButtonClicked;
             _hostButton.OnButtonClicked += HandleHostButtonClicked;
             _backButton.OnButtonClicked += HandleBackButtonClicked;
@@ -42,9 +44,24 @@ namespace Horror.UI.Screens
         {
             base.UnsubscribeEvents();
             
+            _playerInputField.OnSubmitted -= CheckPlayerNameSubmission;
             _joinButton.OnButtonClicked -= HandleJoinButtonClicked;
             _hostButton.OnButtonClicked -= HandleHostButtonClicked;
             _backButton.OnButtonClicked -= HandleBackButtonClicked;
+        }
+        
+        private void CheckPlayerNameSubmission(string playerName)
+        {
+            if (string.IsNullOrEmpty(playerName))
+            {
+                _joinButton.SetInteractable(false);
+                _hostButton.SetInteractable(false);
+                
+                return;
+            }
+
+            _joinButton.SetInteractable(true);
+            _hostButton.SetInteractable(true);
         }
 
         private void HandleJoinButtonClicked()

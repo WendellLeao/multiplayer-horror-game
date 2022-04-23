@@ -1,7 +1,7 @@
 ﻿using Horror.ServiceLocator;
 using UnityEngine;
 
-namespace Horror.UI.Screens
+namespace Horror.UI.Screens.MainMenu
 {
     public sealed class MainMenuManager : MonoBehaviour
     {

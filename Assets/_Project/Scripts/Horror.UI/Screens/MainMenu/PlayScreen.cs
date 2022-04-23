@@ -3,7 +3,7 @@ using Horror.Audio;
 using Horror.Networking;
 using UnityEngine;
 
-namespace Horror.UI.Screens
+namespace Horror.UI.Screens.MainMenu
 {
     public sealed class PlayScreen : UIScreen
     {
@@ -13,7 +13,7 @@ namespace Horror.UI.Screens
         [SerializeField] private HoverButton _quitButton;
         
         [Header("Screens")]
-        [SerializeField] private PlayerNameScreen _playerNameScreen;
+        [SerializeField] private EnterServerOptions _enterServerOptions;
 
         protected override void OnInitialize()
         {
@@ -23,7 +23,7 @@ namespace Horror.UI.Screens
             
             audioService.PlaySound(Sound.GameTheme, Vector3.zero);
             
-            _playerNameScreen.Initialize();
+            _enterServerOptions.Initialize();
         }
 
         protected override void SubscribeEvents()
@@ -46,7 +46,7 @@ namespace Horror.UI.Screens
 
         private void HandleMultiplayerButtonClicked()
         {
-            UIService.OpenScreen(_playerNameScreen);
+            UIService.OpenScreen(_enterServerOptions);
         }
 
         private void HandleSoloButtonClicked()

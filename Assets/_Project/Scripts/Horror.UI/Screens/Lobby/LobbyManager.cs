@@ -6,7 +6,7 @@ using Horror.Events;
 using UnityEngine;
 using Mirror;
 
-namespace Horror.UI.Lobby
+namespace Horror.UI.Screens.Lobby
 {
     public sealed class LobbyManager : NetworkBehaviour
     {

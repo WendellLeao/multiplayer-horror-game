@@ -2,7 +2,7 @@
 using Horror.UI.Screens;
 using UnityEngine;
 
-namespace Horror.UI.Lobby
+namespace Horror.UI.Screens.Lobby
 {
     public sealed class LobbyScreen : UIScreen
     {
@@ -19,8 +19,8 @@ namespace Horror.UI.Lobby
         }
         
         [Header("UI")] 
-        [SerializeField] private GameObject _hostButtonsGroup;
-        [SerializeField] private GameObject _clientButtonsGroup;
+        [SerializeField] private GameObject _hostHintPanel;
+        [SerializeField] private GameObject _clientHintPanel;
         [SerializeField] private HoverButton _playHoverButton;
         [SerializeField] private HoverButton _readyHoverButton;
 
@@ -31,14 +31,14 @@ namespace Horror.UI.Lobby
         
         public void ActiveHostButtonsGroup()
         {
-            _hostButtonsGroup.SetActive(true);
-            _clientButtonsGroup.SetActive(false);
+            _hostHintPanel.SetActive(true);
+            _clientHintPanel.SetActive(false);
         }
         
         public void ActiveClientButtonsGroup()
         {
-            _clientButtonsGroup.SetActive(true);
-            _hostButtonsGroup.SetActive(false);
+            _clientHintPanel.SetActive(true);
+            _hostHintPanel.SetActive(false);
         }
 
         public void SetReadyButtonLabelText(string text)
