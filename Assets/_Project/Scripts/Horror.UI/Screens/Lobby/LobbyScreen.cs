@@ -18,7 +18,6 @@ namespace Horror.UI.Screens.Lobby
             remove => _readyHoverButton.OnButtonClicked -= value;
         }
         
-        [Header("UI")] 
         [SerializeField] private GameObject _hostHintPanel;
         [SerializeField] private GameObject _clientHintPanel;
         [SerializeField] private HoverButton _playHoverButton;

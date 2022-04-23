@@ -1,3 +1,4 @@
+using Horror.UI.Screens.Lobby;
 using Horror.Gameplay.Events;
 using Horror.ServiceLocator;
 using Multiplayer.Events;
@@ -6,7 +7,7 @@ using Horror.Events;
 using UnityEngine;
 using Mirror;
 
-namespace Horror.UI.Screens.Lobby
+namespace Horror.UI.Lobby
 {
     public sealed class LobbyManager : NetworkBehaviour
     {
