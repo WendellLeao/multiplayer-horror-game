@@ -6,13 +6,11 @@ namespace Horror.UI.Screens
     public abstract class UIScreen : MonoBehaviour
     {
         private IUIService _uiService;
-
+        
         protected IUIService UIService => _uiService;
 
         public void Initialize()
         {
-            _uiService = GameServices.GetService<IUIService>();
-            
             OnInitialize();
         }
 
@@ -21,7 +19,7 @@ namespace Horror.UI.Screens
         
         protected virtual void UnsubscribeEvents()
         {}
-        
+
         protected virtual void OnInitialize()
         {}
         
@@ -30,12 +28,26 @@ namespace Horror.UI.Screens
         
         protected virtual void OnClose()
         {}
-
+        
         protected void Close()
         {
             UIService.CloseTopScreen();
         }
-        
+
+        private void Awake()
+        {
+            _uiService = GameServices.GetService<IUIService>();
+            
+            _uiService.RegisterScreen(this);
+            
+            gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            _uiService.UnregisterScreen(this);
+        }
+
         private void OnEnable()
         {
             SubscribeEvents();

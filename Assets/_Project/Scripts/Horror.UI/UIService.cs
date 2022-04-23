@@ -5,7 +5,8 @@ namespace Horror.UI
 {
     public sealed class UIService : IUIService
     {
-        private Stack<UIScreen> _screens = new Stack<UIScreen>();
+        private readonly Stack<UIScreen> _screens = new Stack<UIScreen>();
+        private readonly List<UIScreen> _registeredScreens = new List<UIScreen>();
         private UIScreen _currentOpenedScreen;
 
         public UIScreen CurrentOpenedScreen => _currentOpenedScreen;
@@ -28,12 +29,40 @@ namespace Horror.UI
 
             return uiScreen;
         }
+        
+        public UIScreen OpenScreen<T>(OpenScreenMode openScreenMode = OpenScreenMode.Single) where T : UIScreen
+        {
+            foreach (UIScreen registeredScreen in _registeredScreens)
+            {
+                if (registeredScreen is T)
+                {
+                    OpenScreen(registeredScreen);
+
+                    return registeredScreen;
+                }
+            }
+
+            return null;
+        }
 
         public void CloseScreen(UIScreen uiScreen)
         {
             uiScreen.gameObject.SetActive(false);
             
             _screens.Pop();
+        }
+        
+        public void CloseScreen<T>()
+        {
+            foreach (UIScreen uiScreen in _screens)
+            {
+                if (uiScreen is T)
+                {
+                    uiScreen.gameObject.SetActive(false);
+                    
+                    _screens.Pop();
+                }
+            }
         }
         
         public void CloseTopScreen()
@@ -49,6 +78,26 @@ namespace Horror.UI
 
             OpenPreviousScreen();
         }
+        
+        public void RegisterScreen(UIScreen uiScreen)
+        {
+            if (_registeredScreens.Contains(uiScreen))
+            {
+                return;
+            }
+            
+            _registeredScreens.Add(uiScreen);
+        }
+        
+        public void UnregisterScreen(UIScreen uiScreen)
+        {
+            if (!_registeredScreens.Contains(uiScreen))
+            {
+                return;
+            }
+            
+            _registeredScreens.Remove(uiScreen);
+        }
 
         private void CloseCurrentScreen()
         {
@@ -58,6 +107,11 @@ namespace Horror.UI
             }
             
             UIScreen currentScreen = _screens.Peek();
+
+            if (currentScreen == null)
+            {
+                return;
+            }
 
             currentScreen.gameObject.SetActive(false);
         }
@@ -77,15 +131,29 @@ namespace Horror.UI
         public void Clear()
         {
             _screens.Clear();
+            _registeredScreens.Clear();
         }
-        
-        public UIScreen GetScreen<T>() where T : UIScreen
+
+        public UIScreen GetScreenInStack<T>() where T : UIScreen
         {
             foreach (UIScreen uiScreen in _screens)
             {
                 if (uiScreen is T)
                 {
                     return uiScreen;
+                }
+            }
+            
+            return null;
+        }
+        
+        public UIScreen GetRegisteredScreen<T>() where T : UIScreen
+        {
+            foreach (UIScreen registeredScreen in _registeredScreens)
+            {
+                if (registeredScreen is T)
+                {
+                    return registeredScreen;
                 }
             }
             

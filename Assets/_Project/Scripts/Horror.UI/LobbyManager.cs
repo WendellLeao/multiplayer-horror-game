@@ -17,16 +17,14 @@ namespace Horror.UI.Lobby
         [Header("Spawn")]
         [SerializeField] private Transform[] _spawnPoint;
         [SerializeField] private GameObject _lobbyPlayerPrefab;
-
-        [Header("UI")] 
-        [SerializeField] private LobbyScreen _lobbyScreenData;
-
+        
         private const string ReadyButtonLabel = "Ready";
         private const string UnreadyButtonLabel = "Unready";
         
         private INetworkService _networkService;
         private LobbyScreen _lobbyScreen;
         private int _readyPlayersCount;
+        private bool _hasInitialized;
         private bool _isReady;
         private int _iterator;
 
@@ -39,15 +37,15 @@ namespace Horror.UI.Lobby
             eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             eventService.AddEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
             eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
-
+            
             IUIService uiService = GameServices.GetService<IUIService>();
             
-            uiService.Clear();
-
-            _lobbyScreen = (LobbyScreen) uiService.OpenScreen(_lobbyScreenData);
+            _lobbyScreen = (LobbyScreen) uiService.OpenScreen<LobbyScreen>();
             
             _lobbyScreen.OnPlayButtonClicked += HandlePlayButtonClicked;
             _lobbyScreen.OnReadyButtonClicked += HandleReadyButtonClicked;
+
+            _hasInitialized = true;
         }
 
         private void OnDestroy()
@@ -97,6 +95,11 @@ namespace Horror.UI.Lobby
         [Client]
         private void ClientHandleClientConnected(ServiceEvent serviceEvent)
         {
+            if (!_hasInitialized)
+            {
+                return;
+            }
+            
             if (isServer)
             {
                 _lobbyScreen.ActiveHostButtonsGroup();

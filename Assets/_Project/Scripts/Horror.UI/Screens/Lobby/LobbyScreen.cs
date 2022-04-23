@@ -1,5 +1,4 @@
 ﻿using UnityEngine.Events;
-using Horror.UI.Screens;
 using UnityEngine;
 
 namespace Horror.UI.Screens.Lobby

@@ -1,6 +1,6 @@
 using Horror.ServiceLocator;
-using Horror.Audio;
 using Horror.Networking;
+using Horror.Audio;
 using UnityEngine;
 
 namespace Horror.UI.Screens.MainMenu
@@ -12,8 +12,7 @@ namespace Horror.UI.Screens.MainMenu
         [SerializeField] private HoverButton _multiplayerButton;
         [SerializeField] private HoverButton _quitButton;
         
-        [Header("Screens")]
-        [SerializeField] private EnterServerOptions _enterServerOptions;
+        private UIScreen _enterServerOptions;
 
         protected override void OnInitialize()
         {
@@ -22,6 +21,8 @@ namespace Horror.UI.Screens.MainMenu
             IAudioService audioService = GameServices.GetService<IAudioService>();
             
             audioService.PlaySound(Sound.GameTheme, Vector3.zero);
+
+            _enterServerOptions = UIService.GetRegisteredScreen<EnterServerOptions>();
             
             _enterServerOptions.Initialize();
         }

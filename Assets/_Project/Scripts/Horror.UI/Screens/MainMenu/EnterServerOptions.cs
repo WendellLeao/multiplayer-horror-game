@@ -13,21 +13,18 @@ namespace Horror.UI.Screens.MainMenu
         [SerializeField] private HoverButton _joinButton;
         [SerializeField] private HoverButton _hostButton;
         [SerializeField] private HoverButton _backButton;
-
-        [Header("Screens")] 
-        [SerializeField] private JoinScreen _joinScreen;
+        
+        private UIScreen _joinScreen;
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
+
+            _joinScreen = UIService.GetRegisteredScreen<JoinScreen>();
             
             _joinScreen.Initialize();
             
-            _playerInputField.Initialize();
-            
-            string playerName = _playerInputField.PlayerName;
-            
-            CheckPlayerNameSubmission(playerName);
+            InitializePlayerInputField();
         }
 
         protected override void SubscribeEvents()
@@ -48,6 +45,15 @@ namespace Horror.UI.Screens.MainMenu
             _joinButton.OnButtonClicked -= HandleJoinButtonClicked;
             _hostButton.OnButtonClicked -= HandleHostButtonClicked;
             _backButton.OnButtonClicked -= HandleBackButtonClicked;
+        }
+        
+        private void InitializePlayerInputField()
+        {
+            _playerInputField.Initialize();
+
+            string playerName = _playerInputField.PlayerName;
+
+            CheckPlayerNameSubmission(playerName);
         }
         
         private void CheckPlayerNameSubmission(string playerName)
