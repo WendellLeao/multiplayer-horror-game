@@ -27,6 +27,13 @@ namespace Horror.UI.Screens.MainMenu
             InitializePlayerInputField();
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            
+            _playerInputField.Dispose();
+        }
+
         protected override void SubscribeEvents()
         {
             base.SubscribeEvents();

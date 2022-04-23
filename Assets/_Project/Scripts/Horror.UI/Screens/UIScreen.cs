@@ -29,6 +29,11 @@ namespace Horror.UI.Screens
         protected virtual void OnClose()
         {}
         
+        protected virtual void OnDestroy()
+        {
+            _uiService.UnregisterScreen(this);
+        }
+        
         protected void Close()
         {
             UIService.CloseTopScreen();
@@ -41,11 +46,6 @@ namespace Horror.UI.Screens
             _uiService.RegisterScreen(this);
             
             gameObject.SetActive(false);
-        }
-
-        private void OnDestroy()
-        {
-            _uiService.UnregisterScreen(this);
         }
 
         private void OnEnable()
