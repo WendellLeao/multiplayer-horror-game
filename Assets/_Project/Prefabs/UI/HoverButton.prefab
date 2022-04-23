@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6409398168588752006}
   - component: {fileID: 8610421268830287838}
   m_Layer: 5
-  m_Name: highlitghtableText
+  m_Name: highlitghtableLabelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   _text: {fileID: 6409398168588752006}
   _originalMaterial: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   _glowMaterial: {fileID: 11400000, guid: 8a26289273e76e74ca50e973cd171871, type: 2}
+  _blockedMaterial: {fileID: 11400000, guid: 5012fa56617c5d649abe600d94e71477, type: 2}
 --- !u!1 &6409398168684183772
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 415.7689, y: 77.9567}
+  m_SizeDelta: {x: 0, y: 77.9567}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6409398168684183761
 CanvasRenderer:
@@ -315,6 +316,7 @@ MonoBehaviour:
   _button: {fileID: 6409398168684183774}
   _highlightableTexts:
   - {fileID: 8610421268830287838}
+  _label: {fileID: 6409398168588752006}
 --- !u!114 &4360381944364374611
 MonoBehaviour:
   m_ObjectHideFlags: 0

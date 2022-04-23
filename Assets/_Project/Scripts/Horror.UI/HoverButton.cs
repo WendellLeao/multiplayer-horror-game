@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 namespace Horror.UI
 {
@@ -15,6 +16,9 @@ namespace Horror.UI
         
         [SerializeField] private Button _button = default;
         [SerializeField] private HighlightableText[] _highlightableTexts;
+        [SerializeField] private TMP_Text _label;
+        
+        public bool IsInteractable => _button.interactable;
         
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -29,6 +33,11 @@ namespace Horror.UI
         public void Invoke()
         {
             _button.onClick.Invoke();
+        }
+
+        private void OnEnable()
+        {
+            CheckIfIsInteractable();
         }
 
         private void OnDisable()
@@ -51,16 +60,42 @@ namespace Horror.UI
 
         private void DisableGlow()
         {
+            if (!_button.interactable)
+            {
+                return;
+            }
+                
             foreach (HighlightableText highlightableText in _highlightableTexts)
             {
                 highlightableText.DisableGlow();
             }
         }
-        
-        public bool IsInteractable
+
+        public void SetInteractable(bool isInteractable)
         {
-            get => _button.interactable;
-            set => _button.interactable = value;
+            _button.interactable = isInteractable;
+
+            CheckIfIsInteractable();
+        }
+
+        private void CheckIfIsInteractable()
+        {
+            foreach (HighlightableText highlightableText in _highlightableTexts)
+            {
+                if (!_button.interactable)
+                {
+                    highlightableText.BlockGlow();
+                    
+                    continue;
+                }
+                
+                highlightableText.UnblockGlow();
+            }
+        }
+
+        public void SetLabelText(string text)
+        {
+            _label.text = text;
         }
     }
 }

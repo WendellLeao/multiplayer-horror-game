@@ -48,8 +48,8 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   serverTickRate: 30
-  offlineScene: 
-  onlineScene: 
+  offlineScene: Assets/_Project/Scenes/01_MainMenu.unity
+  onlineScene: Assets/_Project/Scenes/02_Lobby.unity
   transport: {fileID: 1549590031352103653}
   networkAddress: localhost
   maxConnections: 100
@@ -61,6 +61,7 @@ MonoBehaviour:
   - {fileID: 8576530262964735553, guid: 236288b3807703b45bf146f0dee8a34c, type: 3}
   - {fileID: 4274010276560331767, guid: fd3f80cdb2b05de4385793a1a2906712, type: 3}
   - {fileID: 6928832489276159339, guid: 4fb2c74247dca4e4fbd934687c303ee0, type: 3}
+  - {fileID: 5953972490827453440, guid: 9381e2cf1eaa2b649aeff0a94d257402, type: 3}
 --- !u!114 &1549590031352103653
 MonoBehaviour:
   m_ObjectHideFlags: 0

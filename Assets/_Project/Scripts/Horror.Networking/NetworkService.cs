@@ -9,6 +9,8 @@ namespace Horror.Networking
     {
         private IEventService _eventService;
 
+        public int ConnectedPlayersCount => numPlayers;
+
         public override void Awake()
         {
             base.Awake();
@@ -78,6 +80,16 @@ namespace Horror.Networking
             ClientStoppedEvent clientStoppedEvent = new ClientStoppedEvent();
             
             _eventService.DispatchEvent(clientStoppedEvent);
+        }
+        
+        [Server]
+        public override void OnServerConnect(NetworkConnectionToClient conn)
+        {
+            base.OnServerDisconnect(conn);
+            
+            ServerConnectedEvent serverConnectedEvent = new ServerConnectedEvent();
+            
+            _eventService.DispatchEvent(serverConnectedEvent);
         }
 
         [Server]

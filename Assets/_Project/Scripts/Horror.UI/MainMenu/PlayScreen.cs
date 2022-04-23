@@ -1,5 +1,6 @@
 using Horror.ServiceLocator;
 using Horror.Audio;
+using Horror.Networking;
 using UnityEngine;
 
 namespace Horror.UI.Screens
@@ -7,7 +8,8 @@ namespace Horror.UI.Screens
     public sealed class PlayScreen : UIScreen
     {
         [Header("Buttons")]
-        [SerializeField] private HoverButton _playButton;
+        [SerializeField] private HoverButton _soloButton;
+        [SerializeField] private HoverButton _multiplayerButton;
         [SerializeField] private HoverButton _quitButton;
         
         [Header("Screens")]
@@ -27,8 +29,9 @@ namespace Horror.UI.Screens
         protected override void SubscribeEvents()
         {
             base.SubscribeEvents();
-            
-            _playButton.OnButtonClicked += HandlePlayButtonClicked;
+
+            _multiplayerButton.OnButtonClicked += HandleMultiplayerButtonClicked;
+            _soloButton.OnButtonClicked += HandleSoloButtonClicked;
             _quitButton.OnButtonClicked += HandleQuitButtonClicked;
         }
 
@@ -36,13 +39,21 @@ namespace Horror.UI.Screens
         {
             base.UnsubscribeEvents();
             
-            _playButton.OnButtonClicked -= HandlePlayButtonClicked;
+            _multiplayerButton.OnButtonClicked -= HandleMultiplayerButtonClicked;
+            _soloButton.OnButtonClicked -= HandleSoloButtonClicked;
             _quitButton.OnButtonClicked -= HandleQuitButtonClicked;
         }
 
-        private void HandlePlayButtonClicked()
+        private void HandleMultiplayerButtonClicked()
         {
             UIService.OpenScreen(_playerNameScreen);
+        }
+
+        private void HandleSoloButtonClicked()
+        {
+            INetworkService networkService = GameServices.GetService<INetworkService>();
+            
+            networkService.StartHost();
         }
         
         private void HandleQuitButtonClicked()

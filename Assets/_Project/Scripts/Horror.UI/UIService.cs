@@ -10,7 +10,7 @@ namespace Horror.UI
 
         public UIScreen CurrentOpenedScreen => _currentOpenedScreen;
 
-        public void OpenScreen(UIScreen uiScreen, OpenScreenMode openScreenMode = OpenScreenMode.Single)
+        public UIScreen OpenScreen(UIScreen uiScreen, OpenScreenMode openScreenMode = OpenScreenMode.Single)
         {
             if (openScreenMode == OpenScreenMode.Single)
             {
@@ -25,6 +25,8 @@ namespace Horror.UI
             uiScreen.gameObject.SetActive(true);
 
             _currentOpenedScreen = uiScreen;
+
+            return uiScreen;
         }
 
         public void CloseScreen(UIScreen uiScreen)
@@ -70,6 +72,24 @@ namespace Horror.UI
             UIScreen previousScreen = _screens.Peek();
 
             OpenScreen(previousScreen);
+        }
+
+        public void Clear()
+        {
+            _screens.Clear();
+        }
+        
+        public UIScreen GetScreen<T>() where T : UIScreen
+        {
+            foreach (UIScreen uiScreen in _screens)
+            {
+                if (uiScreen is T)
+                {
+                    return uiScreen;
+                }
+            }
+            
+            return null;
         }
     }
 }

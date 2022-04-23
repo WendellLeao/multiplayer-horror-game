@@ -19,6 +19,13 @@ namespace Horror.UI.Screens
             _ipInputField.text = _ipAddress;
         }
 
+        protected override void OnOpen()
+        {
+            base.OnOpen();
+            
+            _joinButton.SetInteractable(true);
+        }
+
         protected override void SubscribeEvents()
         {
             base.SubscribeEvents();
@@ -43,12 +50,12 @@ namespace Horror.UI.Screens
         {
             if (string.IsNullOrEmpty(ipAddress))
             {
-                _joinButton.IsInteractable = false;
+                _joinButton.SetInteractable(false);
                 
                 return;
             }
             
-            _joinButton.IsInteractable = true;
+            _joinButton.SetInteractable(true);
 
             _ipAddress = ipAddress;
         }
@@ -58,6 +65,8 @@ namespace Horror.UI.Screens
             INetworkService networkService = GameServices.GetService<INetworkService>();
             
             networkService.StartClient(_ipAddress);
+            
+            _joinButton.SetInteractable(false);
         }
     }
 }

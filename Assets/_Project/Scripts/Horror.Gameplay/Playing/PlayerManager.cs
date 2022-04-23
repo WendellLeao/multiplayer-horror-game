@@ -16,13 +16,6 @@ namespace Horror.Gameplay.Playing
         private List<Player> _players = new List<Player>();
         private Player _localPlayer;
 
-        public override void OnStartClient()
-        {
-            base.OnStartClient();
-
-            Debug.Log("OnStartClient");
-        }
-
         public void Initialize()
         { }
 

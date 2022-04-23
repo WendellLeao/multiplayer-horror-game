@@ -9,13 +9,13 @@ namespace Horror.UI.Screens
         [SerializeField] private HoverButton _backButton;
 
         [Header("Screens")] 
-        [SerializeField] private LobbyScreen _lobbyScreen;
+        [SerializeField] private EnterServerOptions _enterServerOptions;
         
         protected override void OnInitialize()
         {
             base.OnInitialize();
          
-            _lobbyScreen.Initialize();
+            _enterServerOptions.Initialize();
         }
 
         protected override void OnOpen()
@@ -28,7 +28,7 @@ namespace Horror.UI.Screens
             
             if (string.IsNullOrEmpty(playerName))
             {
-                _continueButton.IsInteractable = false;
+                _continueButton.SetInteractable(false);
             }
         }
 
@@ -61,17 +61,17 @@ namespace Horror.UI.Screens
         {
             if (string.IsNullOrEmpty(playerName))
             {
-                _continueButton.IsInteractable = false;
+                _continueButton.SetInteractable(false);
                 
                 return;
             }
 
-            _continueButton.IsInteractable = true;
+            _continueButton.SetInteractable(true);
         }
 
         private void HandleContinueButtonClicked()
         {
-            UIService.OpenScreen(_lobbyScreen);
+            UIService.OpenScreen(_enterServerOptions);
         }
     }
 }

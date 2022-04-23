@@ -5,11 +5,8 @@ using Mirror;
 
 namespace Horror.UI.Screens
 {
-    public sealed class LobbyScreen : UIScreen
+    public sealed class EnterServerOptions : UIScreen
     {
-        [Scene]
-        [SerializeField] private string _gameSceneName;
-        
         [Header("UI")]
         [SerializeField] private HoverButton _joinButton;
         [SerializeField] private HoverButton _hostButton;
@@ -23,6 +20,13 @@ namespace Horror.UI.Screens
             base.OnInitialize();
             
             _joinScreen.Initialize();
+        }
+
+        protected override void OnOpen()
+        {
+            base.OnOpen();
+            
+            _hostButton.SetInteractable(true);
         }
 
         protected override void SubscribeEvents()
@@ -52,9 +56,9 @@ namespace Horror.UI.Screens
         {
             INetworkService networkService = GameServices.GetService<INetworkService>();
             
-            networkService.ServerChangeScene(_gameSceneName);
-
             networkService.StartHost();
+            
+            _hostButton.SetInteractable(false);
         }
 
         private void HandleBackButtonClicked()
