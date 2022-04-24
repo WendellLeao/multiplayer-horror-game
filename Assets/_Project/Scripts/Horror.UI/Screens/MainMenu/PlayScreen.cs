@@ -1,6 +1,5 @@
 using Horror.ServiceLocator;
 using Horror.Networking;
-using Horror.Audio;
 using UnityEngine;
 
 namespace Horror.UI.Screens.MainMenu
@@ -18,10 +17,6 @@ namespace Horror.UI.Screens.MainMenu
         {
             base.OnInitialize();
             
-            IAudioService audioService = GameServices.GetService<IAudioService>();
-            
-            audioService.PlaySound(Sound.GameTheme, Vector3.zero);
-
             _enterServerOptions = UIService.GetRegisteredScreen<EnterServerOptions>();
             
             _enterServerOptions.Initialize();

@@ -7,7 +7,7 @@ namespace Horror.Audio
 {
     public sealed class AudioService : IAudioService
     {
-        private const string AudioDatasPath = "AudioService/AudioDatas";
+        private const string AudioDatasPath = "GameServices/AudioService/AudioDatas";
         
         private Dictionary<Sound, AudioData> _audioDataDictionary;
         private AudioData[] _audioDatas;

@@ -9,7 +9,7 @@ namespace Horror.Gameplay.VoiceRecognizer
     {
         public event Action<PhraseData> OnPhraseRecognized;
         
-        private const string PhraseDatasPath = "VoiceService/PhraseDatas";
+        private const string PhraseDatasPath = "GameServices/VoiceService/PhraseDatas";
 
         private List<string> _phrases = new List<string>();
         private PhraseRecognizer _phraseRecognizer;

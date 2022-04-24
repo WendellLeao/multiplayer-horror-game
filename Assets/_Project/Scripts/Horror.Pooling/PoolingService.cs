@@ -6,7 +6,7 @@ namespace Horror.Pooling
 {
 	public sealed class PoolingService: MonoBehaviour, IPoolingService
 	{
-		private const string PoolDatasPath = "PoolingService/PoolDatas";
+		private const string PoolDatasPath = "GameServices/PoolingService/PoolDatas";
 		
 		private Dictionary<PoolType, Queue<GameObject>> _poolDictionary;
 		private PoolData[] _poolDatas;

@@ -41892,6 +41892,7 @@ GameObject:
   - component: {fileID: 2110792244}
   - component: {fileID: 2110792246}
   - component: {fileID: 2110792245}
+  - component: {fileID: 2110792247}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -41929,12 +41930,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _gameSceneName: Assets/_Project/Scenes/03_HorrorHotel.unity
-  _spawnPoint:
-  - {fileID: 191840264}
-  - {fileID: 1485456588}
-  - {fileID: 588810754}
-  - {fileID: 187329279}
-  _lobbyPlayerPrefab: {fileID: 5953972490827453440, guid: 9381e2cf1eaa2b649aeff0a94d257402, type: 3}
+  _lobbyPlayerManager: {fileID: 2110792247}
 --- !u!114 &2110792246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41952,6 +41948,26 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &2110792247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110792243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804b7ad896c94ac19f193758a79ba23b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _spawnPoint:
+  - {fileID: 191840264}
+  - {fileID: 1485456588}
+  - {fileID: 588810754}
+  - {fileID: 187329279}
+  _lobbyPlayerPrefab: {fileID: 5953972490827453440, guid: 9381e2cf1eaa2b649aeff0a94d257402, type: 3}
 --- !u!1 &2121872237
 GameObject:
   m_ObjectHideFlags: 0

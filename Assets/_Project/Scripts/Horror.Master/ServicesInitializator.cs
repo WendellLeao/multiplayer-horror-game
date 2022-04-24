@@ -10,8 +10,8 @@ namespace Horror.Master
 {
     public static class ServicesInitializator
     {
-        private const string NetworkServicePrefabPath = "NetworkService/NetworkService";
-        private const string PoolingServicePrefabPath = "PoolingService/PoolingService";
+        private const string NetworkServicePrefabPath = "GameServices/NetworkService/NetworkService";
+        private const string PoolingServicePrefabPath = "GameServices/PoolingService/PoolingService";
 
         private static bool _hasInitialized;
         

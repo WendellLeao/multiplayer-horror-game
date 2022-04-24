@@ -14,26 +14,23 @@ namespace Horror.UI.Lobby
     {
         [Scene]
         [SerializeField] private string _gameSceneName;
+
+        [Header("Components")]
+        [SerializeField] private LobbyPlayerManager _lobbyPlayerManager;
         
-        [Header("Spawn")]
-        [SerializeField] private Transform[] _spawnPoint;
-        [SerializeField] private GameObject _lobbyPlayerPrefab;
-        
-        private const string PlayerNameKey = "PlayerName";
         private const string UnreadyButtonLabel = "Unready";
         private const string ReadyButtonLabel = "Ready";
 
         [SyncVar]
-        private int _iterator;
+        private int _lobbyPlayerIterator;
         
         private List<LobbyPlayer> _lobbyPlayers = new List<LobbyPlayer>();
         private INetworkService _networkService;
         private LobbyScreen _lobbyScreen;
-        private LobbyPlayer _lobbyPlayer;
         private int _readyPlayersCount;
         private bool _hasInitialized;
         private bool _isReady;
-
+        
         private void Awake()
         {
             _networkService = GameServices.GetService<INetworkService>();
@@ -51,18 +48,13 @@ namespace Horror.UI.Lobby
             _lobbyScreen.OnPlayButtonClicked += HandlePlayButtonClicked;
             _lobbyScreen.OnReadyButtonClicked += HandleReadyButtonClicked;
 
+            _lobbyPlayerManager.OnLobbyPlayerCreated += HandleLobbyPlayerCreated;
+
             _hasInitialized = true;
         }
 
         private void OnDestroy()
         {
-            if (_lobbyPlayer == null)
-            {
-                return;
-            }
-            
-            _lobbyPlayer.Dispose();
-            
             IEventService eventService = GameServices.GetService<IEventService>();
             
             eventService.RemoveEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
@@ -73,60 +65,18 @@ namespace Horror.UI.Lobby
             _lobbyScreen.OnReadyButtonClicked -= HandleReadyButtonClicked;
         }
 
-        private void Update()
-        {
-            if (_lobbyPlayer == null)
-            {
-                return;
-            }
-            
-            _lobbyPlayer.Tick(Time.deltaTime);
-        }
-
         [Server]
         private void ServerHandleServerDisconnected(ServiceEvent serviceEvent)
         {
-            _iterator--;
+            _lobbyPlayers.RemoveAt(_lobbyPlayerIterator - 1);
+            
+            _lobbyPlayerIterator--;
         }
 
         [Server]
         private void ServerHandleServerReadied(ServiceEvent serviceEvent)
         {
-            if (serviceEvent is ServerReadiedEvent serverReadiedEvent)
-            {
-                ServerCreateLobbyPlayer(serverReadiedEvent.Conn);
-
-                CheckAndSetPlayButtonInteractable();
-            }
-        }
-
-        [Server]
-        private void ServerCreateLobbyPlayer(NetworkConnectionToClient conn)
-        {
-            GameObject lobbyPlayerObject = Instantiate(_lobbyPlayerPrefab);
-            
-            Transform spawnPoint = _spawnPoint[_iterator]; 
-            
-            lobbyPlayerObject.transform.position = spawnPoint.position;
-            lobbyPlayerObject.transform.rotation = spawnPoint.rotation;
-
-            NetworkServer.AddPlayerForConnection(conn, lobbyPlayerObject);
-
-            TargetRpcSetupLobbyPlayer(conn, lobbyPlayerObject);
-
-            _lobbyPlayers.Add(lobbyPlayerObject.GetComponent<LobbyPlayer>());
-
-            _iterator++;
-        }
-
-        [TargetRpc]
-        private void TargetRpcSetupLobbyPlayer(NetworkConnection conn, GameObject lobbyPlayerObject)
-        {
-            _lobbyPlayer = lobbyPlayerObject.GetComponent<LobbyPlayer>();
-
-            string playerName = PlayerPrefs.GetString(PlayerNameKey);
-            
-            _lobbyPlayer.Initialize(playerName, conn.identity.isServer);
+            CheckAndSetPlayButtonInteractable();
         }
 
         [Client]
@@ -163,7 +113,7 @@ namespace Horror.UI.Lobby
             {
                 _isReady = true;
 
-                CmdUpdateReadiness(_isReady, _iterator);
+                CmdUpdateReadiness(_isReady, _lobbyPlayerIterator);
 
                 _lobbyScreen.SetReadyButtonLabelText(UnreadyButtonLabel);
 
@@ -172,7 +122,7 @@ namespace Horror.UI.Lobby
 
             _isReady = false;
 
-            CmdUpdateReadiness(_isReady, _iterator);
+            CmdUpdateReadiness(_isReady, _lobbyPlayerIterator);
 
             _lobbyScreen.SetReadyButtonLabelText(ReadyButtonLabel);
         }
@@ -201,6 +151,13 @@ namespace Horror.UI.Lobby
             bool canStartTheGame = CanStartTheGame();
 
             _lobbyScreen.SetPlayButtonInteractable(canStartTheGame);
+        }
+
+        private void HandleLobbyPlayerCreated(LobbyPlayer lobbyPlayer)
+        {
+            _lobbyPlayers.Add(lobbyPlayer);
+            
+            _lobbyPlayerIterator++;
         }
         
         private bool CanStartTheGame()
