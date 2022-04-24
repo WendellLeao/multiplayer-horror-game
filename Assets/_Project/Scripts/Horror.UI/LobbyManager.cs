@@ -23,7 +23,7 @@ namespace Horror.UI.Lobby
         [SyncVar]
         private int _lobbyPlayerIterator;
         
-        private List<LobbyPlayer> _lobbyPlayers = new List<LobbyPlayer>();
+        private readonly List<LobbyPlayer> _lobbyPlayers = new List<LobbyPlayer>();
         private INetworkService _networkService;
         private LobbyScreen _lobbyScreen;
         private int _readyPlayersCount;
@@ -62,6 +62,8 @@ namespace Horror.UI.Lobby
             
             _lobbyScreen.OnPlayButtonClicked -= HandlePlayButtonClicked;
             _lobbyScreen.OnReadyButtonClicked -= HandleReadyButtonClicked;
+            
+            _networkService.ServerChangeScene(_gameSceneName);
         }
 
         [Server]
@@ -102,8 +104,9 @@ namespace Horror.UI.Lobby
             {
                 return;
             }
-            
-            _networkService.ServerChangeScene(_gameSceneName);
+
+            NetworkServer.Destroy(_lobbyPlayerManager.gameObject);
+            NetworkServer.Destroy(gameObject);
         }
 
         private void HandleReadyButtonClicked()

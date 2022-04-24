@@ -21,14 +21,13 @@ namespace Horror.UI.Lobby
         private int _spawnPointIterator;
         
         private LobbyPlayer _lobbyPlayer;
-
+        
         private void Awake()
         {
             IEventService eventService = GameServices.GetService<IEventService>();
             
             eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
-            eventService.AddEventListener<ServerChangeEvent>(ServerHandleChangeScene);
         }
 
         private void OnDestroy()
@@ -44,7 +43,6 @@ namespace Horror.UI.Lobby
             
             eventService.RemoveEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             eventService.RemoveEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
-            eventService.RemoveEventListener<ServerChangeEvent>(ServerHandleChangeScene);
         }
 
         private void Update()
@@ -102,11 +100,6 @@ namespace Horror.UI.Lobby
             string playerName = PlayerPrefs.GetString(PlayerNameKey);
             
             _lobbyPlayer.Initialize(playerName, conn.identity.isServer);
-        }
-
-        private void ServerHandleChangeScene(ServiceEvent serviceEvent)
-        {
-            _lobbyPlayer.Dispose();
         }
     }
 }

@@ -30,6 +30,8 @@ namespace Horror.UI.Lobby
         [SyncVar(hook = nameof(UpdateReadiness))] 
         private bool _isReady;
 
+        private bool _hasInitialized;
+
         public void Initialize(string playerName, bool isReady)
         {
             CmdUpdatePlayerName(playerName);
@@ -40,29 +42,38 @@ namespace Horror.UI.Lobby
             _playerInputsListener.Initialize(inputService);
 
             inputService.OnReadPlayerInputs += HandlePlayerInputs;
+
+            _hasInitialized = true;
         }
 
         public void Dispose()
         {
-            _playerInputsListener.Dispose();
-
             IInputService inputService = GameServices.GetService<IInputService>();
 
             inputService.OnReadPlayerInputs -= HandlePlayerInputs;
+            
+            _playerInputsListener.Dispose();
+
+            _hasInitialized = false;
         }
 
         public void Tick(float deltaTime)
         {
-            if (!NetworkServer.active)
+            if (!_hasInitialized)
             {
                 return;
             }
-
+            
             _playerInputsListener.Tick(deltaTime);
         }
 
         private void HandlePlayerInputs(PlayerInputsData playerInputsData)
         {
+            if (!_hasInitialized)
+            {
+                return;
+            }
+            
             Vector2Control mouseCurrentPosition = Mouse.current.position;
 
             CmdUpdateSpineRotation(mouseCurrentPosition.ReadValue());
