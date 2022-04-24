@@ -1,4 +1,4 @@
-﻿using Horror.Gameplay.Events;
+﻿using Horror.Networking.Events;
 using Horror.ServiceLocator;
 using Horror.Events;
 using Mirror;
@@ -41,7 +41,7 @@ namespace Horror.Networking
             
             _eventService.DispatchEvent(serverReadiedEvent);
         }
-        
+      
         [Server]
         public override void OnStartServer()
         {
@@ -60,6 +60,15 @@ namespace Horror.Networking
             ServerStoppedEvent serverStoppedEvent = new ServerStoppedEvent();
             
             _eventService.DispatchEvent(serverStoppedEvent);
+        }
+        
+        public override void OnServerChangeScene(string newSceneName)
+        {
+            base.OnServerChangeScene(newSceneName);
+
+            ServerChangeEvent serverChangeEvent = new ServerChangeEvent();
+            
+            _eventService.DispatchEvent(serverChangeEvent);
         }
 
         [Client]

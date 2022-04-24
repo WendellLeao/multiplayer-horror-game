@@ -1,4 +1,4 @@
-using Multiplayer.Events;
+using Horror.Events;
 
 namespace Horror.Gameplay.Playing
 {

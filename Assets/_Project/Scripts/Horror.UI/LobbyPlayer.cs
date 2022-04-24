@@ -53,6 +53,11 @@ namespace Horror.UI.Lobby
 
         public void Tick(float deltaTime)
         {
+            if (!NetworkServer.active)
+            {
+                return;
+            }
+
             _playerInputsListener.Tick(deltaTime);
         }
 

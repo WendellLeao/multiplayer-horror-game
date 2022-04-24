@@ -1,9 +1,8 @@
 using Horror.Gameplay.VoiceRecognizer;
+using Horror.Networking.Events;
 using Horror.Gameplay.Playing;
-using Horror.Gameplay.Events;
 using Horror.Gameplay.Items;
 using Horror.ServiceLocator;
-using Multiplayer.Events;
 using Horror.Events;
 using UnityEngine;
 using Mirror;

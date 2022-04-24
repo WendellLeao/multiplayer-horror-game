@@ -2,6 +2,6 @@
 
 namespace Horror.Networking.Events
 {
-    public sealed class ClientConnectedEvent : ServiceEvent
+    public sealed class ServerChangeEvent : ServiceEvent
     {}
 }

@@ -1,7 +1,7 @@
-﻿using Multiplayer.Events;
+﻿using Horror.Events;
 using Mirror;
 
-namespace Horror.Gameplay.Events
+namespace Horror.Networking.Events
 {
     public sealed class ServerReadiedEvent : ServiceEvent
     {

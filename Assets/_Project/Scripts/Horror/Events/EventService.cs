@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using Horror.ServiceLocator;
-using Multiplayer.Events;
 using UnityEngine.Events;
-using UnityEngine;
 using System;
 
 namespace Horror.Events

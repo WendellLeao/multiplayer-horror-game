@@ -1,4 +1,3 @@
-using Multiplayer.Events;
 using UnityEngine.Events;
 
 namespace Horror.Events

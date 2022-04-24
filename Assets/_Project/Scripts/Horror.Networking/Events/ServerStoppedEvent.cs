@@ -1,6 +1,6 @@
-﻿using Multiplayer.Events;
+﻿using Horror.Events;
 
-namespace Horror.Gameplay.Events
+namespace Horror.Networking.Events
 {
     public sealed class ServerStoppedEvent : ServiceEvent
     {}

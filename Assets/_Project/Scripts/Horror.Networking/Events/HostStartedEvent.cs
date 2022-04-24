@@ -1,4 +1,4 @@
-﻿namespace Horror.Gameplay.Events
+﻿namespace Horror.Networking.Events
 {
     public sealed class HostStartedEvent{}
 }

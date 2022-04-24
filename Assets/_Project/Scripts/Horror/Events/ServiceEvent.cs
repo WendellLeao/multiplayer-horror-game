@@ -1,4 +1,4 @@
-namespace Multiplayer.Events
+namespace Horror.Events
 {
     public abstract class ServiceEvent
     {}

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
+using Horror.Networking.Events;
 using Horror.UI.Screens.Lobby;
-using Horror.Gameplay.Events;
 using Horror.ServiceLocator;
-using Multiplayer.Events;
 using Horror.Networking;
 using Horror.Events;
 using UnityEngine;
@@ -158,6 +157,8 @@ namespace Horror.UI.Lobby
             _lobbyPlayers.Add(lobbyPlayer);
             
             _lobbyPlayerIterator++;
+            
+            CheckAndSetPlayButtonInteractable();
         }
         
         private bool CanStartTheGame()

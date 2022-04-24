@@ -1,6 +1,5 @@
-﻿using Horror.Gameplay.Events;
+﻿using Horror.Networking.Events;
 using Horror.ServiceLocator;
-using Multiplayer.Events;
 using Horror.Events;
 using UnityEngine;
 using System;
@@ -29,6 +28,7 @@ namespace Horror.UI.Lobby
             
             eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
+            eventService.AddEventListener<ServerChangeEvent>(ServerHandleChangeScene);
         }
 
         private void OnDestroy()
@@ -44,6 +44,7 @@ namespace Horror.UI.Lobby
             
             eventService.RemoveEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             eventService.RemoveEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
+            eventService.RemoveEventListener<ServerChangeEvent>(ServerHandleChangeScene);
         }
 
         private void Update()
@@ -101,6 +102,11 @@ namespace Horror.UI.Lobby
             string playerName = PlayerPrefs.GetString(PlayerNameKey);
             
             _lobbyPlayer.Initialize(playerName, conn.identity.isServer);
+        }
+
+        private void ServerHandleChangeScene(ServiceEvent serviceEvent)
+        {
+            _lobbyPlayer.Dispose();
         }
     }
 }
