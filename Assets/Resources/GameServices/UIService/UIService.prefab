@@ -53,8 +53,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3214558086010052323}
-  - component: {fileID: 1401418519372516791}
   - component: {fileID: 3214558086010052348}
+  - component: {fileID: 1401418519372516791}
+  - component: {fileID: 1456439203136098658}
   m_Layer: 5
   m_Name: LoadingScreen
   m_TagString: Untagged
@@ -83,6 +84,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &3214558086010052348
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214558086010052322}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1401418519372516791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,21 +108,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7a8a375e814cb1bc02bbda78a7825c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 3214558086010052348}
-  _fadeDuration: 1
+  _uiFader: {fileID: 1456439203136098658}
   _loadingBarController: {fileID: 5386866665865194760}
---- !u!225 &3214558086010052348
-CanvasGroup:
+--- !u!114 &1456439203136098658
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3214558086010052322}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df1b05c337cc4a09b21df5a898c9e996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 3214558086010052348}
+  _fadeDuration: 1
 --- !u!1 &3214558086043243669
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,3 +537,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _progressBar: {fileID: 3214558086043243671}
+  _fillDuration: 1

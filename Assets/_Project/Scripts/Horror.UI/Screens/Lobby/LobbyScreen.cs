@@ -16,7 +16,8 @@ namespace Horror.UI.Screens.Lobby
             add => _readyHoverButton.OnButtonClicked += value;
             remove => _readyHoverButton.OnButtonClicked -= value;
         }
-        
+
+        [SerializeField] private UIFader _uiFader;
         [SerializeField] private GameObject _hostHintPanel;
         [SerializeField] private GameObject _clientHintPanel;
         [SerializeField] private HoverButton _playHoverButton;
@@ -42,6 +43,31 @@ namespace Horror.UI.Screens.Lobby
         public void SetReadyButtonLabelText(string text)
         {
             _readyHoverButton.SetLabelText(text);
+        }
+        
+        protected override void OnOpen()
+        {
+            base.OnOpen();
+            
+            float endValue = 1f;
+
+            _uiFader.Fade(endValue);
+        }
+
+        protected override void OnClose()
+        {
+            float endValue = 0f;
+            
+            _uiFader.Fade(endValue);
+
+            _uiFader.OnFadeCompleted += HandleFadeCompleted;
+        }
+
+        private void HandleFadeCompleted()
+        {
+            gameObject.SetActive(false);
+            
+            _uiFader.OnFadeCompleted -= HandleFadeCompleted;
         }
     }
 }

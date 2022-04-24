@@ -1,41 +1,38 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Horror.UI.Screens
 {
     public sealed class LoadingScreen : UIScreen
     {
-        [Header("Canvas")]
-        [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private float _fadeDuration;
+        [Header("Fade")] 
+        [SerializeField] private UIFader _uiFader;
 
         [Header("Loading Bar")] 
         [SerializeField] private LoadingBarController _loadingBarController;
-
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
-
-            _canvasGroup.alpha = 0f;
-        }
 
         protected override void OnOpen()
         {
             base.OnOpen();
             
-            _canvasGroup.alpha = 1f;
+            _uiFader.SetCanvasGroupAlpha(1f);
 
             _loadingBarController.Initialize();
         }
 
         protected override void OnClose()
         {
-            _canvasGroup.DOFade(0f, _fadeDuration).OnComplete(HandleFadeComplete);
+            float endValue = 0f;
+            
+            _uiFader.Fade(endValue);
+
+            _uiFader.OnFadeCompleted += HandleFadeCompleted;
         }
 
-        private void HandleFadeComplete()
+        private void HandleFadeCompleted()
         {
             gameObject.SetActive(false);
+            
+            _uiFader.OnFadeCompleted -= HandleFadeCompleted;
         }
     }
 }

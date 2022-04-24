@@ -2,6 +2,7 @@
 using System.Collections;
 using Horror.Networking;
 using UnityEngine.UI;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Horror.UI.Screens
@@ -9,6 +10,7 @@ namespace Horror.UI.Screens
     public sealed class LoadingBarController : MonoBehaviour
     {
         [SerializeField] private Image _progressBar;
+        [SerializeField] private float _fillDuration = 1f;
         
         private float _sceneProgress;
 
@@ -22,21 +24,21 @@ namespace Horror.UI.Screens
 
             if (networkService.Operation == null)
             {
-                Debug.Log("Thres no operation active");
+                Debug.LogWarning("There's no async operation active");
                 
                 return;
             }
             
-            StartCoroutine(GetSceneLoadProgressRoutine(networkService.Operation));
+            StartCoroutine(GetUpdateProgressBarRoutine(networkService.Operation));
         }
         
-        private IEnumerator GetSceneLoadProgressRoutine(AsyncOperation operation)
+        private IEnumerator GetUpdateProgressBarRoutine(AsyncOperation operation)
         {
             while (!operation.isDone)
             {
                 _sceneProgress = Mathf.Clamp01(operation.progress / 0.9f);
             
-                _progressBar.fillAmount = _sceneProgress;
+                _progressBar.DOFillAmount(_sceneProgress, _fillDuration);
 
                 yield return null;
             }

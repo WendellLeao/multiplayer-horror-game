@@ -1,7 +1,5 @@
-using Horror.Events;
 using Horror.ServiceLocator;
 using Horror.Networking;
-using Horror.Networking.Events;
 using UnityEngine;
 
 namespace Horror.UI.Screens.MainMenu
