@@ -28,12 +28,12 @@ namespace Horror.Gameplay
 
             _eventService = GameServices.GetService<IEventService>();
             
+            _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             _eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
             _eventService.AddEventListener<ServerStoppedEvent>(ServerHandleServerStopped);
+            _eventService.AddEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
             _eventService.AddEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.AddEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
-            _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
-            _eventService.AddEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
         }
 
         private void OnDestroy()
@@ -42,12 +42,12 @@ namespace Horror.Gameplay
             _cursorManager.Dispose();
             _itemManager.Dispose();
             
+            _eventService.RemoveEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             _eventService.RemoveEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
             _eventService.RemoveEventListener<ServerStoppedEvent>(ServerHandleServerStopped);
+            _eventService.RemoveEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
             _eventService.RemoveEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.RemoveEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
-            _eventService.RemoveEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
-            _eventService.RemoveEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
         }
 
         private void Update()//TODO: JUST UPDATE WHEN THE GAME STATE IS STARTED
@@ -57,6 +57,10 @@ namespace Horror.Gameplay
             _playerManager.Tick(deltaTime);
             _itemManager.Tick(deltaTime);
         }
+        
+        [Server]
+        private void ServerHandleServerDisconnected(ServiceEvent serviceEvent)
+        { }
 
         [Server]
         private void ServerHandleServerReadied(ServiceEvent serviceEvent)
@@ -76,6 +80,10 @@ namespace Horror.Gameplay
         {
             _itemManager.Stop();
         }
+        
+        [Client]
+        private void ClientHandleClientConnected(ServiceEvent serviceEvent)
+        { }
        
         [Client]
         private void ClientHandleClientStarted(ServiceEvent serviceEvent)
@@ -89,18 +97,5 @@ namespace Horror.Gameplay
             _playerManager.Stop();
             _itemManager.Stop();
         }
-        
-        [Server]
-        private void ServerHandleServerDisconnected(ServiceEvent serviceEvent)
-        {
-            if (serviceEvent is ServerDisconnectedEvent serverDisconnectedEvent)
-            {
-                _playerManager.RemoveDisconnectedPlayerFromList(serverDisconnectedEvent.Conn);
-            }
-        }
-
-        [Client]
-        private void ClientHandleClientConnected(ServiceEvent serviceEvent)
-        { }
     }
 }

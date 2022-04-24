@@ -1492,6 +1492,7 @@ GameObject:
   - component: {fileID: 5953972490827453452}
   - component: {fileID: 6554737833991113567}
   - component: {fileID: 528888663595408202}
+  - component: {fileID: 3572000737612855574}
   m_Layer: 7
   m_Name: LobbyHorrorPlayer
   m_TagString: Untagged
@@ -1545,12 +1546,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  PlayerName: 
-  IsReady: 0
   _nameText: {fileID: 6831701731895027036}
   _readinessText: {fileID: 6492355453489525493}
   _readyTextColor: {r: 0.015300989, g: 1, b: 0, a: 1}
   _unreadyTextColor: {r: 1, g: 0, b: 0, a: 1}
+  _playerInputsListener: {fileID: 3572000737612855574}
+  _spineTransform: {fileID: 3428502230067279170}
+  _spineRotationSpeed: 0.3
+--- !u!114 &3572000737612855574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5953972490827453440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea7b9d99d2bc524284e6133507ca12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &6053301819342181982
 GameObject:
   m_ObjectHideFlags: 0

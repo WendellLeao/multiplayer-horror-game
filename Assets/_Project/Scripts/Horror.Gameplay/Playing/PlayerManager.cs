@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Horror.Gameplay.Cameras;
+﻿using Horror.Gameplay.Cameras;
 using Horror.ServiceLocator;
 using Horror.Events;
 using UnityEngine;
@@ -12,8 +10,7 @@ namespace Horror.Gameplay.Playing
     {
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private Transform _spawnPosition;
-        
-        private List<Player> _players = new List<Player>();
+
         private Player _localPlayer;
 
         public void Initialize()
@@ -36,35 +33,6 @@ namespace Horror.Gameplay.Playing
             }
             
             _localPlayer.Stop();
-            
-            _players.Clear();
-        }
-        
-        [Server]
-        public void RemoveDisconnectedPlayerFromList(NetworkConnectionToClient conn)
-        {
-            if (_players.Count <= 0)
-            {
-                return;
-            }
-            
-            int disconnectedPlayerIndex = 0;
-            
-            for (int i = 0; i < _players.Count; i++)
-            {
-                Player player = _players[i];
-
-                if (player.connectionToClient != conn)
-                {
-                    continue;
-                }
-
-                disconnectedPlayerIndex = i;
-                
-                break;
-            }
-
-            RpcRemovePlayerToList(disconnectedPlayerIndex);
         }
 
         public void Tick(float deltaTime)
@@ -86,8 +54,6 @@ namespace Horror.Gameplay.Playing
             
             TargetRpcInitializePlayer(conn, playerObject, firstPersonCamera.gameObject);
 
-            ServerAddPlayerToList(conn, playerObject);
-            
             RpcDispatchEvent(playerObject);
         }
 
@@ -147,38 +113,6 @@ namespace Horror.Gameplay.Playing
             IEventService eventService = GameServices.GetService<IEventService>();
             
             eventService.DispatchEvent(new PlayerCreatedEvent(player));
-        }
-
-        [Server]
-        private void ServerAddPlayerToList(NetworkConnectionToClient conn, GameObject playerObject)
-        {
-            _players.Add(playerObject.GetComponent<Player>());
-            
-            for (var i = 0; i < _players.Count; i++)
-            {
-                Player player = _players[i];
-                
-                RpcAddPlayerToList(player.gameObject, i);
-            }
-        }
-        
-        [ClientRpc]
-        private void RpcAddPlayerToList(GameObject playerObject, int index)
-        {
-            Player player = playerObject.GetComponent<Player>();
-            
-            if (_players.Contains(player))
-            {
-                return;
-            }
-            
-            _players.Add(player);
-        }
-
-        [ClientRpc]
-        private void RpcRemovePlayerToList(int playerDisconnectedIndex)
-        {
-            _players.RemoveAt(playerDisconnectedIndex);
         }
     }
 }

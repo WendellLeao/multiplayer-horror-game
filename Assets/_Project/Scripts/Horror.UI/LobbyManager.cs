@@ -12,9 +12,6 @@ namespace Horror.UI.Lobby
 {
     public sealed class LobbyManager : NetworkBehaviour
     {
-        [SyncVar]
-        public int _iterator;
-        
         [Scene]
         [SerializeField] private string _gameSceneName;
         
@@ -26,6 +23,9 @@ namespace Horror.UI.Lobby
         private const string UnreadyButtonLabel = "Unready";
         private const string ReadyButtonLabel = "Ready";
 
+        [SyncVar]
+        private int _iterator;
+        
         private List<LobbyPlayer> _lobbyPlayers = new List<LobbyPlayer>();
         private INetworkService _networkService;
         private LobbyScreen _lobbyScreen;
@@ -56,6 +56,13 @@ namespace Horror.UI.Lobby
 
         private void OnDestroy()
         {
+            if (_lobbyPlayer == null)
+            {
+                return;
+            }
+            
+            _lobbyPlayer.Dispose();
+            
             IEventService eventService = GameServices.GetService<IEventService>();
             
             eventService.RemoveEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
@@ -64,6 +71,16 @@ namespace Horror.UI.Lobby
             
             _lobbyScreen.OnPlayButtonClicked -= HandlePlayButtonClicked;
             _lobbyScreen.OnReadyButtonClicked -= HandleReadyButtonClicked;
+        }
+
+        private void Update()
+        {
+            if (_lobbyPlayer == null)
+            {
+                return;
+            }
+            
+            _lobbyPlayer.Tick(Time.deltaTime);
         }
 
         [Server]
@@ -109,7 +126,7 @@ namespace Horror.UI.Lobby
 
             string playerName = PlayerPrefs.GetString(PlayerNameKey);
             
-            _lobbyPlayer.Setup(playerName, conn.identity.isServer);
+            _lobbyPlayer.Initialize(playerName, conn.identity.isServer);
         }
 
         [Client]
