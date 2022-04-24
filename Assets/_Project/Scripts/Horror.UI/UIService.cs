@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
+using Horror.ServiceLocator;
 using Horror.UI.Screens;
+using UnityEngine;
 
 namespace Horror.UI
 {
-    public sealed class UIService : IUIService
+    public sealed class UIService : MonoBehaviour, IUIService
     {
         private readonly Stack<UIScreen> _screens = new Stack<UIScreen>();
         private readonly List<UIScreen> _registeredScreens = new List<UIScreen>();
         private UIScreen _currentOpenedScreen;
 
+        public bool HasOpenedScreen => _screens.Count > 0;
         public UIScreen CurrentOpenedScreen => _currentOpenedScreen;
 
         public UIScreen OpenScreen(UIScreen uiScreen, OpenScreenMode openScreenMode = OpenScreenMode.Single)
@@ -47,7 +50,7 @@ namespace Horror.UI
 
         public void CloseScreen(UIScreen uiScreen)
         {
-            uiScreen.gameObject.SetActive(false);
+            uiScreen.Close();
             
             _screens.Pop();
         }
@@ -58,7 +61,7 @@ namespace Horror.UI
             {
                 if (uiScreen is T)
                 {
-                    uiScreen.gameObject.SetActive(false);
+                    uiScreen.Close();
                     
                     _screens.Pop();
                 }
@@ -67,15 +70,15 @@ namespace Horror.UI
         
         public void CloseTopScreen()
         {
-            if (_screens.Count <= 0)
+            if (_currentOpenedScreen == null)
             {
                 return;
             }
 
-            UIScreen currentScreen = _screens.Pop();
-            
-            currentScreen.gameObject.SetActive(false);
+            _currentOpenedScreen.Close();
 
+            _screens.Pop();
+                
             OpenPreviousScreen();
         }
         
@@ -113,7 +116,7 @@ namespace Horror.UI
                 return;
             }
 
-            currentScreen.gameObject.SetActive(false);
+            currentScreen.Close();
         }
         
         private void OpenPreviousScreen()
@@ -158,6 +161,18 @@ namespace Horror.UI
             }
             
             return null;
+        }
+
+        private void Awake()
+        {
+            GameServices.RegisterService<IUIService>(this);
+            
+            DontDestroyOnLoad(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            GameServices.DeregisterService<IUIService>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Horror.Networking.Events;
 using Horror.ServiceLocator;
 using Horror.Events;
+using UnityEngine;
 using Mirror;
 
 namespace Horror.Networking
@@ -9,6 +10,7 @@ namespace Horror.Networking
     {
         private IEventService _eventService;
 
+        public AsyncOperation Operation => loadingSceneAsync;
         public int ConnectedPlayersCount => numPlayers;
 
         public override void Awake()
@@ -66,9 +68,9 @@ namespace Horror.Networking
         {
             base.OnServerChangeScene(newSceneName);
 
-            ServerChangeEvent serverChangeEvent = new ServerChangeEvent();
+            ServerChangeSceneEvent serverChangeSceneEvent = new ServerChangeSceneEvent();
             
-            _eventService.DispatchEvent(serverChangeEvent);
+            _eventService.DispatchEvent(serverChangeSceneEvent);
         }
 
         [Client]
@@ -120,7 +122,7 @@ namespace Horror.Networking
             
             _eventService.DispatchEvent(clientConnectedEvent);
         }
-        
+
         public void StartClient(string ipAddress)
         {
             networkAddress = ipAddress;

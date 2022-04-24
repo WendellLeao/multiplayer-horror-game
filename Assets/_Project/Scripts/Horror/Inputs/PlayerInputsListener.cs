@@ -1,18 +1,17 @@
 using UnityEngine.InputSystem;
-using Horror.Inputs;
 using UnityEngine;
 using Mirror;
 
-namespace Horror.Gameplay.Playing
+namespace Horror.Inputs
 {
 	public sealed class PlayerInputsListener : NetworkBehaviour
 	{
 		[Header("Input System")]
 		private PlayerInputs _playerInputs;
-		
-		private PlayerInputsData _playerInputsData = new PlayerInputsData();
+
 		private PlayerInputs.LandControlsActions _playerLandControls;
 		private PlayerInputs.UIControlsActions _uiControls;
+		private PlayerInputsData _playerInputsData;
 		private IInputService _inputService;
 		
 		[Header("Inputs Data")]

@@ -4,7 +4,6 @@ using Horror.Events;
 using Horror.Inputs;
 using Horror.Audio;
 using UnityEngine;
-using Horror.UI;
 
 namespace Horror.Master
 {
@@ -12,6 +11,7 @@ namespace Horror.Master
     {
         private const string NetworkServicePrefabPath = "GameServices/NetworkService/NetworkService";
         private const string PoolingServicePrefabPath = "GameServices/PoolingService/PoolingService";
+        private const string UIServicePrefabPath = "GameServices/UIService/UIService";
 
         private static bool _hasInitialized;
         
@@ -56,9 +56,9 @@ namespace Horror.Master
 
         private static void InitializeUIService()
         {
-            IUIService uiService = new UIService();
-            
-            GameServices.RegisterService(uiService);
+            GameObject uiService = Resources.Load(UIServicePrefabPath) as GameObject;
+                
+            Object.Instantiate(uiService);
         }
 
         private static void InitializeEventService()

@@ -4,6 +4,7 @@ namespace Horror.UI
 {
     public interface IUIService
     {
+        bool HasOpenedScreen { get; }
         UIScreen CurrentOpenedScreen { get; }
         UIScreen OpenScreen(UIScreen uiScreen, OpenScreenMode openScreenMode = OpenScreenMode.Single);
         UIScreen OpenScreen<T>(OpenScreenMode openScreenMode = OpenScreenMode.Single) where T : UIScreen;

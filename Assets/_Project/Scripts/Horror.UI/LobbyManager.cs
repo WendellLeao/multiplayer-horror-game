@@ -4,6 +4,7 @@ using Horror.UI.Screens.Lobby;
 using Horror.ServiceLocator;
 using Horror.Networking;
 using Horror.Events;
+using Horror.UI.Screens;
 using UnityEngine;
 using Mirror;
 
@@ -26,10 +27,11 @@ namespace Horror.UI.Lobby
         private readonly List<LobbyPlayer> _lobbyPlayers = new List<LobbyPlayer>();
         private INetworkService _networkService;
         private LobbyScreen _lobbyScreen;
+        private IUIService _uiService;
         private int _readyPlayersCount;
         private bool _hasInitialized;
         private bool _isReady;
-        
+
         private void Awake()
         {
             _networkService = GameServices.GetService<INetworkService>();
@@ -40,9 +42,9 @@ namespace Horror.UI.Lobby
             eventService.AddEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
             eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
             
-            IUIService uiService = GameServices.GetService<IUIService>();
+            _uiService = GameServices.GetService<IUIService>();
             
-            _lobbyScreen = (LobbyScreen) uiService.OpenScreen<LobbyScreen>();
+            _lobbyScreen = (LobbyScreen) _uiService.GetRegisteredScreen<LobbyScreen>();
             
             _lobbyScreen.OnPlayButtonClicked += HandlePlayButtonClicked;
             _lobbyScreen.OnReadyButtonClicked += HandleReadyButtonClicked;
@@ -105,6 +107,8 @@ namespace Horror.UI.Lobby
                 return;
             }
 
+            _uiService.OpenScreen<LoadingScreen>();
+
             NetworkServer.Destroy(_lobbyPlayerManager.gameObject);
             NetworkServer.Destroy(gameObject);
         }
@@ -155,6 +159,7 @@ namespace Horror.UI.Lobby
             _lobbyScreen.SetPlayButtonInteractable(canStartTheGame);
         }
 
+        [Server]
         private void HandleLobbyPlayerCreated(LobbyPlayer lobbyPlayer)
         {
             _lobbyPlayers.Add(lobbyPlayer);
@@ -162,6 +167,13 @@ namespace Horror.UI.Lobby
             _lobbyPlayerIterator++;
             
             CheckAndSetPlayButtonInteractable();
+
+            if (_lobbyScreen.IsOpen)
+            {
+                return;
+            }
+
+            _uiService.OpenScreen(_lobbyScreen);
         }
         
         private bool CanStartTheGame()

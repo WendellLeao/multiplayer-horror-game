@@ -1,5 +1,7 @@
+using Horror.Events;
 using Horror.ServiceLocator;
 using Horror.Networking;
+using Horror.Networking.Events;
 using UnityEngine;
 
 namespace Horror.UI.Screens.MainMenu
@@ -52,8 +54,19 @@ namespace Horror.UI.Screens.MainMenu
             networkService.StartHost();
             
             _soloButton.SetInteractable(false);
+            
+            OpenLoadingScreen();
         }
-        
+
+        private void OpenLoadingScreen()
+        {
+            LoadingScreen loadingScreen = (LoadingScreen) UIService.GetRegisteredScreen<LoadingScreen>();
+
+            loadingScreen.Initialize();
+
+            UIService.OpenScreen(loadingScreen);
+        }
+
         private void HandleQuitButtonClicked()
         {
             Application.Quit();

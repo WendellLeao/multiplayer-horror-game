@@ -1,3 +1,4 @@
+using Horror.Inputs;
 using UnityEngine;
 
 namespace Horror.Gameplay.Playing

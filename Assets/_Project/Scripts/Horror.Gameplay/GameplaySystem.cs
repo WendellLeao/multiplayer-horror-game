@@ -3,8 +3,12 @@ using Horror.Networking.Events;
 using Horror.Gameplay.Playing;
 using Horror.Gameplay.Items;
 using Horror.ServiceLocator;
+using Horror.Gameplay.UI;
+using System.Collections;
+using Horror.UI.Screens;
 using Horror.Events;
 using UnityEngine;
+using Horror.UI;
 using Mirror;
 
 namespace Horror.Gameplay
@@ -18,6 +22,8 @@ namespace Horror.Gameplay
         [SerializeField] private VoiceListener _voiceListener;//
 
         private IEventService _eventService;
+        private IUIService _uiService;
+        private UIScreen _loadingScreen;
 
         private void Awake()
         {
@@ -30,9 +36,16 @@ namespace Horror.Gameplay
             _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             _eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
             _eventService.AddEventListener<ServerStoppedEvent>(ServerHandleServerStopped);
-            _eventService.AddEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
             _eventService.AddEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.AddEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
+
+            _uiService = GameServices.GetService<IUIService>();
+
+            _loadingScreen = _uiService.CurrentOpenedScreen;
+
+            _loadingScreen.OnClosed += HandleLoadingScreenClosed;
+            
+            StartCoroutine(CloseLoadingScreenRoutine());
         }
 
         private void OnDestroy()
@@ -44,12 +57,11 @@ namespace Horror.Gameplay
             _eventService.RemoveEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             _eventService.RemoveEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
             _eventService.RemoveEventListener<ServerStoppedEvent>(ServerHandleServerStopped);
-            _eventService.RemoveEventListener<ClientConnectedEvent>(ClientHandleClientConnected);
             _eventService.RemoveEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.RemoveEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
         }
 
-        private void Update()//TODO: JUST UPDATE WHEN THE GAME STATE IS STARTED
+        private void Update()
         {
             float deltaTime = Time.deltaTime;
 
@@ -81,10 +93,6 @@ namespace Horror.Gameplay
         }
         
         [Client]
-        private void ClientHandleClientConnected(ServiceEvent serviceEvent)
-        { }
-       
-        [Client]
         private void ClientHandleClientStarted(ServiceEvent serviceEvent)
         {
             _voiceListener.Begin();
@@ -95,6 +103,20 @@ namespace Horror.Gameplay
         {
             _playerManager.Stop();
             _itemManager.Stop();
+        }
+
+        private IEnumerator CloseLoadingScreenRoutine()
+        {
+            yield return new WaitForSeconds(1f);
+
+            _uiService.CloseScreen(_loadingScreen);
+        }
+
+        private void HandleLoadingScreenClosed(UIScreen uiScreen)
+        {
+            _uiService.OpenScreen<PlayerHUD>();
+            
+            uiScreen.OnClosed -= HandleLoadingScreenClosed;
         }
     }
 }
