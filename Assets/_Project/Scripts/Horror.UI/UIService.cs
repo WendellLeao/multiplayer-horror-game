@@ -54,6 +54,8 @@ namespace Horror.UI
                 }
             }
 
+            Debug.LogWarning($"{typeof(T)} is not registered. Probably you are trying to open the screen before it be registered");
+            
             return null;
         }
 

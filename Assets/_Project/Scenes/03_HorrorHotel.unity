@@ -128989,7 +128989,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2089713474}
+  - component: {fileID: 2089713477}
   - component: {fileID: 2089713475}
+  - component: {fileID: 2089713476}
   m_Layer: 5
   m_Name: PlayerHUD
   m_TagString: Untagged
@@ -129029,6 +129031,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626128603aa74226adba95b12d5926d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiFader: {fileID: 2089713476}
+--- !u!114 &2089713476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089713473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df1b05c337cc4a09b21df5a898c9e996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 2089713477}
+  _fadeDuration: 1
+--- !u!225 &2089713477
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089713473}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2089851045
 GameObject:
   m_ObjectHideFlags: 0

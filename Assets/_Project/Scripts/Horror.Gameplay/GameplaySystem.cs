@@ -1,14 +1,14 @@
+using System;
 using Horror.Gameplay.VoiceRecognizer;
 using Horror.Networking.Events;
 using Horror.Gameplay.Playing;
 using Horror.Gameplay.Items;
 using Horror.ServiceLocator;
 using Horror.Gameplay.UI;
-using System.Collections;
-using Horror.UI.Screens;
 using Horror.Events;
 using UnityEngine;
 using Horror.UI;
+using Horror.UI.Screens;
 using Mirror;
 
 namespace Horror.Gameplay
@@ -30,6 +30,8 @@ namespace Horror.Gameplay
             _cursorManager.Initialize();
             _itemManager.Initialize();
 
+            _uiService = GameServices.GetService<IUIService>();
+
             _eventService = GameServices.GetService<IEventService>();
             
             _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
@@ -37,14 +39,11 @@ namespace Horror.Gameplay
             _eventService.AddEventListener<ServerStoppedEvent>(ServerHandleServerStopped);
             _eventService.AddEventListener<ClientStartedEvent>(ClientHandleClientStarted);
             _eventService.AddEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
+        }
 
-            _uiService = GameServices.GetService<IUIService>();
-            
-            UIScreen loadingScreen = _uiService.CurrentOpenedScreen;
-            
-            loadingScreen.OnClosed += HandleLoadingScreenClosed;
-            
-            _uiService.OpenScreen<PlayerHUD>(OpenScreenMode.Single, 2f);//TODO: FIX HARD CODE
+        private void Start()
+        {
+            _uiService.OpenScreen<PlayerHUD>();
         }
 
         private void OnDestroy()
@@ -102,13 +101,6 @@ namespace Horror.Gameplay
         {
             _playerManager.Stop();
             _itemManager.Stop();
-        }
-
-        private void HandleLoadingScreenClosed(UIScreen uiScreen)
-        {
-            _uiService.OpenScreen<PlayerHUD>();
-
-            uiScreen.OnClosed -= HandleLoadingScreenClosed;
         }
     }
 }

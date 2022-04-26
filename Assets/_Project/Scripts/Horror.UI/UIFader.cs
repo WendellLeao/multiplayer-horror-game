@@ -12,9 +12,11 @@ namespace Horror.UI
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _fadeDuration = 1f;
 
+        private Tween _tween;
+        
         public void Fade(float endValue)
         {
-            _canvasGroup.DOFade(endValue, _fadeDuration).OnComplete(HandleFadeComplete);
+            _tween = _canvasGroup.DOFade(endValue, _fadeDuration).OnComplete(HandleFadeComplete);
         }
 
         public void SetCanvasGroupAlpha(float value)
@@ -25,6 +27,11 @@ namespace Horror.UI
         private void HandleFadeComplete()
         {
             OnFadeCompleted?.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            _tween.Kill();
         }
     }
 }

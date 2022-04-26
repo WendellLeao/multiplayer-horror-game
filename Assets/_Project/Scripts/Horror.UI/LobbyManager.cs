@@ -177,6 +177,12 @@ namespace Horror.UI.Lobby
 
             CheckAndSetPlayButtonInteractable();
             
+            RpcCloseLoadingScreen(lobbyPlayer.connectionToClient);
+        }
+
+        [TargetRpc]
+        private void RpcCloseLoadingScreen(NetworkConnection conn)
+        {
             _uiService.CloseTopScreen();
         }
 

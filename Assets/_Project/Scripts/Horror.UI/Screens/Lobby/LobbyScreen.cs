@@ -58,21 +58,5 @@ namespace Horror.UI.Screens.Lobby
 
             _uiFader.Fade(endValue);
         }
-
-        protected override void OnClose()
-        {
-            float endValue = 0f;
-            
-            _uiFader.Fade(endValue);
-
-            _uiFader.OnFadeCompleted += HandleFadeCompleted;
-        }
-
-        private void HandleFadeCompleted()
-        {
-            gameObject.SetActive(false);
-            
-            _uiFader.OnFadeCompleted -= HandleFadeCompleted;
-        }
     }
 }
