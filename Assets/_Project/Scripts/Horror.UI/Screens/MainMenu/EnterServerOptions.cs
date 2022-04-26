@@ -14,20 +14,11 @@ namespace Horror.UI.Screens.MainMenu
         [SerializeField] private HoverButton _hostButton;
         [SerializeField] private HoverButton _backButton;
         
-        private UIScreen _joinScreen;
-
         protected override void OnInitialize()
         {
             base.OnInitialize();
 
             InitializePlayerInputField();
-        }
-        
-        protected override void OnOpen()
-        {
-            base.OnOpen();
-            
-            _joinScreen = UIService.GetRegisteredScreen<JoinScreen>();
         }
 
         protected override void OnDestroy()
@@ -82,7 +73,7 @@ namespace Horror.UI.Screens.MainMenu
 
         private void HandleJoinButtonClicked()
         {
-            UIService.OpenScreen(_joinScreen);
+            UIService.OpenScreen<JoinScreen>(OpenScreenMode.Additive);
         }
 
         private void HandleHostButtonClicked()

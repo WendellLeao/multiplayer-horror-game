@@ -14,7 +14,7 @@ namespace Horror.UI
 
         public UIScreen CurrentOpenedScreen => _currentOpenedScreen;
 
-        public UIScreen OpenScreen(UIScreen uiScreen, float delay = 0, OpenScreenMode openScreenMode = OpenScreenMode.Single)
+        public UIScreen OpenScreen(UIScreen uiScreen, OpenScreenMode openScreenMode = OpenScreenMode.Single, float delay = 0)
         {
             StartCoroutine(OpenScreenRoutine());
             
@@ -42,13 +42,13 @@ namespace Horror.UI
             return uiScreen;
         }
         
-        public UIScreen OpenScreen<T>(float delay = 0, OpenScreenMode openScreenMode = OpenScreenMode.Single) where T : UIScreen
+        public UIScreen OpenScreen<T>(OpenScreenMode openScreenMode = OpenScreenMode.Single, float delay = 0) where T : UIScreen
         {
             foreach (UIScreen registeredScreen in _registeredScreens)
             {
                 if (registeredScreen is T)
                 {
-                    OpenScreen(registeredScreen, delay);
+                    OpenScreen(registeredScreen, openScreenMode, delay);
 
                     return registeredScreen;
                 }

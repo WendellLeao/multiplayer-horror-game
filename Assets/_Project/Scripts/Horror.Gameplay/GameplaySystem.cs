@@ -44,7 +44,7 @@ namespace Horror.Gameplay
             
             loadingScreen.OnClosed += HandleLoadingScreenClosed;
             
-            _uiService.OpenScreen<PlayerHUD>(2f);
+            _uiService.OpenScreen<PlayerHUD>(OpenScreenMode.Single, 2f);//TODO: FIX HARD CODE
         }
 
         private void OnDestroy()

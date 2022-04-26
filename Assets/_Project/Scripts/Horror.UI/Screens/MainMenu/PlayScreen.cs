@@ -10,15 +10,6 @@ namespace Horror.UI.Screens.MainMenu
         [SerializeField] private HoverButton _soloButton;
         [SerializeField] private HoverButton _multiplayerButton;
         [SerializeField] private HoverButton _quitButton;
-        
-        private UIScreen _enterServerOptions;
-
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
-            
-            _enterServerOptions = UIService.GetRegisteredScreen<EnterServerOptions>();
-        }
 
         protected override void SubscribeEvents()
         {
@@ -40,7 +31,7 @@ namespace Horror.UI.Screens.MainMenu
 
         private void HandleMultiplayerButtonClicked()
         {
-            UIService.OpenScreen(_enterServerOptions);
+            UIService.OpenScreen<EnterServerOptions>();
         }
 
         private void HandleSoloButtonClicked()
