@@ -23,7 +23,6 @@ namespace Horror.Gameplay
 
         private IEventService _eventService;
         private IUIService _uiService;
-        private UIScreen _loadingScreen;
 
         private void Awake()
         {
@@ -40,12 +39,12 @@ namespace Horror.Gameplay
             _eventService.AddEventListener<ClientStoppedEvent>(ClientHandleClientStopped);
 
             _uiService = GameServices.GetService<IUIService>();
-
-            _loadingScreen = _uiService.CurrentOpenedScreen;
-
-            _loadingScreen.OnClosed += HandleLoadingScreenClosed;
             
-            StartCoroutine(CloseLoadingScreenRoutine());
+            UIScreen loadingScreen = _uiService.CurrentOpenedScreen;
+            
+            loadingScreen.OnClosed += HandleLoadingScreenClosed;
+            
+            _uiService.OpenScreen<PlayerHUD>(2f);
         }
 
         private void OnDestroy()
@@ -105,17 +104,10 @@ namespace Horror.Gameplay
             _itemManager.Stop();
         }
 
-        private IEnumerator CloseLoadingScreenRoutine()
-        {
-            yield return new WaitForSeconds(1f);
-
-            _uiService.CloseScreen(_loadingScreen);
-        }
-
         private void HandleLoadingScreenClosed(UIScreen uiScreen)
         {
             _uiService.OpenScreen<PlayerHUD>();
-            
+
             uiScreen.OnClosed -= HandleLoadingScreenClosed;
         }
     }

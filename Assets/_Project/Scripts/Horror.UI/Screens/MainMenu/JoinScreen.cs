@@ -72,6 +72,8 @@ namespace Horror.UI.Screens.MainMenu
             networkService.StartClient(_ipAddress);
             
             _joinButton.SetInteractable(false);
+            
+            UIService.OpenScreen<LoadingScreen>();
         }
 
         private void HandleBackButtonClicked()

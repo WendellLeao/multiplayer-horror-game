@@ -20,11 +20,14 @@ namespace Horror.UI.Screens.MainMenu
         {
             base.OnInitialize();
 
-            _joinScreen = UIService.GetRegisteredScreen<JoinScreen>();
-            
-            _joinScreen.Initialize();
-            
             InitializePlayerInputField();
+        }
+        
+        protected override void OnOpen()
+        {
+            base.OnOpen();
+            
+            _joinScreen = UIService.GetRegisteredScreen<JoinScreen>();
         }
 
         protected override void OnDestroy()
@@ -89,6 +92,8 @@ namespace Horror.UI.Screens.MainMenu
             networkService.StartHost();
             
             _hostButton.SetInteractable(false);
+
+            UIService.OpenScreen<LoadingScreen>();
         }
 
         private void HandleBackButtonClicked()

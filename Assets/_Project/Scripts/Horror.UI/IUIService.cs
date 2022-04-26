@@ -4,17 +4,12 @@ namespace Horror.UI
 {
     public interface IUIService
     {
-        bool HasOpenedScreen { get; }
         UIScreen CurrentOpenedScreen { get; }
-        UIScreen OpenScreen(UIScreen uiScreen, OpenScreenMode openScreenMode = OpenScreenMode.Single);
-        UIScreen OpenScreen<T>(OpenScreenMode openScreenMode = OpenScreenMode.Single) where T : UIScreen;
-        void CloseScreen(UIScreen uiScreen);
-        void CloseScreen<T>();
+        UIScreen OpenScreen(UIScreen uiScreen, float delay = 0, OpenScreenMode openScreenMode = OpenScreenMode.Single);
+        UIScreen OpenScreen<T>(float delay = 0, OpenScreenMode openScreenMode = OpenScreenMode.Single) where T : UIScreen;
         void CloseTopScreen();
         void RegisterScreen(UIScreen uiScreen);
         void UnregisterScreen(UIScreen uiScreen);
-        UIScreen GetScreenInStack<T>() where T : UIScreen;
         UIScreen GetRegisteredScreen<T>() where T : UIScreen;
-        void Clear();
     }
 }

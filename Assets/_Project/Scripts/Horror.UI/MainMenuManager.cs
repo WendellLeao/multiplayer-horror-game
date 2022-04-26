@@ -8,20 +8,34 @@ namespace Horror.UI.MainMenu
 {
     public sealed class MainMenuManager : MonoBehaviour
     {
+        private IUIService _uiService;
+        private UIScreen _playScreen;
+
         private void Awake()
         {
             PlayGameTheme();
             
-            OpenPlayScreen();
+            _uiService = GameServices.GetService<IUIService>();
+
+            _playScreen = _uiService.GetRegisteredScreen<PlayScreen>();
+            
+            if (_uiService.CurrentOpenedScreen == null)
+            {
+                _uiService.OpenScreen(_playScreen);
+
+                return;
+            }
+            
+            UIScreen loadingScreen = _uiService.CurrentOpenedScreen;
+                
+            loadingScreen.OnClosed += HandleLoadingScreenClosed;
         }
 
-        private static void OpenPlayScreen()
+        private void HandleLoadingScreenClosed(UIScreen uiScreen)
         {
-            IUIService uiService = GameServices.GetService<IUIService>();
-
-            UIScreen playScreen = uiService.OpenScreen<PlayScreen>();
-
-            playScreen.Initialize();
+            _uiService.OpenScreen(_playScreen);
+            
+            uiScreen.OnClosed -= HandleLoadingScreenClosed;
         }
 
         private void PlayGameTheme()

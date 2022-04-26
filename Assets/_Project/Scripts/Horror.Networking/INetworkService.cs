@@ -8,6 +8,8 @@ namespace Horror.Networking
         int ConnectedPlayersCount { get; }
         void StartHost();
         void StartClient(string ipAddress);
+        void StopHost();
+        void StopClient();
         void ServerChangeScene(string newSceneName);
     }
 }

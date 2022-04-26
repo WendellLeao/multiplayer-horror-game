@@ -3,8 +3,8 @@ using Horror.Networking.Events;
 using Horror.UI.Screens.Lobby;
 using Horror.ServiceLocator;
 using Horror.Networking;
-using Horror.Events;
 using Horror.UI.Screens;
+using Horror.Events;
 using UnityEngine;
 using Mirror;
 
@@ -34,6 +34,8 @@ namespace Horror.UI.Lobby
 
         private void Awake()
         {
+            _uiService = GameServices.GetService<IUIService>();
+
             _networkService = GameServices.GetService<INetworkService>();
             
             IEventService eventService = GameServices.GetService<IEventService>();
@@ -48,9 +50,12 @@ namespace Horror.UI.Lobby
             
             _lobbyScreen.OnPlayButtonClicked += HandlePlayButtonClicked;
             _lobbyScreen.OnReadyButtonClicked += HandleReadyButtonClicked;
-
+            _lobbyScreen.OnBackButtonClicked += HandleBackButtonClicked;
+            
+            _uiService.CurrentOpenedScreen.OnClosed += HandleLoadingScreenClosed;
+            
             _lobbyPlayerManager.OnLobbyPlayerCreated += HandleLobbyPlayerCreated;
-
+            
             _hasInitialized = true;
         }
 
@@ -64,8 +69,7 @@ namespace Horror.UI.Lobby
             
             _lobbyScreen.OnPlayButtonClicked -= HandlePlayButtonClicked;
             _lobbyScreen.OnReadyButtonClicked -= HandleReadyButtonClicked;
-            
-            _networkService.ServerChangeScene(_gameSceneName);
+            _lobbyScreen.OnBackButtonClicked -= HandleBackButtonClicked;
         }
 
         [Server]
@@ -100,6 +104,7 @@ namespace Horror.UI.Lobby
             _lobbyScreen.ActiveClientButtonsGroup();
         }
         
+        [Server]
         private void HandlePlayButtonClicked()
         {
             if (!CanStartTheGame())
@@ -108,11 +113,14 @@ namespace Horror.UI.Lobby
             }
 
             _uiService.OpenScreen<LoadingScreen>();
-
+            
             NetworkServer.Destroy(_lobbyPlayerManager.gameObject);
             NetworkServer.Destroy(gameObject);
+            
+            _networkService.ServerChangeScene(_gameSceneName);
         }
 
+        [Client]
         private void HandleReadyButtonClicked()
         {
             if (!_isReady)
@@ -152,6 +160,7 @@ namespace Horror.UI.Lobby
             CheckAndSetPlayButtonInteractable();
         }
 
+        [Server]
         private void CheckAndSetPlayButtonInteractable()
         {
             bool canStartTheGame = CanStartTheGame();
@@ -165,15 +174,31 @@ namespace Horror.UI.Lobby
             _lobbyPlayers.Add(lobbyPlayer);
             
             _lobbyPlayerIterator++;
-            
-            CheckAndSetPlayButtonInteractable();
 
-            if (_lobbyScreen.IsOpen)
+            CheckAndSetPlayButtonInteractable();
+            
+            _uiService.CloseTopScreen();
+        }
+
+        private void HandleLoadingScreenClosed(UIScreen uiScreen)
+        {
+            _uiService.OpenScreen(_lobbyScreen);
+
+            uiScreen.OnClosed -= HandleLoadingScreenClosed;
+        }
+
+        private void HandleBackButtonClicked()
+        {
+            _uiService.OpenScreen<LoadingScreen>();
+            
+            if (isServer)
             {
+                _networkService.StopHost();
+
                 return;
             }
-
-            _uiService.OpenScreen(_lobbyScreen);
+            
+            _networkService.StopClient();
         }
         
         private bool CanStartTheGame()

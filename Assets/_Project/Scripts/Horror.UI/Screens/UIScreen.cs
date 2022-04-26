@@ -14,20 +14,13 @@ namespace Horror.UI.Screens
         public bool IsOpen => _isOpen;
         protected IUIService UIService => _uiService;
 
-        public void Initialize()
-        {
-            OnInitialize();
-        }
-
         public void Close()
         {
+            _isOpen = false;
+            
             UnsubscribeEvents();
             
             OnClose();
-
-            _isOpen = false;
-            
-            OnClosed?.Invoke(this);
         }
 
         protected virtual void SubscribeEvents()
@@ -45,11 +38,18 @@ namespace Horror.UI.Screens
         protected virtual void OnClose()
         {
             gameObject.SetActive(false);
+
+            DispatchClosedEvent();
         }
         
         protected virtual void OnDestroy()
         {
             _uiService.UnregisterScreen(this);
+        }
+
+        protected void DispatchClosedEvent()
+        {
+            OnClosed?.Invoke(this);
         }
         
         private void Awake()
@@ -59,6 +59,8 @@ namespace Horror.UI.Screens
             _uiService.RegisterScreen(this);
             
             gameObject.SetActive(false);
+            
+            OnInitialize();
         }
 
         private void OnEnable()

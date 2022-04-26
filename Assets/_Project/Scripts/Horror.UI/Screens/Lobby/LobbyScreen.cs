@@ -7,42 +7,47 @@ namespace Horror.UI.Screens.Lobby
     {
         public event UnityAction OnPlayButtonClicked
         {
-            add => _playHoverButton.OnButtonClicked += value;
-            remove => _playHoverButton.OnButtonClicked -= value;
+            add => _playButton.OnButtonClicked += value;
+            remove => _playButton.OnButtonClicked -= value;
         }
         
         public event UnityAction OnReadyButtonClicked
         {
-            add => _readyHoverButton.OnButtonClicked += value;
-            remove => _readyHoverButton.OnButtonClicked -= value;
+            add => _readyButton.OnButtonClicked += value;
+            remove => _readyButton.OnButtonClicked -= value;
+        }
+        
+        public event UnityAction OnBackButtonClicked
+        {
+            add => _backButton.OnButtonClicked += value;
+            remove => _backButton.OnButtonClicked -= value;
         }
 
         [SerializeField] private UIFader _uiFader;
-        [SerializeField] private GameObject _hostHintPanel;
-        [SerializeField] private GameObject _clientHintPanel;
-        [SerializeField] private HoverButton _playHoverButton;
-        [SerializeField] private HoverButton _readyHoverButton;
+        [SerializeField] private HoverButton _playButton;
+        [SerializeField] private HoverButton _readyButton;
+        [SerializeField] private HoverButton _backButton;
 
         public void SetPlayButtonInteractable(bool isInteractable)
         {
-            _playHoverButton.SetInteractable(isInteractable);
+            _playButton.SetInteractable(isInteractable);
         }
         
         public void ActiveHostButtonsGroup()
         {
-            _hostHintPanel.SetActive(true);
-            _clientHintPanel.SetActive(false);
+            _playButton.gameObject.SetActive(true);
+            _readyButton.gameObject.SetActive(false);
         }
         
         public void ActiveClientButtonsGroup()
         {
-            _clientHintPanel.SetActive(true);
-            _hostHintPanel.SetActive(false);
+            _readyButton.gameObject.SetActive(true);
+            _playButton.gameObject.SetActive(false);
         }
 
         public void SetReadyButtonLabelText(string text)
         {
-            _readyHoverButton.SetLabelText(text);
+            _readyButton.SetLabelText(text);
         }
         
         protected override void OnOpen()

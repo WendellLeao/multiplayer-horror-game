@@ -18,8 +18,6 @@ namespace Horror.UI.Screens.MainMenu
             base.OnInitialize();
             
             _enterServerOptions = UIService.GetRegisteredScreen<EnterServerOptions>();
-            
-            _enterServerOptions.Initialize();
         }
 
         protected override void SubscribeEvents()
@@ -53,18 +51,9 @@ namespace Horror.UI.Screens.MainMenu
             
             _soloButton.SetInteractable(false);
             
-            OpenLoadingScreen();
+            UIService.OpenScreen<LoadingScreen>();
         }
-
-        private void OpenLoadingScreen()
-        {
-            LoadingScreen loadingScreen = (LoadingScreen) UIService.GetRegisteredScreen<LoadingScreen>();
-
-            loadingScreen.Initialize();
-
-            UIService.OpenScreen(loadingScreen);
-        }
-
+        
         private void HandleQuitButtonClicked()
         {
             Application.Quit();

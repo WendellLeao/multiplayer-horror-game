@@ -32,6 +32,8 @@ namespace Horror.UI.Screens
         {
             gameObject.SetActive(false);
             
+            DispatchClosedEvent();
+            
             _uiFader.OnFadeCompleted -= HandleFadeCompleted;
         }
     }
