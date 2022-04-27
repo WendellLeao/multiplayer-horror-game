@@ -411,8 +411,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -144, y: 52.623}
-  m_SizeDelta: {x: 247.669, y: 93.679}
+  m_AnchoredPosition: {x: -246.804, y: 52.623}
+  m_SizeDelta: {x: 453.277, y: 93.679}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3214558086971169942
 CanvasRenderer:
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HORROR
+  m_text: Where Are <color=#7B0000>You ?</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d509c9eaa40e6fe49963344f9075c590, type: 2}
   m_sharedMaterial: {fileID: -6801542306228150699, guid: d509c9eaa40e6fe49963344f9075c590, type: 2}
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

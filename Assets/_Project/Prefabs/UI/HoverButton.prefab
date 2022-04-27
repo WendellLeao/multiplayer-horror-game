@@ -316,8 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 6409398168684183774}
-  _highlightableTexts:
-  - {fileID: 8610421268830287838}
+  _highlightableTexts: []
   _label: {fileID: 6409398168588752006}
 --- !u!114 &4360381944364374611
 MonoBehaviour:
