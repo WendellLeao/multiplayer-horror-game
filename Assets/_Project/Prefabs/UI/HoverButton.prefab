@@ -151,6 +151,8 @@ MonoBehaviour:
   _originalMaterial: {fileID: 2100000, guid: 453adede56e02c942bbe2c9205ec5e25, type: 2}
   _glowMaterial: {fileID: 2100000, guid: 37c6d94c3758cca409772bf8da3b580e, type: 2}
   _blockedMaterial: {fileID: 2100000, guid: c1e61b61ea805e1419202cafb11e6ff1, type: 2}
+  _originalColor: {r: 1, g: 1, b: 1, a: 1}
+  _glowColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &6409398168684183772
 GameObject:
   m_ObjectHideFlags: 0

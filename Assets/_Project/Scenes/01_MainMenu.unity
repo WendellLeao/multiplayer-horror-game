@@ -6162,7 +6162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 404.92706
+      value: 499.161
       objectReference: {fileID: 0}
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9013,7 +9013,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HORROR
+  m_text: "Ghost <color=red>Exorcists\r</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d509c9eaa40e6fe49963344f9075c590, type: 2}
   m_sharedMaterial: {fileID: -6801542306228150699, guid: d509c9eaa40e6fe49963344f9075c590, type: 2}
@@ -9040,8 +9040,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.26
-  m_fontSizeBase: 60.26
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10011,8 +10011,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -555.0729, y: 0}
-  m_SizeDelta: {x: -1110.1459, y: 0}
+  m_AnchoredPosition: {x: -460.83902, y: 0}
+  m_SizeDelta: {x: -921.678, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &413107142
 MonoBehaviour:
@@ -15658,7 +15658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 404.92706
+      value: 499.161
       objectReference: {fileID: 0}
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -18871,7 +18871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 404.92706
+      value: 499.161
       objectReference: {fileID: 0}
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -21391,7 +21391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 404.92706
+      value: 499.161
       objectReference: {fileID: 0}
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -21408,6 +21408,18 @@ PrefabInstance:
     - target: {fileID: 6409398168684183775, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610421268830287838, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
+      propertyPath: _glowColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610421268830287838, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
+      propertyPath: _glowColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610421268830287838, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
+      propertyPath: _glowColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7f99f51c57fdcc4eb5490619a7feb0d, type: 3}
@@ -23277,7 +23289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HORROR
+  m_text: "Ghost <color=red>Exorcists\r</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d509c9eaa40e6fe49963344f9075c590, type: 2}
   m_sharedMaterial: {fileID: -6801542306228150699, guid: d509c9eaa40e6fe49963344f9075c590, type: 2}
@@ -23304,8 +23316,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90.28
-  m_fontSizeBase: 90.28
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -24171,7 +24183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HORROR
+  m_text: "Ghost <color=red>Exorcists\r</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d509c9eaa40e6fe49963344f9075c590, type: 2}
   m_sharedMaterial: {fileID: -6801542306228150699, guid: d509c9eaa40e6fe49963344f9075c590, type: 2}
@@ -24198,8 +24210,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.26
-  m_fontSizeBase: 60.26
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -41266,8 +41278,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 265.224}
-  m_SizeDelta: {x: 0, y: -530.447}
+  m_AnchoredPosition: {x: 0, y: 240.223}
+  m_SizeDelta: {x: 0, y: -480.445}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1930525247
 GameObject:
