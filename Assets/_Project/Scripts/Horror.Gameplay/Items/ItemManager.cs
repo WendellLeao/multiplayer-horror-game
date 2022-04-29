@@ -3,6 +3,7 @@ using Horror.Gameplay.Evidences;
 using Horror.Gameplay.Enemies;
 using Horror.ServiceLocator;
 using Horror.Events;
+using Horror.Gameplay.Cameras;
 using UnityEngine;
 using Mirror;
 
@@ -15,12 +16,14 @@ namespace Horror.Gameplay.Items
         
         public List<Item> _items = new List<Item>();
         private int _itemSpawnDataIterator;
-        private IHasEvidences _enemy;
+        private ICameraService _cameraService;
         private IEventService _eventService;
+        private IHasEvidences _enemy;
 
-        public void Initialize()
+        public void Initialize(ICameraService cameraService, IEventService eventService)
         {
-            _eventService = GameServices.GetService<IEventService>();
+            _cameraService = cameraService;
+            _eventService = eventService;
             
             _eventService.AddEventListener<EnemyCreatedEvent>(HandleEnemyCreated);
         }
@@ -164,7 +167,7 @@ namespace Horror.Gameplay.Items
                     continue;
                 }
                 
-                item.Initialize(_enemy);
+                item.Initialize(_cameraService, _enemy);
             }
         }
 

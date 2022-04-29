@@ -6,6 +6,7 @@ using Horror.Gameplay.Items;
 using Horror.ServiceLocator;
 using Horror.Gameplay.UI;
 using Horror.Events;
+using Horror.Gameplay.Cameras;
 using UnityEngine;
 using Horror.UI;
 using Mirror;
@@ -21,17 +22,18 @@ namespace Horror.Gameplay
         [SerializeField] private ItemManager _itemManager;
         [SerializeField] private VoiceListener _voiceListener;//
 
+        private ICameraService _cameraService;
         private IEventService _eventService;
         private IUIService _uiService;
 
         private void Awake()
         {
-            _cursorManager.Initialize();
-            _itemManager.Initialize();
-
-            _uiService = GameServices.GetService<IUIService>();
-
+            _cameraService = GameServices.GetService<ICameraService>();
             _eventService = GameServices.GetService<IEventService>();
+            _uiService = GameServices.GetService<IUIService>();
+            
+            _cursorManager.Initialize();
+            _itemManager.Initialize(_cameraService, _eventService);
             
             _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             _eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);
@@ -43,6 +45,8 @@ namespace Horror.Gameplay
         private void Start()
         {
             _uiService.OpenScreen<PlayerHUD>();
+            
+            _voiceListener.Begin();
         }
 
         private void OnDestroy()

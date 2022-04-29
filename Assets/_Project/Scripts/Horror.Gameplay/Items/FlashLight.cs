@@ -6,7 +6,7 @@ namespace Horror.Gameplay.Items
 {
     public sealed class FlashLight : Item, IIlluminable
     {
-        [Header("FlashLight")] 
+        [Header("FlashLight")]
         [SerializeField] private FlashLightView _flashLightView;
         [SerializeField] private Light _light = default;
         [SerializeField] private HDAdditionalLightData _lightData = default;

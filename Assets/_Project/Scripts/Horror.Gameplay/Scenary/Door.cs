@@ -3,10 +3,14 @@ using UnityEngine;
 
 namespace Horror.Gameplay.Scenary
 {
-    public sealed class Door : Entity
+    public sealed class Door : Entity, IParanormalObject
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private float _delayInSeconds;
+        
+        private bool _isEvidence;
+
+        public bool IsEvidence => _isEvidence;
         
         public void Close()
         {
@@ -17,7 +21,9 @@ namespace Horror.Gameplay.Scenary
         {
             yield return new WaitForSeconds(_delayInSeconds);
             
-            _animator.SetTrigger("close_door"); 
+            _animator.SetTrigger("close_door");
+
+            _isEvidence = true;
         }
     }
 }

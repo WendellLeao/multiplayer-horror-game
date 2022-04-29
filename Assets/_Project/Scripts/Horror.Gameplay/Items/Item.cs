@@ -1,4 +1,5 @@
-﻿using Horror.Gameplay.Enemies;
+﻿using Horror.Gameplay.Cameras;
+using Horror.Gameplay.Enemies;
 using UnityEngine;
 using Mirror;
 
@@ -13,6 +14,7 @@ namespace Horror.Gameplay.Items
         [SerializeField] private float _throwForce = 250f;
         [SerializeField] private float _throwHeight = 0.2f;
 
+        private ICameraService _cameraService;
         private IHasEvidences _enemy;
         private Transform _container;
         private bool _hasInitialized;
@@ -21,12 +23,14 @@ namespace Horror.Gameplay.Items
         public bool HasInitialized => _hasInitialized;
         public NetworkIdentity NetIdentity => netIdentity;
         protected IHasEvidences Enemy => _enemy;
+        protected ICameraService CameraService => _cameraService;
         
-        public void Initialize(IHasEvidences enemy)
+        public void Initialize(ICameraService cameraService, IHasEvidences enemy)
         {
-            OnInitialize();
-
+            _cameraService = cameraService;
             _enemy = enemy;
+
+            OnInitialize();
             
             _hasInitialized = true;
         }

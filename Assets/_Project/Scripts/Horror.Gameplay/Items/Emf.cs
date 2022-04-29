@@ -1,12 +1,16 @@
 ﻿using Horror.Gameplay.Evidences;
+using Horror.Gameplay.Scenary;
 using UnityEngine;
 
 namespace Horror.Gameplay.Items
 {
     public sealed class Emf : Item
     {
-        private bool _isOn;
+        [Header("Emf")]
+        [SerializeField] private float _detectionRange;
         
+        private bool _isOn;
+
         public override void ExecuteAction()
         {
             _isOn = !_isOn;
@@ -26,19 +30,41 @@ namespace Horror.Gameplay.Items
 
         private void CheckForParanormalInteractions()
         {
-            //Throw a ray and try to get paranormal interactions, if found throw log
-            
-            foreach (EvidenceData enemyEvidence in Enemy.Evidences)
-            {
-                if (enemyEvidence is EmfEvidenceData emfEvidenceData)
-                {
-                    Debug.Log("Has emf evidence, can turn red light and dispatch");
+            RaycastHit hit;
 
+            Transform mainCameraTransform = CameraService.MainCamera.transform;
+            
+            Ray ray = new Ray(mainCameraTransform.position, mainCameraTransform.forward);
+            
+            if (Physics.Raycast(ray, out hit, _detectionRange))
+            {
+                Transform selection = hit.transform;
+
+                if (!selection.TryGetComponent(out IParanormalObject paranormalObject))
+                {
                     return;
                 }
+
+                if (!EnemyHasEmfEvidence() || !paranormalObject.IsEvidence)
+                {
+                    return;
+                }
+                
+                Debug.Log("Has EMF evidence!!");
             }
-            
-            Debug.Log("Has no emf evidence");
+        }
+
+        private bool EnemyHasEmfEvidence()
+        {
+            foreach (EvidenceData enemyEvidence in Enemy.Evidences)
+            {
+                if (enemyEvidence is EmfEvidenceData)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

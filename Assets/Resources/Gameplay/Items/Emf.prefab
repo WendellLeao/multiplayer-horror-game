@@ -156,6 +156,7 @@ MonoBehaviour:
   _rigidBody: {fileID: 1937281623811627743}
   _throwForce: 250
   _throwHeight: 0.2
+  _detectionRange: 5
 --- !u!1001 &9120652246338714460
 PrefabInstance:
   m_ObjectHideFlags: 0
