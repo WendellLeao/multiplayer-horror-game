@@ -1,13 +1,32 @@
 using UnityEngine;
+using Mirror;
 
 namespace Horror.Gameplay.Enemies
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemyManager : NetworkBehaviour
     {
-        public void Dispose()
-        {}
+        [SerializeField] private EnemyData[] _enemies;
         
-        public void Tick(float deltaTime)
-        {}
+        [Server]
+        public void Begin()
+        {
+            int randomIndex = Random.Range(0, _enemies.Length);
+
+            RpcCreateEnemy(randomIndex);
+        }
+
+        [ClientRpc]
+        private void RpcCreateEnemy(int randomIndex)
+        {
+            EnemyData randomEnemyData = _enemies[randomIndex];
+
+            GameObject enemyClone = Instantiate(randomEnemyData.EnemyPrefab);
+
+            NetworkServer.Spawn(enemyClone);
+            
+            Enemy enemy = enemyClone.GetComponent<Enemy>();
+
+            enemy.Begin(randomEnemyData);
+        }
     }
 }

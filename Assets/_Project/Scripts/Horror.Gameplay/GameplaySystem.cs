@@ -2,13 +2,13 @@ using System;
 using Horror.Gameplay.VoiceRecognizer;
 using Horror.Networking.Events;
 using Horror.Gameplay.Playing;
+using Horror.Gameplay.Enemies;
 using Horror.Gameplay.Items;
 using Horror.ServiceLocator;
 using Horror.Gameplay.UI;
 using Horror.Events;
 using UnityEngine;
 using Horror.UI;
-using Horror.UI.Screens;
 using Mirror;
 
 namespace Horror.Gameplay
@@ -18,6 +18,7 @@ namespace Horror.Gameplay
         [Header("Managers")]
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private CursorManager _cursorManager;
+        [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private ItemManager _itemManager;
         [SerializeField] private VoiceListener _voiceListener;//
 
@@ -81,6 +82,8 @@ namespace Horror.Gameplay
                 _cursorManager.TargetRpcLockCursor(serverReadiedEvent.Conn);
 
                 _itemManager.Begin(serverReadiedEvent.Conn);
+
+                _enemyManager.Begin();
             }
         }
 
