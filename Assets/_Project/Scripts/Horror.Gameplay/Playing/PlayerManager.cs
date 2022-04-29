@@ -12,10 +12,7 @@ namespace Horror.Gameplay.Playing
         [SerializeField] private Transform _spawnPosition;
 
         private Player _localPlayer;
-
-        public void Initialize()
-        { }
-
+        
         [Server]
         public void Begin(NetworkConnectionToClient conn)
         {

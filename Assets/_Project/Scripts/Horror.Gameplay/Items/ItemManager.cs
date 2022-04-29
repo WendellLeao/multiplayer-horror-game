@@ -1,4 +1,8 @@
 ﻿using System.Collections.Generic;
+using Horror.Gameplay.Evidences;
+using Horror.Gameplay.Enemies;
+using Horror.ServiceLocator;
+using Horror.Events;
 using UnityEngine;
 using Mirror;
 
@@ -11,10 +15,16 @@ namespace Horror.Gameplay.Items
         
         public List<Item> _items = new List<Item>();
         private int _itemSpawnDataIterator;
+        private IHasEvidences _enemy;
+        private IEventService _eventService;
 
         public void Initialize()
-        { }
-        
+        {
+            _eventService = GameServices.GetService<IEventService>();
+            
+            _eventService.AddEventListener<EnemyCreatedEvent>(HandleEnemyCreated);
+        }
+
         [Server]
         public void Begin(NetworkConnectionToClient conn)
         {
@@ -27,6 +37,8 @@ namespace Horror.Gameplay.Items
             {
                 item.Dispose();
             }
+            
+            _eventService.RemoveEventListener<EnemyCreatedEvent>(HandleEnemyCreated);
         }
         
         public void Stop()
@@ -78,6 +90,8 @@ namespace Horror.Gameplay.Items
             {
                 return;
             }
+
+            _itemSpawnDataIterator = Random.Range(0, _itemSpawnDatas.Length);
             
             ItemSpawnData itemSpawnData = _itemSpawnDatas[_itemSpawnDataIterator];
             
@@ -150,7 +164,7 @@ namespace Horror.Gameplay.Items
                     continue;
                 }
                 
-                item.Initialize();
+                item.Initialize(_enemy);
             }
         }
 
@@ -162,6 +176,15 @@ namespace Horror.Gameplay.Items
             int lastSpawnDataIndex = _itemSpawnDatas.Length - 1;
             
             _itemSpawnDataIterator = Mathf.Clamp(_itemSpawnDataIterator, 0, lastSpawnDataIndex);
+        }
+        
+        [Client]
+        private void HandleEnemyCreated(ServiceEvent serviceEvent)
+        {
+            if (serviceEvent is EnemyCreatedEvent enemyCreatedEvent)
+            {
+                _enemy = enemyCreatedEvent.Enemy;
+            }
         }
     }
 }

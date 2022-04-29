@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Horror.Gameplay.Enemies;
+using UnityEngine;
 using Mirror;
 
 namespace Horror.Gameplay.Items
@@ -9,25 +10,24 @@ namespace Horror.Gameplay.Items
         [SerializeField] private Rigidbody _rigidBody;
 
         [Header("Throw")] 
-        // [SerializeField] private float _positionSmoothness = 100f;
-        // [SerializeField] private float _rotationSmoothness = 100f;
         [SerializeField] private float _throwForce = 250f;
         [SerializeField] private float _throwHeight = 0.2f;
 
-        // [SyncVar]
-        // private bool _isContained;
-        
+        private IHasEvidences _enemy;
         private Transform _container;
         private bool _hasInitialized;
 
         public bool CanBePickedUp => true;
         public bool HasInitialized => _hasInitialized;
         public NetworkIdentity NetIdentity => netIdentity;
+        protected IHasEvidences Enemy => _enemy;
         
-        public void Initialize()
+        public void Initialize(IHasEvidences enemy)
         {
             OnInitialize();
 
+            _enemy = enemy;
+            
             _hasInitialized = true;
         }
         
@@ -78,8 +78,7 @@ namespace Horror.Gameplay.Items
             OnThrow();
         }
 
-        public virtual void ExecuteAction()
-        {}
+        public abstract void ExecuteAction();
 
         protected virtual void SubscribeEvents()
         { }
@@ -129,15 +128,11 @@ namespace Horror.Gameplay.Items
             FreezeRigidbody();
             
             SetPositionAndRotation();
-            
-            // _isContained = true;
         }
         
         private void ExitContainer()
         {
             transform.SetParent(null);
-                
-            // _isContained = false;
                 
             _container = null;
                 

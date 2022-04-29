@@ -1,3 +1,6 @@
+using Horror.Gameplay.Evidences;
+using Horror.ServiceLocator;
+using Horror.Events;
 using UnityEngine;
 using Mirror;
 
@@ -6,7 +9,7 @@ namespace Horror.Gameplay.Enemies
     public sealed class EnemyManager : NetworkBehaviour
     {
         [SerializeField] private EnemyData[] _enemies;
-        
+
         [Server]
         public void Begin()
         {
@@ -27,6 +30,10 @@ namespace Horror.Gameplay.Enemies
             Enemy enemy = enemyClone.GetComponent<Enemy>();
 
             enemy.Begin(randomEnemyData);
+
+            IEventService eventService = GameServices.GetService<IEventService>();
+            
+            eventService.DispatchEvent(new EnemyCreatedEvent(enemy));
         }
     }
 }

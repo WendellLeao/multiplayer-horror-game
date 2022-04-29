@@ -1,4 +1,3 @@
-using System;
 using Horror.Gameplay.VoiceRecognizer;
 using Horror.Networking.Events;
 using Horror.Gameplay.Playing;
@@ -27,7 +26,6 @@ namespace Horror.Gameplay
 
         private void Awake()
         {
-            _playerManager.Initialize();
             _cursorManager.Initialize();
             _itemManager.Initialize();
 
@@ -81,9 +79,9 @@ namespace Horror.Gameplay
                 
                 _cursorManager.TargetRpcLockCursor(serverReadiedEvent.Conn);
 
-                _itemManager.Begin(serverReadiedEvent.Conn);
-
                 _enemyManager.Begin();
+
+                _itemManager.Begin(serverReadiedEvent.Conn);
             }
         }
 

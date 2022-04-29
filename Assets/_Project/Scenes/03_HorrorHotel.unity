@@ -52153,6 +52153,10 @@ MonoBehaviour:
     SpawnPoints:
     - {fileID: 39432575}
     - {fileID: 272853304}
+  - ItemData: {fileID: 11400000, guid: 967c0ed3ff68a214b86ae2ac65ae9518, type: 2}
+    SpawnPoints:
+    - {fileID: 39432575}
+    - {fileID: 272853304}
   _items: []
 --- !u!4 &833387366
 Transform:

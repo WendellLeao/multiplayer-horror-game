@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace Horror.Gameplay.Enemies
 {
-    public abstract class Enemy : NetworkEntity
+    public abstract class Enemy : NetworkEntity, IHasEvidences
     {
         [SerializeField] private EnemyView _enemyView;
         
         private EnemyAssemblyData _enemyAssemblyData;
         private EnemyData _enemyData;
+
+        public EvidenceData[] Evidences => _enemyData.Evidences;
 
         public void Begin(EnemyData enemyData)
         {

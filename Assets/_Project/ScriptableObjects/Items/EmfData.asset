@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09dd8a3eb8404148b99aa09e0100a244, type: 3}
-  m_Name: FlashLightData
+  m_Name: EmfData
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 6928832489276159339, guid: 34115d54b39fe7742aef1660dd5ce1b2, type: 3}
+  Prefab: {fileID: 6928832489276159339, guid: 333194774447f6a44bc3f9435dc2fb7a, type: 3}
