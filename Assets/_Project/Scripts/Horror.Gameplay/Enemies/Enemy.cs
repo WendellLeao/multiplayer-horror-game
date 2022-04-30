@@ -65,8 +65,6 @@ namespace Horror.Gameplay.Enemies
             IEventService eventService = GameServices.GetService<IEventService>();//TODO: ...
             
             eventService.DispatchEvent(new EnemyResponseEvent());
-
-            Debug.Log("Dispatch");
         }
         
         private void SetupEnemyAssemblyData(EnemyData enemyData)

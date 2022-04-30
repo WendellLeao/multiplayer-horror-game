@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Horror.Gameplay.Evidences;
 using Horror.Gameplay.Enemies;
-using Horror.ServiceLocator;
-using Horror.Events;
 using Horror.Gameplay.Cameras;
+using Horror.Events;
 using UnityEngine;
 using Mirror;
 

@@ -50,7 +50,7 @@ namespace Horror.Gameplay.Items
         {
             base.OnTick(deltaTime);
 
-            if (!_isOn ||! isLocalPlayer)
+            if (!HasInitialized || !_isOn)
             {
                 return;
             }
