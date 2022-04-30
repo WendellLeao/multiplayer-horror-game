@@ -57,7 +57,7 @@ namespace Horror.Gameplay.VoiceRecognizer
             }
             else if(recognizedPhraseData.ID == giveSignPhraseData.ID || recognizedPhraseData.ID == giveSignPhraseDataPt.ID)
             {
-                _door.Close();
+                _door.Interact();
                 
                 _audioService.PlaySound(Sound.CloseDoor, _door.transform.position);
             }

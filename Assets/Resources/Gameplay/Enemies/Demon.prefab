@@ -105,3 +105,4 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _enemyView: {fileID: 9049906676127244460}
+  askLocationPhraseData: {fileID: 11400000, guid: 4b1148977f3a5ec44a92d66cc46db509, type: 2}

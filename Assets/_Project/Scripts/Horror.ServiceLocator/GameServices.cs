@@ -28,11 +28,6 @@ namespace Horror.ServiceLocator
             
             _serviceMap.TryGetValue(typeof(T).GetHashCode(), out service);
 
-            if (service == null)
-            {
-                Debug.LogWarning("You are trying to get a unregistered service");
-            }
-            
             return (T) service;
         }
     }

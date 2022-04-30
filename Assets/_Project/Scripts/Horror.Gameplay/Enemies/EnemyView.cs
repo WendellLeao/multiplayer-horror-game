@@ -8,10 +8,6 @@ namespace Horror.Gameplay.Enemies
         public void Setup(EnemyAssemblyData enemyAssemblyData)
         {
             Instantiate(enemyAssemblyData.Model);
-            
-            Debug.Log(enemyAssemblyData.Sex);            
-            Debug.Log(enemyAssemblyData.Age);            
-            Debug.Log(enemyAssemblyData.Voice);
         }
     }
 }

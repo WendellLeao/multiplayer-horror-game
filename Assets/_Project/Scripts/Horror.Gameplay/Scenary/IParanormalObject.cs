@@ -1,7 +1,12 @@
-﻿namespace Horror.Gameplay.Scenary
+﻿using Horror.Gameplay.Items;
+
+namespace Horror.Gameplay.Scenary
 {
     public interface IParanormalObject
     {
-        public bool IsEvidence { get; }
+        bool IsEvidence { get; }
+        float EvidenceDuration { get; }
+        EmfScore EmfScore { get; } 
+        void Interact();
     }
 }

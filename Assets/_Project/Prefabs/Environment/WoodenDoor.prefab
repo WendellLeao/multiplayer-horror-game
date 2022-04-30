@@ -136,8 +136,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7416500746365461719}
-  - component: {fileID: 328786888582888374}
   - component: {fileID: 517226886076821656}
+  - component: {fileID: 328786888582888374}
   m_Layer: 9
   m_Name: WoodenDoor
   m_TagString: Untagged
@@ -161,20 +161,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
---- !u!114 &328786888582888374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901394636407062125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 517226886076821656}
-  _delayInSeconds: 0
 --- !u!95 &517226886076821656
 Animator:
   serializedVersion: 3
@@ -194,6 +180,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &328786888582888374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901394636407062125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _evidenceDuration: 5
+  _animator: {fileID: 517226886076821656}
+  _delayInSeconds: 0
 --- !u!1 &8191623591335257464
 GameObject:
   m_ObjectHideFlags: 0

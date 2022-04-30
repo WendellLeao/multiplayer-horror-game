@@ -167,7 +167,7 @@ namespace Horror.Gameplay.Items
                     continue;
                 }
                 
-                item.Initialize(_cameraService, _enemy);
+                item.Initialize(_cameraService, _eventService, _enemy);
             }
         }
 
