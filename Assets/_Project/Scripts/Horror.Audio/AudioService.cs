@@ -5,26 +5,11 @@ using UnityEngine;
 
 namespace Horror.Audio
 {
-    public sealed class AudioService : IAudioService
+    public sealed class AudioService : MonoBehaviour, IAudioService
     {
-        private const string AudioDatasPath = "GameServices/AudioService/AudioDatas";
+        [SerializeField] private AudioData[] _audioDatas;
         
         private Dictionary<Sound, AudioData> _audioDataDictionary;
-        private AudioData[] _audioDatas;
-
-        public AudioService()
-        {
-            _audioDatas = Resources.LoadAll<AudioData>(AudioDatasPath);
-            
-            _audioDataDictionary = new Dictionary<Sound, AudioData>();
-
-            foreach (AudioData audioData in _audioDatas)
-            {
-                audioData.IsPlaying = false;
-                
-                _audioDataDictionary.Add(audioData.Sound, audioData);
-            }
-        }
 
         public void PlaySound(Sound sound, Vector3 position)
         {
@@ -67,6 +52,27 @@ namespace Horror.Audio
             SoundPlayer soundPlayer = soundPlayerGameObject.GetComponent<SoundPlayer>();
 
             return soundPlayer;
+        }
+        
+        private void Awake()
+        {
+            _audioDataDictionary = new Dictionary<Sound, AudioData>();
+
+            foreach (AudioData audioData in _audioDatas)
+            {
+                audioData.IsPlaying = false;
+                
+                _audioDataDictionary.Add(audioData.Sound, audioData);
+            }
+            
+            GameServices.RegisterService<IAudioService>(this);
+            
+            DontDestroyOnLoad(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            GameServices.DeregisterService<IAudioService>();
         }
     }
 }
