@@ -3,7 +3,37 @@ guid: c60b5d4bcbf918742968817b7b1f676f
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: a81fd478f27a6014ca59d3bcc87f609d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black.textur
+    second: {fileID: 2100000, guid: 6dbe0cbfe8272ad4eb422a2ac7fe400b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 7d316254b9a354844ab06bc94b24c45e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 187665d42ffb8a1479e27cf6d1ab8b4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chrome
+    second: {fileID: 2100000, guid: 9627095167ada5740baf4d6f2959d04a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chrome.waves
+    second: {fileID: 2100000, guid: 850f25b978f9d2a4faabb8d0b9257354, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

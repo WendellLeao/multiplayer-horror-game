@@ -39,6 +39,13 @@ namespace Horror.Gameplay.Items
             _emfView.Begin();
         }
 
+        protected override void OnDispose()
+        {
+            base.OnDispose();
+            
+            EventService.RemoveEventListener<EnemyResponseEvent>(HandleEnemyResponseEvent);
+        }
+        
         protected override void OnStop()
         {
             base.OnStop();
@@ -50,10 +57,13 @@ namespace Horror.Gameplay.Items
         {
             base.OnTick(deltaTime);
 
-            if (!HasInitialized || !_isOn)
+            
+            if (!_isOn)//is local player
             {
                 return;
             }
+            
+            _isDetectingParanormal = false;
 
             CheckForParanormalInteractions();
             
@@ -70,22 +80,13 @@ namespace Horror.Gameplay.Items
             EventService.AddEventListener<EnemyResponseEvent>(HandleEnemyResponseEvent);
         }
 
-        protected override void UnsubscribeEvents()
-        {
-            base.UnsubscribeEvents();
-            
-            EventService.RemoveEventListener<EnemyResponseEvent>(HandleEnemyResponseEvent);
-        }
-
         private void CheckForParanormalInteractions()
         {
-            _isDetectingParanormal = false;
-            
             RaycastHit hit;
 
-            Transform mainCameraTransform = CameraService.MainCamera.transform;
+            Transform itemTransform = transform;
             
-            Ray ray = new Ray(mainCameraTransform.position, mainCameraTransform.forward);
+            Ray ray = new Ray(itemTransform.position, itemTransform.forward);
             
             if (Physics.Raycast(ray, out hit, _detectionRange))
             {

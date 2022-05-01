@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 1856288755356575672}
   - component: {fileID: 7508116065572436797}
   - component: {fileID: 9072003485025703557}
-  - component: {fileID: 5811738487725677632}
   m_Layer: 9
-  m_Name: 10057_wooden_door_v1
+  m_Name: View_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,20 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5811738487725677632
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3777485230292632672}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 674375431392153129, guid: e698f31fe255b984585004882282b732, type: 3}
 --- !u!1 &7801845184738979555
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,8 +90,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9091377229767948054}
+  - component: {fileID: 4593683313869481014}
+  - component: {fileID: 5077133493336812273}
+  - component: {fileID: 3341531288399592887}
   m_Layer: 9
-  m_Name: DoorContainer
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,6 +115,53 @@ Transform:
   m_Father: {fileID: 7416500746365461719}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &4593683313869481014
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801845184738979555}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f5bf69b48519014594506bc35597fea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &5077133493336812273
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801845184738979555}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 81.19387, y: 3.0119102, z: 202.53221}
+  m_Center: {x: -38.561394, y: 0.187228, z: 100.74782}
+--- !u!114 &3341531288399592887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801845184738979555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _evidenceDuration: 5
+  _animator: {fileID: 4593683313869481014}
+  _delayInSeconds: 0
 --- !u!1 &7901394636407062125
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,8 +171,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7416500746365461719}
-  - component: {fileID: 517226886076821656}
-  - component: {fileID: 328786888582888374}
   m_Layer: 9
   m_Name: WoodenDoor
   m_TagString: Untagged
@@ -161,40 +194,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
---- !u!95 &517226886076821656
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901394636407062125}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0f5bf69b48519014594506bc35597fea, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &328786888582888374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901394636407062125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _evidenceDuration: 5
-  _animator: {fileID: 517226886076821656}
-  _delayInSeconds: 0
 --- !u!1 &8191623591335257464
 GameObject:
   m_ObjectHideFlags: 0
