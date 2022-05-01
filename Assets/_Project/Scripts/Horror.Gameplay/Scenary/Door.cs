@@ -1,5 +1,6 @@
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
+using System;
 
 namespace Horror.Gameplay.Scenary
 {
@@ -9,25 +10,22 @@ namespace Horror.Gameplay.Scenary
         [SerializeField] private Animator _animator;
         [SerializeField] private float _delayInSeconds;
         
+        private static readonly int CloseDoorHash = Animator.StringToHash("CloseDoor");
+
         public override void Interact()
         {
-            Close();
+            CloseAsync();
         }
 
-        public void Close()
+        private async void CloseAsync()
         {
-            StartCoroutine(CloseCoroutine());
-        }
-
-        private IEnumerator CloseCoroutine()
-        {
-            yield return new WaitForSeconds(_delayInSeconds);
+            await Task.Delay(TimeSpan.FromSeconds(_delayInSeconds));
             
-            _animator.SetTrigger("close_door");
+            _animator.SetTrigger(CloseDoorHash);
 
             IsEvidence = true;
 
-            yield return new WaitForSeconds(EvidenceDuration);
+            await Task.Delay(TimeSpan.FromSeconds(_delayInSeconds));
             
             IsEvidence = false;
         }

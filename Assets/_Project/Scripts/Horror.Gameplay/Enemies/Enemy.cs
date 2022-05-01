@@ -1,5 +1,6 @@
 using Horror.Gameplay.Enemies.EnemyAssemblies;
 using Horror.Gameplay.VoiceRecognizer;
+using Horror.Gameplay.Enemies.Events;
 using Horror.Gameplay.Evidences;
 using Horror.ServiceLocator;
 using Horror.Events;
@@ -10,11 +11,12 @@ namespace Horror.Gameplay.Enemies
     public abstract class Enemy : NetworkEntity, IHasEvidences
     {
         [SerializeField] private EnemyView _enemyView;
-        [SerializeField] private PhraseData askLocationPhraseData;
+        [SerializeField] private float _manifestationDuration = 3f;
+        [SerializeField] private PhraseData askLocationPhraseData;//TODO: Remove this
         
         private EnemyAssemblyData _enemyAssemblyData;
-        private EnemyData _enemyData;
         private IVoiceService _voiceService;
+        private EnemyData _enemyData;
 
         public EvidenceData[] Evidences => _enemyData.Evidences;
 
@@ -64,7 +66,7 @@ namespace Horror.Gameplay.Enemies
             
             IEventService eventService = GameServices.GetService<IEventService>();//TODO: ...
             
-            eventService.DispatchEvent(new EnemyResponseEvent());
+            eventService.DispatchEvent(new EnemyResponseEvent(_manifestationDuration));
         }
         
         private void SetupEnemyAssemblyData(EnemyData enemyData)

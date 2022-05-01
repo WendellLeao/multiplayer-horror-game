@@ -1,10 +1,11 @@
-﻿using Horror.Gameplay.Evidences;
-using Horror.Gameplay.Enemies;
+﻿using Horror.Gameplay.Enemies.Events;
+using Horror.Gameplay.Evidences;
 using Horror.Gameplay.Scenary;
-using System.Collections;
+using System.Threading.Tasks;
 using Horror.Events;
 using UnityEngine;
 using Mirror;
+using System;
 
 namespace Horror.Gameplay.Items
 {
@@ -159,24 +160,31 @@ namespace Horror.Gameplay.Items
         
         private void HandleEnemyResponseEvent(ServiceEvent serviceEvent)//TODO: IS NOT WORKING BECAUSE THE FLAG IS FALSE, CREATE A ASYNC METHOD
         {
-            _enemyHasManifested = true;
-
-            _isDetectingParanormal = true;
-
-            StartCoroutine(DelayRoutine());
-
-            if (!_isOn)
+            if (serviceEvent is EnemyResponseEvent enemyResponseEvent)
             {
-                return;
-            }
+                float manifestationDuration = enemyResponseEvent.ManifestationDuration;
 
-            CheckEvidenceAndTurnOn();
+                Debug.Log(manifestationDuration);
+                
+                SetEnemyHasManifestedAsync(manifestationDuration);
+
+                _isDetectingParanormal = true;
+
+                if (!_isOn)
+                {
+                    return;
+                }
+
+                CheckEvidenceAndTurnOn();
+            }
         }
         
-        private IEnumerator DelayRoutine()
+        private async void SetEnemyHasManifestedAsync(float manifestationDuration)
         {
-            yield return new WaitForSeconds(3f);
-
+            _enemyHasManifested = true;
+            
+            await Task.Delay(TimeSpan.FromSeconds(manifestationDuration));
+            
             _enemyHasManifested = false;
             
             CmdTurnOff();
