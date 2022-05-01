@@ -15,15 +15,15 @@ namespace Horror.Gameplay.Enemies
         [SerializeField] private PhraseData askLocationPhraseData;//TODO: Remove this
         
         private EnemyAssemblyData _enemyAssemblyData;
-        private IVoiceService _voiceService;
+        private IEventService _eventService;
         private EnemyData _enemyData;
 
         public EvidenceType[] Evidences => _enemyData.Evidences;
 
-        public void Begin(EnemyData enemyData, IVoiceService voiceService)
+        public void Begin(EnemyData enemyData, IEventService eventService)
         {
             _enemyData = enemyData;
-            _voiceService = voiceService;
+            _eventService = eventService;
             
             SetupEnemyAssemblyData(_enemyData);
 
@@ -49,24 +49,27 @@ namespace Horror.Gameplay.Enemies
 
         protected virtual void SubscribeEvents()
         {
-            _voiceService.OnPhraseRecognized += HandlePhraseRecognized;
+            _eventService.AddEventListener<PhraseRecognizedEvent>(HandlePhraseRecognized);
         }
 
         protected virtual void UnsubscribeEvents()
         {
-            _voiceService.OnPhraseRecognized -= HandlePhraseRecognized;
+            _eventService.RemoveEventListener<PhraseRecognizedEvent>(HandlePhraseRecognized);
         }
 
-        protected virtual void HandlePhraseRecognized(PhraseData phraseData)
+        protected virtual void HandlePhraseRecognized(ServiceEvent serviceEvent)
         {
-            if (phraseData.ID != askLocationPhraseData.ID)//TODO: REMOVE THIS
+            if (serviceEvent is PhraseRecognizedEvent phraseRecognizedEvent)
             {
-                return;
+                PhraseData phraseData = phraseRecognizedEvent.PhraseData; 
+                
+                if (phraseData.ID != askLocationPhraseData.ID)//TODO: REMOVE THIS
+                {
+                    return;
+                }
+            
+                _eventService.DispatchEvent(new EnemyResponseEvent(_manifestationDuration));
             }
-            
-            IEventService eventService = GameServices.GetService<IEventService>();//TODO: ...
-            
-            eventService.DispatchEvent(new EnemyResponseEvent(_manifestationDuration));
         }
         
         private void SetupEnemyAssemblyData(EnemyData enemyData)

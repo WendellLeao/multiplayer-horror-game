@@ -2,7 +2,7 @@
 {
     public enum EvidenceType
     {
-        SpiritBox = 0,
-        EMF = 1
+        SpiritBox,
+        EMF
     }
 }

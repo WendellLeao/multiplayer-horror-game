@@ -34,6 +34,7 @@ namespace Horror.Gameplay
             
             _cursorManager.Initialize();
             _itemManager.Initialize(_cameraService, _eventService);
+            _enemyManager.Initialize(_eventService);
             
             _eventService.AddEventListener<ServerDisconnectedEvent>(ServerHandleServerDisconnected);
             _eventService.AddEventListener<ServerReadiedEvent>(ServerHandleServerReadied);

@@ -11,6 +11,13 @@ namespace Horror.Gameplay.Enemies
     {
         [SerializeField] private EnemyData[] _enemies;
         
+        private IEventService _eventService;
+
+        public void Initialize(IEventService eventService)
+        {
+            _eventService = eventService;
+        }
+        
         [Server]
         public void Begin()
         {
@@ -32,9 +39,7 @@ namespace Horror.Gameplay.Enemies
             
             Enemy enemy = enemyClone.GetComponent<Enemy>();
 
-            IVoiceService voiceService = GameServices.GetService<IVoiceService>();            
-
-            enemy.Begin(randomEnemyData, voiceService);
+            enemy.Begin(randomEnemyData, _eventService);
 
             DispatchEnemyCreatedEvent(enemy);
         }

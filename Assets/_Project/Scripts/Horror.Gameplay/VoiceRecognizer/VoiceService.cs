@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Horror.Events;
+using Horror.ServiceLocator;
 
 namespace Horror.Gameplay.VoiceRecognizer
 {
     public sealed class VoiceService : IVoiceService
     {
-        public event Action<PhraseData> OnPhraseRecognized;
-        
         private const string PhraseDatasPath = "GameServices/VoiceService/PhraseDatas";
 
         private List<string> _phrases = new List<string>();
         private PhraseRecognizer _phraseRecognizer;
+        private IEventService _eventService;
         private PhraseData[] _phraseDatas;
         private AudioClip _audioClip;
         private bool _hasBegun;
@@ -20,6 +21,8 @@ namespace Horror.Gameplay.VoiceRecognizer
         public VoiceService()
         {
             _phraseDatas = Resources.LoadAll<PhraseData>(PhraseDatasPath);
+
+            _eventService = GameServices.GetService<IEventService>();
         }
         
         public void Begin()
@@ -76,8 +79,8 @@ namespace Horror.Gameplay.VoiceRecognizer
                     {
                         continue;
                     }
-                
-                    OnPhraseRecognized?.Invoke(phraseData);
+
+                    _eventService.DispatchEvent(new PhraseRecognizedEvent(phraseData));
 
                     return;
                 }

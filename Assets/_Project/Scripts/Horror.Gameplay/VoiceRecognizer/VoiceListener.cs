@@ -1,6 +1,7 @@
 using Horror.Gameplay.Scenary;
 using Horror.ServiceLocator;
 using Horror.Audio;
+using Horror.Events;
 using UnityEngine;
 
 namespace Horror.Gameplay.VoiceRecognizer
@@ -18,48 +19,51 @@ namespace Horror.Gameplay.VoiceRecognizer
         [Header("Others")]
         [SerializeField] private Door _door;
         
-        private IVoiceService _voiceService;
         private IAudioService _audioService;
+        private IEventService _eventService;
 
         public void Begin()
         {
             _audioService = GameServices.GetService<IAudioService>();
             
-            _voiceService = GameServices.GetService<IVoiceService>();
-
-            _voiceService.OnPhraseRecognized += HandlePhraseRecognized;
+            _eventService = GameServices.GetService<IEventService>();
+            
+            _eventService.AddEventListener<PhraseRecognizedEvent>(HandlePhraseRecognized);
         }
         
         private void OnDisable()
         {
-            IVoiceService voiceService = GameServices.GetService<IVoiceService>();
-            
-            voiceService.OnPhraseRecognized -= HandlePhraseRecognized;
+            _eventService.RemoveEventListener<PhraseRecognizedEvent>(HandlePhraseRecognized);
         }
         
-        private void HandlePhraseRecognized(PhraseData recognizedPhraseData)
+        private void HandlePhraseRecognized(ServiceEvent serviceEvent)
         {
-            if (recognizedPhraseData.ID == askNamePhraseData.ID)
+            if (serviceEvent is PhraseRecognizedEvent phraseRecognizedEvent)
             {
-                _audioService.PlaySound(Sound.AgeResponseVoice, Vector3.zero);
-            }
-            else if(recognizedPhraseData.ID == askLocationPhraseData.ID)
-            {
-                _audioService.PlaySound(Sound.LocationResponseVoice, Vector3.zero);
-            }
-            if (recognizedPhraseData.ID == askNamePhraseDataPt.ID)
-            {
-                _audioService.PlaySound(Sound.AgeResponseVoicePt, Vector3.zero);
-            }
-            else if(recognizedPhraseData.ID == askLocationPhraseDataPt.ID)
-            {
-                _audioService.PlaySound(Sound.LocationResponseVoicePt, Vector3.zero);
-            }
-            else if(recognizedPhraseData.ID == giveSignPhraseData.ID || recognizedPhraseData.ID == giveSignPhraseDataPt.ID)
-            {
-                _door.Interact();
+                PhraseData recognizedPhraseData = phraseRecognizedEvent.PhraseData;
                 
-                _audioService.PlaySound(Sound.CloseDoor, _door.transform.position);
+                if (recognizedPhraseData.ID == askNamePhraseData.ID)
+                {
+                    _audioService.PlaySound(Sound.AgeResponseVoice, Vector3.zero);
+                }
+                else if(recognizedPhraseData.ID == askLocationPhraseData.ID)
+                {
+                    _audioService.PlaySound(Sound.LocationResponseVoice, Vector3.zero);
+                }
+                if (recognizedPhraseData.ID == askNamePhraseDataPt.ID)
+                {
+                    _audioService.PlaySound(Sound.AgeResponseVoicePt, Vector3.zero);
+                }
+                else if(recognizedPhraseData.ID == askLocationPhraseDataPt.ID)
+                {
+                    _audioService.PlaySound(Sound.LocationResponseVoicePt, Vector3.zero);
+                }
+                else if(recognizedPhraseData.ID == giveSignPhraseData.ID || recognizedPhraseData.ID == giveSignPhraseDataPt.ID)
+                {
+                    _door.Interact();
+                
+                    _audioService.PlaySound(Sound.CloseDoor, _door.transform.position);
+                }
             }
         }
     }
