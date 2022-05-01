@@ -17,7 +17,7 @@ namespace Horror.Gameplay.Playing
         [SerializeField] private Vector3 _crouchCenter;
         
         private PlayerAnimationsController _animationsController;
-        private FirstPersonCamera _firstPersonCamera;
+        private ICamera _firstPersonCamera;
         private IInputService _inputService;
         private Transform _originalCameraTarget;
         private Vector3 _originalCharacterCenter;
@@ -25,7 +25,7 @@ namespace Horror.Gameplay.Playing
         private bool _isCrouching;
 
         public void Initialize(IInputService inputService, PlayerAnimationsController animationsController,
-            FirstPersonCamera firstPersonCamera)
+            ICamera firstPersonCamera)
         {
             _firstPersonCamera = firstPersonCamera;
             

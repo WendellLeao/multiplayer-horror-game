@@ -16,11 +16,14 @@ namespace Horror.Gameplay
         private ICameraService _cameraService;
         private IInputService _inputService;
 
-        public void Initialize(ICameraService cameraService, IInputService inputService, Camera mainCamera)
+        public void Initialize(ICameraService cameraService, IInputService inputService)
         {
-            _mainCameraTransform = mainCamera.transform;
-            _cameraService = cameraService;
             _inputService = inputService;
+            _cameraService = cameraService;
+
+            Camera mainCamera = _cameraService.MainCamera;
+            
+            _mainCameraTransform = mainCamera.transform;
             
             _inputService.OnReadPlayerInputs += HandleReadInputs;
         }

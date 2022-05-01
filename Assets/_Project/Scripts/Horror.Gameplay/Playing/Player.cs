@@ -23,19 +23,17 @@ namespace Horror.Gameplay.Playing
 		private ICameraService _cameraService;
 		private IInputService _inputService;
 		private IVoiceService _voiceService;
-		private Camera _mainCamera;
 		private bool _isPlaying;
 
 		public Transform CameraTarget => _cameraTarget;
 		
-		public void Begin(ICameraService cameraService, FirstPersonCamera firstPersonCamera)
+		public void Begin(ICameraService cameraService, ICamera firstPersonCamera)
 		{
 			BeginVoice();
 			
 			_inputService = GameServices.GetService<IInputService>();
 
 			_cameraService = cameraService;
-			_mainCamera = _cameraService.MainCamera;
 			
 			_playerView.Initialize();
 
@@ -43,10 +41,10 @@ namespace Horror.Gameplay.Playing
 			
 			_playerInputsListener.Initialize(_inputService);
 			_playerMovement.Initialize(_inputService);
-			_playerRotation.Initialize(_mainCamera);
+			_playerRotation.Initialize(_cameraService);
 			_playerSprint.Initialize(_inputService, animationsController);
 			_playerCrouch.Initialize(_inputService, animationsController, firstPersonCamera);
-			_carrier.Initialize(_cameraService, _inputService, _mainCamera);
+			_carrier.Initialize(_cameraService, _inputService);
 
 			gameObject.name = "Horror Player [Local]";
 

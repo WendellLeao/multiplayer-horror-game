@@ -1,4 +1,5 @@
 using UnityEngine.Rendering.HighDefinition;
+using Horror.Gameplay.Items.View;
 using UnityEngine;
 using Mirror;
 

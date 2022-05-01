@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Horror.Gameplay.Items
+namespace Horror.Gameplay.Items.View
 {
     public sealed class EmfView : ItemView
     {

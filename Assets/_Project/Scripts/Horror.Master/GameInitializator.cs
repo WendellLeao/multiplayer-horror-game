@@ -21,8 +21,6 @@ namespace Horror.Master
 
         private void StartGame()
         {
-            Debug.Log("Game started!");
-            
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
             
             SceneManager.LoadScene(nextSceneIndex);

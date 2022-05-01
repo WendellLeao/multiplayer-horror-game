@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Horror.Gameplay.Cameras
 {
-	public sealed class FirstPersonCamera : MonoBehaviour
+	public sealed class FirstPersonCamera : MonoBehaviour, ICamera
 	{
 		[Header("Virtual Camera")]
 		[SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;

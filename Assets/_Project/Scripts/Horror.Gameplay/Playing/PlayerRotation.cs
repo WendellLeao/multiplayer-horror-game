@@ -1,3 +1,4 @@
+using Horror.Gameplay.Cameras;
 using UnityEngine;
 using Mirror;
 
@@ -12,9 +13,9 @@ namespace Horror.Gameplay.Playing
 		
 		private Camera _mainCamera;
 
-		public void Initialize(Camera mainCamera)
+		public void Initialize(ICameraService cameraService)
 		{
-			_mainCamera = mainCamera;
+			_mainCamera = cameraService.MainCamera;
 		}
 
 		public void Dispose()
