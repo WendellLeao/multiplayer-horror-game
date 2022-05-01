@@ -18,7 +18,7 @@ namespace Horror.Gameplay.Enemies
         private IVoiceService _voiceService;
         private EnemyData _enemyData;
 
-        public EvidenceData[] Evidences => _enemyData.Evidences;
+        public EvidenceType[] Evidences => _enemyData.Evidences;
 
         public void Begin(EnemyData enemyData, IVoiceService voiceService)
         {

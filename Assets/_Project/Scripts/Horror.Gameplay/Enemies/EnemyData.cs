@@ -10,7 +10,7 @@ namespace Horror.Gameplay.Enemies
         public GameObject EnemyPrefab;
      
         [Space(5f)]
-        public EvidenceData[] Evidences;
+        public EvidenceType[] Evidences;
         public EnemyAssemblyData[] EnemyAssemblyDatas;
     }
 }

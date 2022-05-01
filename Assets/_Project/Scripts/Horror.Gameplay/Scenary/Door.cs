@@ -25,7 +25,7 @@ namespace Horror.Gameplay.Scenary
 
             IsEvidence = true;
 
-            await Task.Delay(TimeSpan.FromSeconds(_delayInSeconds));
+            await Task.Delay(TimeSpan.FromSeconds(EvidenceDuration));
             
             IsEvidence = false;
         }

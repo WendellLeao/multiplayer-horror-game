@@ -227,9 +227,9 @@ namespace Horror.Gameplay.Items
         
         private bool EnemyHasEmfEvidence()
         {
-            foreach (EvidenceData enemyEvidence in Enemy.Evidences)
+            foreach (EvidenceType enemyEvidence in Enemy.Evidences)
             {
-                if (enemyEvidence is EmfEvidenceData)
+                if (enemyEvidence == EvidenceType.EMF)
                 {
                     return true;
                 }

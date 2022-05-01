@@ -4,6 +4,6 @@ namespace Horror.Gameplay.Enemies
 {
     public interface IHasEvidences
     {
-        EvidenceData[] Evidences { get; }
+        EvidenceType[] Evidences { get; }
     }
 }

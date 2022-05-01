@@ -1,5 +1,5 @@
 using Horror.Gameplay.VoiceRecognizer;
-using Horror.Gameplay.Evidences;
+using Horror.Gameplay.Enemies.Events;
 using Horror.ServiceLocator;
 using Horror.Events;
 using UnityEngine;

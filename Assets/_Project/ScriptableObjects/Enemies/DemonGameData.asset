@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: DemonGameData
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 7565786660555258560, guid: dfa330f7224c9334399138977dfe87d4, type: 3}
-  Evidences:
-  - {fileID: 11400000, guid: e1ebeea0db334a34aa9730ec97848a34, type: 2}
+  Evidences: 01000000
   EnemyAssemblyDatas:
   - {fileID: 11400000, guid: b4e36f32565277b4c843751dbc046d9b, type: 2}
   - {fileID: 11400000, guid: 53aa57110c410a94c86267a61f8c8ac7, type: 2}

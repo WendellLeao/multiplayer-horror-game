@@ -1,7 +1,6 @@
-﻿using Horror.Gameplay.Enemies;
-using Horror.Events;
+﻿using Horror.Events;
 
-namespace Horror.Gameplay.Evidences
+namespace Horror.Gameplay.Enemies.Events
 {
     public sealed class EnemyCreatedEvent : ServiceEvent
     {

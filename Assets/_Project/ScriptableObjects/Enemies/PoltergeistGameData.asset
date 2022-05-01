@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: PoltergeistGameData
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 4532697851274421565, guid: 2b534f6f361b7ca448d3c8c84ac35a0a, type: 3}
-  Evidences:
-  - {fileID: 11400000, guid: 8d23cd767d000e14581e9500f4eced0b, type: 2}
+  Evidences: 00000000
   EnemyAssemblyDatas:
   - {fileID: 11400000, guid: b4e36f32565277b4c843751dbc046d9b, type: 2}
   - {fileID: 11400000, guid: 53aa57110c410a94c86267a61f8c8ac7, type: 2}
