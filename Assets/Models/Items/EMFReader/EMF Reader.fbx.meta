@@ -3,7 +3,17 @@ guid: a3c45877d3650bb4da138128854e33bc
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EMF Reader
+    second: {fileID: 2100000, guid: 7185d6a866e419e41a06055e0754c187, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lights
+    second: {fileID: 2100000, guid: 2b14c70d65ac71b479329bcc5f663534, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
