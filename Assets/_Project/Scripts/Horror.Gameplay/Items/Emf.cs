@@ -1,6 +1,7 @@
 ﻿using Horror.Gameplay.Evidences;
 using Horror.Gameplay.Enemies;
 using Horror.Gameplay.Scenary;
+using System.Collections;
 using Horror.Events;
 using UnityEngine;
 using Mirror;
@@ -14,6 +15,7 @@ namespace Horror.Gameplay.Items
         [SerializeField] private float _detectionRange;
         
         private bool _isDetectingParanormal;
+        private bool _enemyHasManifested;
         
         [SyncVar]
         private bool _isOn;
@@ -22,14 +24,21 @@ namespace Horror.Gameplay.Items
         {
             _isOn = !_isOn;
 
-            if (_isOn)
+            if (!_isOn)
             {
-                CmdTurnOn((int) EmfScore.Idle);
+                CmdTurnOff();
 
                 return;
             }
             
-            CmdTurnOff();
+            if (_enemyHasManifested)
+            {
+                CheckEvidenceAndTurnOn();
+                    
+                return;
+            }
+               
+            CmdTurnOn((int) EmfScore.Idle);
         }
 
         protected override void OnBegin()
@@ -56,21 +65,23 @@ namespace Horror.Gameplay.Items
         protected override void OnTick(float deltaTime)
         {
             base.OnTick(deltaTime);
-
             
-            if (!_isOn)//is local player
+            if (!_enemyHasManifested)
+            {
+                _isDetectingParanormal = false;
+            }
+            
+            if (!_isOn)//TODO: Check if is local player
             {
                 return;
             }
-            
-            _isDetectingParanormal = false;
 
-            CheckForParanormalInteractions();
-            
             if (!_isDetectingParanormal)
             {
                 CmdTurnOn((int) EmfScore.Idle);
             }
+            
+            CheckForParanormalInteractions();
         }
 
         protected override void SubscribeEvents()
@@ -82,17 +93,15 @@ namespace Horror.Gameplay.Items
 
         private void CheckForParanormalInteractions()
         {
-            RaycastHit hit;
-
             Transform itemTransform = transform;
             
             Ray ray = new Ray(itemTransform.position, itemTransform.forward);
             
-            if (Physics.Raycast(ray, out hit, _detectionRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, _detectionRange))
             {
-                Transform selection = hit.transform;
-              
-                if (!selection.TryGetComponent(out IParanormalObject paranormalObject))
+                IParanormalObject paranormalObject = hit.transform.GetComponentInParent<IParanormalObject>();
+                
+                if (paranormalObject == null)
                 {
                     return;
                 }
@@ -150,19 +159,27 @@ namespace Horror.Gameplay.Items
         
         private void HandleEnemyResponseEvent(ServiceEvent serviceEvent)//TODO: IS NOT WORKING BECAUSE THE FLAG IS FALSE, CREATE A ASYNC METHOD
         {
+            _enemyHasManifested = true;
+
+            _isDetectingParanormal = true;
+
+            StartCoroutine(DelayRoutine());
+
             if (!_isOn)
             {
                 return;
             }
 
-            if (EnemyHasEmfEvidence())
-            {
-                CmdTurnOn((int) EmfScore.Evidence);
-                        
-                return;
-            }
-                    
-            CmdTurnOn((int) EmfScore.EnemyManifestation);
+            CheckEvidenceAndTurnOn();
+        }
+        
+        private IEnumerator DelayRoutine()
+        {
+            yield return new WaitForSeconds(3f);
+
+            _enemyHasManifested = false;
+            
+            CmdTurnOff();
         }
 
         [Command]
@@ -187,6 +204,18 @@ namespace Horror.Gameplay.Items
         private void RpcTurnOff()
         {
             _emfView.TurnOff();
+        }
+        
+        private void CheckEvidenceAndTurnOn()
+        {
+            if (EnemyHasEmfEvidence())
+            {
+                CmdTurnOn((int) EmfScore.Evidence);
+
+                return;
+            }
+
+            CmdTurnOn((int) EmfScore.EnemyManifestation);
         }
         
         private bool EnemyHasEmfEvidence()

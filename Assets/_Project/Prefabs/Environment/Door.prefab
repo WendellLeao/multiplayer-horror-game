@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7508116065572436797}
   - component: {fileID: 9072003485025703557}
   m_Layer: 9
-  m_Name: View_Door
+  m_Name: DoorModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,9 +92,8 @@ GameObject:
   - component: {fileID: 9091377229767948054}
   - component: {fileID: 4593683313869481014}
   - component: {fileID: 5077133493336812273}
-  - component: {fileID: 3341531288399592887}
   m_Layer: 9
-  m_Name: Door
+  m_Name: View_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,8 +107,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7801845184738979555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.9, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.6773506, y: 0, z: 0}
+  m_LocalScale: {x: 0.0169762, y: 0.0169762, z: 0.0169762}
   m_Children:
   - {fileID: 1856288755356575672}
   m_Father: {fileID: 7416500746365461719}
@@ -147,21 +146,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 81.19387, y: 3.0119102, z: 202.53221}
   m_Center: {x: -38.561394, y: 0.187228, z: 100.74782}
---- !u!114 &3341531288399592887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7801845184738979555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _evidenceDuration: 5
-  _animator: {fileID: 4593683313869481014}
-  _delayInSeconds: 0
 --- !u!1 &7901394636407062125
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,8 +155,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7416500746365461719}
+  - component: {fileID: 1951273911107082256}
   m_Layer: 9
-  m_Name: WoodenDoor
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,14 +171,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7901394636407062125}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 2.689, y: -9.69, z: 7.62}
-  m_LocalScale: {x: 0.016976204, y: 0.0169762, z: 0.0169762}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9091377229767948054}
   - {fileID: 3597067495216129491}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!114 &1951273911107082256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901394636407062125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _evidenceDuration: 5
+  _animator: {fileID: 4593683313869481014}
+  _delayInSeconds: 0
 --- !u!1 &8191623591335257464
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 3597067495216129491}
   - component: {fileID: 9190189530758170860}
   - component: {fileID: 4277464454095030607}
-  - component: {fileID: 4692691001478005319}
   m_Layer: 9
   m_Name: OutDoor
   m_TagString: Untagged
@@ -222,7 +221,7 @@ Transform:
   m_GameObject: {fileID: 8191623591335257464}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.0169762, y: 0.0169762, z: 0.0169762}
   m_Children: []
   m_Father: {fileID: 7416500746365461719}
   m_RootOrder: 1
@@ -276,17 +275,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4692691001478005319
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191623591335257464}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7853059701103012548, guid: e698f31fe255b984585004882282b732, type: 3}

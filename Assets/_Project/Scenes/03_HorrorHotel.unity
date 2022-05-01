@@ -2754,7 +2754,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39432574}
   m_LocalRotation: {x: -0.2418517, y: -0.2418517, z: 0.66446054, w: 0.66446054}
-  m_LocalPosition: {x: 1.47, y: 1.059, z: -0.198}
+  m_LocalPosition: {x: 1.47, y: 1.119, z: -0.198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 833387366}
@@ -17068,7 +17068,7 @@ MonoBehaviour:
   _enterEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1360867939}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Horror.Gameplay.Scenary.Door, Horror.Gameplay
         m_MethodName: Close
         m_Mode: 1
@@ -17449,7 +17449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272853303}
   m_LocalRotation: {x: 0.24185054, y: 0.24185054, z: 0.66446096, w: 0.66446096}
-  m_LocalPosition: {x: -1.81, y: 1.059, z: -0.197999}
+  m_LocalPosition: {x: -1.81, y: 1.119, z: -0.197999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 833387366}
@@ -84230,17 +84230,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346756220}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1347819972 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 328786888582888374, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
-  m_PrefabInstance: {fileID: 1559307514}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559307516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1349349306
 GameObject:
   m_ObjectHideFlags: 0
@@ -84716,17 +84705,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360262495}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1360867939 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 328786888582888374, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
-  m_PrefabInstance: {fileID: 11732823}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1361100094
 GameObject:
   m_ObjectHideFlags: 0
@@ -88043,6 +88021,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404163642}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1404968228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1951273911107082256, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
+  m_PrefabInstance: {fileID: 1559307514}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4652003ffc1fa874589b21f758b2bf16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1405688512
 GameObject:
   m_ObjectHideFlags: 0
@@ -96971,7 +96960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7901394636407062125, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
       propertyPath: m_Name
-      value: WoodenDoor (1)
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 9091377229767948054, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -96993,31 +96982,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8623408927968405728, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
 --- !u!4 &1559307515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7416500746365461719, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
   m_PrefabInstance: {fileID: 1559307514}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1559307516 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7901394636407062125, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
-  m_PrefabInstance: {fileID: 1559307514}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1559307517
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559307516}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 113.78, y: 91.53507, z: 198.3311}
-  m_Center: {x: -0.0000000020742403, y: -30.547533, z: 106.59489}
 --- !u!1 &1559963526
 GameObject:
   m_ObjectHideFlags: 0
@@ -100990,7 +100962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7901394636407062125, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
       propertyPath: m_Name
-      value: WoodenDoor
+      value: Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
@@ -114724,7 +114696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7901394636407062125, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
       propertyPath: m_Name
-      value: WoodenDoor (2)
+      value: Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1073fed033fd3247b28e8f83ad7f29e, type: 3}
@@ -127420,7 +127392,7 @@ MonoBehaviour:
   askLocationPhraseDataPt: {fileID: 11400000, guid: 616be3da14dcd8d41b2a8713766663d0, type: 2}
   giveSignPhraseData: {fileID: 11400000, guid: 5b829426550694443922d279597041eb, type: 2}
   giveSignPhraseDataPt: {fileID: 11400000, guid: ccbf4a534e7d6a3419e1953d8e459659, type: 2}
-  _door: {fileID: 1347819972}
+  _door: {fileID: 1404968228}
 --- !u!4 &2069621699
 Transform:
   m_ObjectHideFlags: 0

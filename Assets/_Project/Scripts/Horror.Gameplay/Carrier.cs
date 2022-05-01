@@ -59,23 +59,23 @@ namespace Horror.Gameplay
 
         private void CheckForCarriableObjects(PlayerInputsData playerInputsData)
         {
-            RaycastHit hit;
-            
             Ray ray = new Ray(_mainCameraTransform.position, _mainCameraTransform.forward);
             
-            if (Physics.Raycast(ray, out hit, _pickUpRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, _pickUpRange))
             {
-                Transform selection = hit.transform;
-                
                 if (!playerInputsData.PressInteract)
                 {
                     return;
                 }
+
+                ICarriableObject carriableObject = hit.transform.GetComponentInParent<ICarriableObject>();
                 
-                if (selection.TryGetComponent(out ICarriableObject carriableObject))
+                if (carriableObject == null)
                 {
-                    HandlePickUpItem(carriableObject);
+                    return;
                 }
+                
+                HandlePickUpItem(carriableObject);
             }
         }
 
