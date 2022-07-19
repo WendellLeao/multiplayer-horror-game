@@ -20,32 +20,44 @@ namespace Horror.Master
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeServices()
         {
-            CheckAndInitializeNetworkService();
+            if (GameServices.GetService<INetworkService>() == null)
+            {
+                CheckAndInitializeNetworkService();
+            }
 
-            CheckAndInitializePoolingService();
-                
-            CheckAndInitializeAudioService();
+            if (GameServices.GetService<IPoolingService>() == null)
+            {
+                CheckAndInitializePoolingService();
+            }
 
-            CheckAndInitializeUIService();
+            if (GameServices.GetService<IAudioService>() == null)
+            {
+                CheckAndInitializeAudioService();
+            }
 
-            CheckAndInitializeEventService();
-            
-            CheckAndInitializeInputService();
-            
-            CheckAndInitializeVoiceService();
+            if (GameServices.GetService<IUIService>() == null)
+            {
+                CheckAndInitializeUIService();
+            }
+
+            if (GameServices.GetService<IEventService>() == null)
+            {
+                CheckAndInitializeEventService();
+            }
+
+            if (GameServices.GetService<IInputService>() == null)
+            {
+                CheckAndInitializeInputService();
+            }
+
+            if (GameServices.GetService<IVoiceService>() == null)
+            {
+                CheckAndInitializeVoiceService();
+            }
         }
 
         private static void CheckAndInitializeNetworkService()
         {
-            INetworkService networkService = GameServices.GetService<INetworkService>();
-
-            if (networkService != null)
-            {
-                Debug.LogWarning($"{networkService} is already registered");
-                
-                return;
-            }
-            
             GameObject networkServicePrefab = Resources.Load(NetworkServicePrefabPath) as GameObject;
                 
             Object.Instantiate(networkServicePrefab);
@@ -53,15 +65,6 @@ namespace Horror.Master
         
         private static void CheckAndInitializePoolingService()
         {
-            IPoolingService poolingService = GameServices.GetService<IPoolingService>();
-
-            if (poolingService != null)
-            {
-                Debug.LogWarning($"{poolingService} is already registered");
-                
-                return;
-            }
-            
             GameObject poolingServicePrefab = Resources.Load(PoolingServicePrefabPath) as GameObject;
                 
             Object.Instantiate(poolingServicePrefab);
@@ -69,15 +72,6 @@ namespace Horror.Master
         
         private static void CheckAndInitializeAudioService()
         {
-            IAudioService audioService = GameServices.GetService<IAudioService>();
-
-            if (audioService != null)
-            {
-                Debug.LogWarning($"{audioService} is already registered");
-                
-                return;
-            }
-            
             GameObject audioServicePrefab = Resources.Load(AudioServicePrefabPath) as GameObject;
                 
             Object.Instantiate(audioServicePrefab);
@@ -85,15 +79,6 @@ namespace Horror.Master
 
         private static void CheckAndInitializeUIService()
         {
-            IUIService uiService = GameServices.GetService<IUIService>();
-
-            if (uiService != null)
-            {
-                Debug.LogWarning($"{uiService} is already registered");
-                
-                return;
-            }
-            
             GameObject uiServicePrefab = Resources.Load(UIServicePrefabPath) as GameObject;
                 
             Object.Instantiate(uiServicePrefab);
@@ -101,15 +86,6 @@ namespace Horror.Master
         
         private static void CheckAndInitializeEventService()
         {
-            IEventService eventService = GameServices.GetService<IEventService>();
-
-            if (eventService != null)
-            {
-                Debug.LogWarning($"{eventService} is already registered");
-                
-                return;
-            }
-            
             IEventService newEventService = new EventService();
             
             GameServices.RegisterService(newEventService);
@@ -117,15 +93,6 @@ namespace Horror.Master
 
         private static void CheckAndInitializeInputService()
         {
-            IInputService inputService = GameServices.GetService<IInputService>();
-
-            if (inputService != null)
-            {
-                Debug.LogWarning($"{inputService} is already registered");
-                
-                return;
-            }
-            
             IInputService newInputService = new PlayerInputService();
             
             GameServices.RegisterService(newInputService);
@@ -133,15 +100,6 @@ namespace Horror.Master
         
         private static void CheckAndInitializeVoiceService()
         {
-            IVoiceService voiceService = GameServices.GetService<IVoiceService>();
-
-            if (voiceService != null)
-            {
-                Debug.LogWarning($"{voiceService} is already registered");
-                
-                return;
-            }
-            
             IVoiceService newVoiceService = new VoiceService();
             
             GameServices.RegisterService(newVoiceService);
